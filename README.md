@@ -1,5 +1,7 @@
 # potc
 
+[![PyPI](https://img.shields.io/pypi/v/potc)](https://pypi.org/project/potc/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/potc)](https://pypi.org/project/potc/)
 ![Loc](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/HansBug/eaabf18edb37af48c7e67a9a9ec9aa8e/raw/loc.json)
 ![Comments](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/HansBug/eaabf18edb37af48c7e67a9a9ec9aa8e/raw/comments.json)
 
