@@ -1,20 +1,32 @@
-.. potc documentation master file, created by
-   sphinx-quickstart on Wed Aug 11 23:50:33 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Welcome to Potc's Documentation
+=====================================
 
-Welcome to potc's documentation!
-================================
+Overview
+-------------
+
+``Potc`` is a module which support the transform from \
+any python objects to python source which can be directly \
+imported and built.
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+    :maxdepth: 2
+    :caption: Tutorials
+
+    tutorials/installation/index
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Best Practice
 
 
+.. toctree::
+    :maxdepth: 2
+    :caption: API Documentation
 
-Indices and tables
-==================
+    api_doc/config/index
+    api_doc/utils/index
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. toctree::
+    :maxdepth: 2
+    :caption: Contributor Guide
+
