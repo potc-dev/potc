@@ -1,0 +1,2 @@
+from .test_addons import TestTranslateAddonsAddons
+from .test_imports import TestTranslateAddonsImports
