@@ -17,13 +17,14 @@ def try_import_info(obj, alias=None):
 
 
 def _raw_import_info(obj):
-    if not hasattr(obj, '__module__') and isinstance(obj, types.ModuleType):
-        return 'import', obj.__name__
-    elif hasattr(obj, '__module__') and hasattr(obj, '__name__'):
-        if isinstance(obj, types.ModuleType):
-            return 'import', f'{obj.__module__}.{obj.__name__}'
+    if isinstance(obj, types.ModuleType):
+        _segments = obj.__name__.split('.')
+        if len(_segments) > 1:
+            return 'from', '.'.join(_segments[:-1]), 'import', _segments[-1]
         else:
-            return 'from', obj.__module__, 'import', obj.__name__
+            return 'import', obj.__name__
+    elif hasattr(obj, '__module__') and hasattr(obj, '__name__'):
+        return 'from', obj.__module__, 'import', obj.__name__
     else:
         raise TypeError(f'Unable to import {repr(obj)}.')
 

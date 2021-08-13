@@ -1,6 +1,7 @@
 import dill as xdill
+import numpy
 import pytest
-from numpy import ndarray as dxx
+from numpy import ndarray
 
 from potc.translate.addons.addons import Addons
 
@@ -10,48 +11,34 @@ class TestTranslateAddonsAddons:
     def test_addons(self):
         addons = Addons()
         with addons.transaction() as add:
-            add.import_('treevalue.utils').as_('tutils')
-            add.from_('trevalue.utils').import_('int_enums_loads')
-            add.import_('treevalue.config')
-            add.from_('trevalue.utils').import_('int_enums_loads').as_('my_int_enums_loads')
-            add.quick_import(xdill, 'xdill')
-            add.quick_import(dxx, 'dxx')
+            add.obj(xdill)
+            add.obj(xdill, 'xdill')
+            add.obj(numpy)
+            add.obj(ndarray, 'nda')
 
-        assert [str(i) for i in addons.imports] == [
-            'import treevalue.utils as tutils',
-            'from trevalue.utils import int_enums_loads',
-            'import treevalue.config',
-            'from trevalue.utils import int_enums_loads as my_int_enums_loads',
+        assert [str(i) for i in addons.import_items] == [
+            'import dill',
             'import dill as xdill',
-            'from numpy import ndarray as dxx',
+            'import numpy',
+            'from numpy import ndarray as nda',
         ]
 
     def test_addons_with_failure(self):
         addons = Addons()
         with addons.transaction() as add:
-            add.import_('treevalue.utils').as_('tutils')
-            add.from_('trevalue.utils').import_('int_enums_loads')
-            add.quick_import
-        assert [str(i) for i in addons.imports] == [
-            'import treevalue.utils as tutils',
-            'from trevalue.utils import int_enums_loads',
+            add.obj(xdill)
+            add.obj(xdill, 'xdill')
+        assert [str(i) for i in addons.import_items] == [
+            'import dill',
+            'import dill as xdill',
         ]
 
-        with pytest.raises(ValueError):
+        with pytest.raises(RuntimeError):
             with addons.transaction() as add:
-                add.import_('treevalue.config')
-                add.from_('trevalue.utils').import_('int_enums_loads').as_('my_int_enums_loads')
-                add.from_('trevalue.utils').import_('****').as_('my_int_enums_loads')
-        assert [str(i) for i in addons.imports] == [
-            'import treevalue.utils as tutils',
-            'from trevalue.utils import int_enums_loads',
-        ]
-
-        with pytest.raises(TypeError):
-            with addons.transaction() as add:
-                add.quick_import(xdill, 'xdill')
-                add.quick_import(1)
-        assert [str(i) for i in addons.imports] == [
-            'import treevalue.utils as tutils',
-            'from trevalue.utils import int_enums_loads',
+                add.obj(numpy)
+                add.obj(ndarray, 'nda')
+                raise RuntimeError
+        assert [str(i) for i in addons.import_items] == [
+            'import dill',
+            'import dill as xdill',
         ]

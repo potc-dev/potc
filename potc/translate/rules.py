@@ -78,7 +78,7 @@ def rules_chain(*rules):
             except UnprocessableError:
                 continue
             else:
-                return _result, _name
+                return str(_result), _name
 
         unprocessable()
 

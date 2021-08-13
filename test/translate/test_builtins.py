@@ -1,6 +1,9 @@
 import math
+import types
 
+import easydict
 import pytest
+from dill import source
 from easydict import EasyDict
 
 from potc.testing import obj_translate_assert
@@ -121,6 +124,10 @@ class TestTranslateBuiltins:
             assert obj == self._MyInnerPair
             assert name == 'builtin_type'
 
+        with obj_translate_assert(types.ModuleType) as (obj, name):
+            assert obj is types.ModuleType
+            assert name == 'builtin_type'
+
     def test_func(self):
         with obj_translate_assert(lambda x: x ** x) as (obj, name):
             assert obj(2) == 4
@@ -217,14 +224,14 @@ class TestTranslateBuiltins:
     class _MyInnerPair(_MyPair):
         pass
 
-    def test_anything(self):
+    def test_object(self):
         with obj_translate_assert(_MyPair(1, 2)) as (obj, name):
             assert obj == _MyPair(1, 2)
-            assert name == 'any_'
+            assert name == 'builtin_object'
 
         with obj_translate_assert(self._MyInnerPair(1, 2)) as (obj, name):
             assert obj == self._MyInnerPair(1, 2)
-            assert name == 'any_'
+            assert name == 'builtin_object'
 
     def test_with_rules(self):
         def _my_dict_rule(v, addon):
@@ -279,3 +286,12 @@ class TestTranslateBuiltins:
         with pytest.raises(KeyError):
             with obj_translate_assert({}, [_my_dict_rule_t3]):
                 pass
+
+    def test_module(self):
+        with obj_translate_assert(easydict) as (obj, name):
+            assert obj is easydict
+            assert name == 'builtin_module'
+
+        with obj_translate_assert(source) as (obj, name):
+            assert obj is source
+            assert name == 'builtin_module'

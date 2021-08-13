@@ -4,8 +4,8 @@ from functools import lru_cache
 from itertools import chain
 from typing import Tuple
 
-from .imports import ImportPool, ImportStatement, FromImport, DirectImport, from_import_str, direct_import_str
-from ...utils import try_import_info
+from .imports import ImportPool, ImportStatement, FromImport, DirectImport
+from ...utils import try_import_info, pre_process
 
 
 @lru_cache()
@@ -18,49 +18,65 @@ def unprocessable():
     return _get_unprocessable()()
 
 
+class AddonProxy:
+    def __init__(self, base, rule):
+        self.__base = base
+        self.__rule = pre_process(lambda x: ((str(x) if isinstance(x, AddonProxy) else x,), {}), )(rule)
+
+    def attr(self, name: str) -> 'AddonProxy':
+        return AddonProxy(f'{self.__base}.{name}', self.__rule)
+
+    def call(self, *args, **kwargs) -> 'AddonProxy':
+        _items = chain(
+            map(lambda x: self.__rule(x), args),
+            map(lambda p: f"{p[0]}={self.__rule(p[1])}", kwargs.items())
+        )
+        return AddonProxy(
+            f'{self.__base}({", ".join(_items)})',
+            self.__rule,
+        )
+
+    def str(self) -> str:
+        return self.__str__()
+
+    def __str__(self) -> str:
+        return self.__base
+
+
 class Addons:
     def __init__(self, rule=None):
         self.__imports = ImportPool()
         self.__rule = rule
 
-    def import_(self, _import: str) -> DirectImport:
+    def __import(self, _import: str) -> DirectImport:
         return self.__imports.import_(_import)
 
-    def from_(self, _from: str) -> FromImport:
+    def __from(self, _from: str) -> FromImport:
         return self.__imports.from_(_from)
 
-    def quick_import(self, obj, alias=None):
-        _import_str = ' '.join(try_import_info(obj, alias=alias))
-        try:
-            _import = from_import_str(self, _import_str)
-        except ValueError:
-            _import = direct_import_str(self, _import_str)
+    def obj(self, obj, alias=None) -> AddonProxy:
+        with self.transaction():
+            segments = try_import_info(obj, alias=alias)
+            _import = self
+            for sign, content in zip(segments[::2], segments[1::2]):
+                if sign == 'from':
+                    _import = _import.__from(content)
+                elif sign == 'import':
+                    _import = (_import.__import if _import is self else _import.import_)(content)
+                else:
+                    _import = _import.as_(content)
 
-        if alias:
-            _import = _import.as_(alias)
-        return _import
+            if alias:
+                _import = _import.as_(alias)
+            return AddonProxy(str(_import.target), self.rule)
 
     def rule(self, v):
         with self.transaction():
             _result, _trace = self.__rule(v, self)
-            return _result
-
-    def func_call(self, func, *args, falias=None, **kwargs):
-        with self.transaction():
-            _import = self.quick_import(func, alias=falias)
-            _pitems = chain(
-                map(lambda x: self.rule(x), args),
-                map(lambda p: f"{p[0]}={self.rule(p[1])}", kwargs.items())
-            )
-            return f'{_import.target}({", ".join(_pitems)})'
-
-    def obj_attr(self, obj, attr, oalias=None):
-        with self.transaction():
-            _import = self.quick_import(obj, alias=oalias)
-            return f'{_import.target}.{attr}'
+            return str(_result)
 
     @property
-    def imports(self) -> Tuple[ImportStatement, ...]:
+    def import_items(self) -> Tuple[ImportStatement, ...]:
         return self.__imports.imports
 
     def assert_(self, value):

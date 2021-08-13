@@ -2,6 +2,7 @@ import os
 from itertools import chain
 from typing import Mapping, Any, Tuple
 
+from isort import code as sort_code_imports
 from yapf.yapflib.yapf_api import FormatCode
 
 from .addons import Addons
@@ -21,8 +22,7 @@ class TranslationFailed(Exception):
 
 
 def translate_object(obj, extend_rules=None) -> Tuple[str, Addons, str]:
-    ext_ = rules_chain(*(extend_rules or []))
-    final_ = rules_chain(ext_, plugins_, builtins_)
+    final_ = rules_chain(*(extend_rules or []), *plugins_, *builtins_)
 
     addon = Addons(rule=final_)
     try:
@@ -39,16 +39,23 @@ def _translate_vars(vars_: Mapping[str, Any], extend_rules=None):
         codes.append((key, _code))
         addons.append(_addon)
 
-    _imports = sorted(set(chain(*map(lambda x: x.imports, addons))), key=lambda x: x.key)
+    _imports = sorted(set(chain(*map(lambda x: x.import_items, addons))), key=lambda x: x.key)
     return _imports, codes
 
 
-def translate_vars(vars_: Mapping[str, Any], extend_rules=None) -> str:
+def translate_vars(vars_: Mapping[str, Any], extend_rules=None, reformat=None, isort: bool = True) -> str:
     actual_vars = dict(vars_)
     actual_vars.update(dict(__all__=sorted(vars_.keys())))
     _import_lines, _assignments = _translate_vars(actual_vars, extend_rules)
     _assignment_lines = [f'{key} = {code}' for key, code in _assignments]
 
     _code = os.linesep.join(list(map(str, chain(_import_lines, _assignment_lines))))
-    _code, _ = FormatCode(_code)
+
+    if isort:
+        _code = sort_code_imports(_code)
+    if reformat is not None:
+        if hasattr(reformat, '__call__'):
+            _code = reformat(_code)
+        else:
+            _code, _ = FormatCode(_code, style_config=reformat)
     return _code

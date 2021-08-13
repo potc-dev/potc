@@ -28,5 +28,5 @@ def typed_object(type_: Type[_T], data: bytes) -> _T:
     return _load_obj(data)
 
 
-def function(data: bytes) -> Callable:
+def function(name: str, data: bytes) -> Callable:
     return _load_obj(data)
