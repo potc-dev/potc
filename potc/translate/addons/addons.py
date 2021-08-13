@@ -5,7 +5,7 @@ from itertools import chain
 from typing import Tuple
 
 from .imports import ImportPool, ImportStatement, FromImport, DirectImport
-from ...utils import try_import_info, pre_process
+from ...utils import try_import_info
 
 
 @lru_cache()
@@ -21,7 +21,7 @@ def unprocessable():
 class AddonProxy:
     def __init__(self, base, rule):
         self.__base = base
-        self.__rule = pre_process(lambda x: ((str(x) if isinstance(x, AddonProxy) else x,), {}), )(rule)
+        self.__rule = rule
 
     def attr(self, name: str) -> 'AddonProxy':
         return AddonProxy(f'{self.__base}.{name}', self.__rule)

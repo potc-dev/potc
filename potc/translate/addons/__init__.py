@@ -1,1 +1,1 @@
-from .addons import Addons
+from .addons import Addons, AddonProxy

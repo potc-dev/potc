@@ -1,7 +1,7 @@
 import math
 import types
 
-from .addons import Addons
+from .addons import Addons, AddonProxy
 from .supports import raw_object, typed_object, function, _dump_obj, raw_type
 from ..utils import dynamic_call
 
@@ -142,7 +142,15 @@ def builtin_object(v, addon: Addons):
             return addon.obj(typed_object).call(type(v), _dump_obj(v))
 
 
+@dynamic_call
+def sys_addon_proxy(v: AddonProxy, addon: Addons):
+    addon.is_type(v, AddonProxy)
+    with addon.transaction():
+        return v.str()
+
+
 builtins_ = [
+    sys_addon_proxy,
     builtin_int,
     builtin_float,
     builtin_str,

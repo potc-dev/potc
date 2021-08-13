@@ -256,14 +256,14 @@ class TestTranslateBuiltins:
         @rule_rename('values')
         def _my_dict_rule_v(v, addon):
             addon.is_type(v, _MyDictV)
-            return addon.rule(set(v.values()))
+            return addon.rule([set(v.values()), 2, addon.obj(math).attr('cos').call(len(v))])
 
         with obj_translate_assert(_MyDictK({'a': 1}), [_my_dict_rule_k, _my_dict_rule_v]) as (obj, name):
             assert obj == {'a'}
             assert name == 'keys'
 
         with obj_translate_assert(_MyDictV({'a': 1}), [_my_dict_rule_k, _my_dict_rule_v]) as (obj, name):
-            assert obj == {1}
+            assert obj == [{1}, 2, math.cos(1)]
             assert name == 'values'
 
         with pytest.raises(NameError):

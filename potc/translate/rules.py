@@ -2,6 +2,7 @@ import re
 from functools import wraps
 from itertools import chain
 
+from .addons import AddonProxy
 from ..utils import dynamic_call
 
 
@@ -78,7 +79,7 @@ def rules_chain(*rules):
             except UnprocessableError:
                 continue
             else:
-                return str(_result), _name
+                return str(_result) if isinstance(_result, AddonProxy) else _result, _name
 
         unprocessable()
 
