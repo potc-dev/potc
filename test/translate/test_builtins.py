@@ -8,6 +8,7 @@ from easydict import EasyDict
 
 from potc.testing import obj_translate_assert
 from potc.translate import rule_rename
+from potc.translate.addons import Addons
 
 
 class _LocalType:
@@ -256,7 +257,7 @@ class TestTranslateBuiltins:
         @rule_rename('values')
         def _my_dict_rule_v(v, addon):
             addon.is_type(v, _MyDictV)
-            return addon.rule([set(v.values()), 2, addon.obj(math).attr('cos').call(len(v))])
+            return addon.rule([set(v.values()), 2, addon.obj(math).cos(len(v))])
 
         with obj_translate_assert(_MyDictK({'a': 1}), [_my_dict_rule_k, _my_dict_rule_v]) as (obj, name):
             assert obj == {'a'}
@@ -295,3 +296,51 @@ class TestTranslateBuiltins:
         with obj_translate_assert(source) as (obj, name):
             assert obj is source
             assert name == 'builtin_module'
+
+    def test_ellipsis(self):
+        with obj_translate_assert(...) as (obj, name):
+            assert obj is Ellipsis
+            assert name == 'builtin_ellipsis'
+
+    def test_range(self):
+        with obj_translate_assert(range(10)) as (obj, name):
+            assert obj == range(10)
+            assert name == 'builtin_range'
+
+        with obj_translate_assert(range(-1, 6)) as (obj, name):
+            assert obj == range(-1, 6)
+            assert name == 'builtin_range'
+
+        with obj_translate_assert(range(-1, 6, 2)) as (obj, name):
+            assert obj == range(-1, 6, 2)
+            assert name == 'builtin_range'
+
+    def test_slice(self):
+        with obj_translate_assert(slice(10)) as (obj, name):
+            assert obj == slice(10)
+            assert name == 'builtin_slice'
+
+        with obj_translate_assert(slice(-5, 10)) as (obj, name):
+            assert obj == slice(-5, 10)
+            assert name == 'builtin_slice'
+
+        with obj_translate_assert(slice(-5, 10, -4)) as (obj, name):
+            assert obj == slice(-5, 10, -4)
+            assert name == 'builtin_slice'
+
+    def test_new_addon_getitem(self):
+        def my_rule(v, addon: Addons):
+            addon.is_type(v, tuple)
+            return addon.obj(list)(list(reversed(v)))[::-2]
+
+        with obj_translate_assert((1, 2, 3, 4, 5), extend_rules=[my_rule]) as (obj, name):
+            assert obj == [1, 3, 5]
+            assert name == 'my_rule'
+
+        def my_rule_2(v, addon: Addons):
+            addon.is_type(v, tuple)
+            return addon.obj(list)(list(reversed(v)))[-2]
+
+        with obj_translate_assert((1, 2, 3, 4, 5), extend_rules=[my_rule_2]) as (obj, name):
+            assert obj == 2
+            assert name == 'my_rule_2'

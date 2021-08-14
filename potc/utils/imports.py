@@ -5,15 +5,12 @@ import types
 def try_import_info(obj, alias=None):
     try:
         _simple = _raw_import_info(obj)
-        _sentence = (*_simple, *(('as', alias) if alias else ()))
-        _actual = _validate_import_info(*_sentence)
+        if _validate_import_info(*_simple) is obj:
+            return (*_simple, *(('as', alias) if alias else ()))
+        else:
+            raise TypeError(f'Unable to import {repr(obj)}, validate fail.')
     except (TypeError, ImportError, AttributeError, ModuleNotFoundError):
         raise TypeError(f'Unable to import {repr(obj)}, error occurred when trying to trace.')
-
-    if _actual is obj:
-        return _sentence
-    else:
-        raise TypeError(f'Unable to import {repr(obj)}, validate fail.')
 
 
 def _raw_import_info(obj):
