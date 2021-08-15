@@ -3,7 +3,8 @@ import math
 import types
 
 from .addons import Addons, AddonProxy
-from .supports import raw_object, typed_object, function, _dump_obj, raw_type
+from ..supports import raw_object, typed_object, function, raw_type
+from ..supports.bin import dump_obj
 from ..utils import dynamic_call
 
 
@@ -125,7 +126,7 @@ def builtin_bytearray(v: bytearray, addon: Addons):
 def builtin_func(v, addon: Addons):
     addon.is_type(v, types.FunctionType)
     with addon.transaction():
-        return addon.obj(function)(v.__name__, _dump_obj(v))
+        return addon.obj(function)(v.__name__, dump_obj(v))
 
 
 _TYPES_TYPE_NAMES = {getattr(types, name): name for name in filter(lambda x: x.endswith('Type'), dir(types))}
@@ -145,7 +146,7 @@ def builtin_type(v: type, addon: Addons):
                 return addon.obj(v)
         except (ImportError, TypeError):
             _full_name = ((v.__module__ + '.') if hasattr(v, '__module__') else '') + v.__name__
-            return addon.obj(raw_type)(_full_name, _dump_obj(v))
+            return addon.obj(raw_type)(_full_name, dump_obj(v))
 
 
 @dynamic_call
@@ -161,9 +162,9 @@ def builtin_object(v, addon: Addons):
         try:
             _i = addon.obj(type(v))
         except (ImportError, TypeError):
-            return addon.obj(raw_object)(_dump_obj(v))
+            return addon.obj(raw_object)(dump_obj(v))
         else:
-            return addon.obj(typed_object)(type(v), _dump_obj(v))
+            return addon.obj(typed_object)(type(v), dump_obj(v))
 
 
 @dynamic_call

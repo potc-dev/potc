@@ -1,3 +1,3 @@
 from .config import *
-from .translate import *
+from .rules import *
 from .utils import *

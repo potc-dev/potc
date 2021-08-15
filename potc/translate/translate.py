@@ -5,10 +5,9 @@ from typing import Mapping, Any, Tuple
 from isort import code as sort_code_imports
 from yapf.yapflib.yapf_api import FormatCode
 
-from .addons import Addons
-from .builtins import builtins_
-from .plugins import plugins_
-from .rules import UnprocessableError, rules_chain
+from ..rules import UnprocessableError, rules_chain, Addons
+from ..rules.builtins import builtins_
+from ..rules.plugins import plugins_
 
 
 class TranslationFailed(Exception):

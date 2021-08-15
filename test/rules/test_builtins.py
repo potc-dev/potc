@@ -6,9 +6,9 @@ import pytest
 from dill import source
 from easydict import EasyDict
 
+from potc.rules import rule_rename
+from potc.rules.addons import Addons
 from potc.testing import obj_translate_assert
-from potc.translate import rule_rename
-from potc.translate.addons import Addons
 
 
 class _LocalType:
