@@ -124,14 +124,14 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
+# a list of plugins themes.
 #
 html_theme = 'sphinx_rtd_theme'
 htmlhelp_basename = 'TreeValue'
 
 # Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
+# relative to this directory. They are copied after the plugins static files,
+# so a file named "default.css" will overwrite the plugins "default.css".
 html_static_path = ['_static']
 
 epub_title = project

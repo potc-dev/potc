@@ -5,12 +5,12 @@ from itertools import chain
 from typing import Tuple
 
 from .imports import ImportPool, ImportStatement, FromImport, DirectImport
-from ...utils import try_import_info
+from ..utils import try_import_info
 
 
 @lru_cache()
 def _get_unprocessable():
-    from ..utils import unprocessable
+    from .utils import unprocessable
     return unprocessable
 
 

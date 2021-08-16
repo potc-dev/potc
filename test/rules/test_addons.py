@@ -3,7 +3,7 @@ import numpy
 import pytest
 from numpy import ndarray
 
-from potc.rules.addons.addons import Addons
+from potc.rules.addons import Addons
 
 
 @pytest.mark.unittest

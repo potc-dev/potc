@@ -1,6 +1,6 @@
 import pytest
 
-from potc.rules.addons.imports import FromImport, DirectImport, ImportPool
+from potc.rules.imports import FromImport, DirectImport, ImportPool
 
 
 @pytest.mark.unittest

@@ -1,2 +1,2 @@
-from .addons import *
-from .test_builtins import TestTranslateBuiltins
+from .test_addons import TestTranslateAddonsAddons
+from .test_imports import TestTranslateAddonsImports

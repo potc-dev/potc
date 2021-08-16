@@ -2,7 +2,7 @@ import builtins
 import math
 import types
 
-from .addons import Addons, AddonProxy
+from ..rules import Addons, AddonProxy
 from ..supports import raw_object, typed_object, function, raw_type
 from ..supports.bin import dump_obj
 from ..utils import dynamic_call
