@@ -50,6 +50,6 @@ def topological(n: int, edges: Collection[Tuple[int, int]]) -> List[int]:
 
     if len(visited) < n:
         missing = tuple(sorted(set(range(n)) - set(visited)))
-        raise ArithmeticError(f'Invalid top graph for some node ids not accessible - {repr(missing)}.')
+        raise ArithmeticError(f'Invalid top graph for some node ids not accessible - {repr(missing)}.', missing)
 
     return visited

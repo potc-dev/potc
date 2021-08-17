@@ -29,4 +29,4 @@ def _load_plugins():
     return _plugins
 
 
-external_ = _load_plugins()
+installed_all = _load_plugins()

@@ -2,25 +2,24 @@ import builtins
 import math
 import types
 
-from ..rules import Addons, AddonProxy
+from ..rules import Addons, rule
 from ..supports import raw_object, typed_object, function, raw_type
 from ..supports.bin import dump_obj
-from ..utils import dynamic_call
 
 
-@dynamic_call
+@rule()
 def builtin_ellipsis(v, addon: Addons):
     addon.is_type(v, type(...))
     return '...'
 
 
-@dynamic_call
+@rule()
 def builtin_int(v: int, addon: Addons):
     addon.is_type(v, int)
     return repr(v)
 
 
-@dynamic_call
+@rule()
 def builtin_float(v: float, addon: Addons):
     addon.is_type(v, float)
     with addon.transaction():
@@ -39,34 +38,34 @@ def builtin_float(v: float, addon: Addons):
                 return repr(v)
 
 
-@dynamic_call
+@rule()
 def builtin_str(v: str, addon: Addons):
     addon.is_type(v, str)
     return repr(v)
 
 
-@dynamic_call
+@rule()
 def builtin_none(v: None, addon: Addons):
     if v is not None:
         addon.unprocessable()
     return repr(v)
 
 
-@dynamic_call
+@rule()
 def builtin_range(v: range, addon: Addons):
     addon.is_type(v, range)
     with addon.transaction():
         return addon.val(range)(v.start, v.stop, v.step)
 
 
-@dynamic_call
+@rule()
 def builtin_slice(v: slice, addon: Addons):
     addon.is_type(v, slice)
     with addon.transaction():
         return addon.val(slice)(v.start, v.stop, v.step)
 
 
-@dynamic_call
+@rule()
 def builtin_list(v: list, addon: Addons):
     addon.is_type(v, list)
     with addon.transaction():
@@ -76,7 +75,7 @@ def builtin_list(v: list, addon: Addons):
             return addon.obj(type(v))(list(v))
 
 
-@dynamic_call
+@rule()
 def builtin_tuple(v: tuple, addon: Addons):
     addon.is_type(v, tuple)
     with addon.transaction():
@@ -86,7 +85,7 @@ def builtin_tuple(v: tuple, addon: Addons):
             return addon.obj(type(v))(tuple(v))
 
 
-@dynamic_call
+@rule()
 def builtin_set(v: set, addon: Addons):
     addon.is_type(v, set)
     with addon.transaction():
@@ -99,7 +98,7 @@ def builtin_set(v: set, addon: Addons):
             return addon.obj(type(v))(set(v))
 
 
-@dynamic_call
+@rule()
 def builtin_dict(v: dict, addon: Addons):
     addon.is_type(v, dict)
     with addon.transaction():
@@ -109,20 +108,20 @@ def builtin_dict(v: dict, addon: Addons):
             return addon.obj(type(v))(dict(v))
 
 
-@dynamic_call
+@rule()
 def builtin_bytes(v: bytes, addon: Addons):
     addon.is_type(v, bytes)
     return repr(v)
 
 
-@dynamic_call
+@rule()
 def builtin_bytearray(v: bytearray, addon: Addons):
     addon.is_type(v, bytearray)
     with addon.transaction():
         return addon.val(bytearray)(bytes(v))
 
 
-@dynamic_call
+@rule()
 def builtin_func(v, addon: Addons):
     addon.is_type(v, types.FunctionType)
     with addon.transaction():
@@ -133,7 +132,7 @@ _TYPES_TYPE_NAMES = {getattr(types, name): name for name in filter(lambda x: x.e
 _BUILTIN_TYPE_NAMES = {value: key for key, value in builtins.__dict__.items() if isinstance(value, type)}
 
 
-@dynamic_call
+@rule()
 def builtin_type(v: type, addon: Addons):
     addon.is_type(v, type)
     with addon.transaction():
@@ -149,14 +148,14 @@ def builtin_type(v: type, addon: Addons):
             return addon.obj(raw_type)(_full_name, dump_obj(v))
 
 
-@dynamic_call
+@rule()
 def builtin_module(v, addon: Addons):
     addon.is_type(v, types.ModuleType)
     with addon.transaction():
         return addon.obj(v)
 
 
-@dynamic_call
+@rule()
 def builtin_object(v, addon: Addons):
     with addon.transaction():
         try:
@@ -167,30 +166,34 @@ def builtin_object(v, addon: Addons):
             return addon.obj(typed_object)(type(v), dump_obj(v))
 
 
-@dynamic_call
-def sys_addon_proxy(v: AddonProxy, addon: Addons):
-    addon.is_type(v, AddonProxy)
-    with addon.transaction():
-        return str(v)
-
-
-builtins_ = [
-    sys_addon_proxy,
-    builtin_ellipsis,
+builtin_bases = (
     builtin_int,
     builtin_float,
     builtin_str,
     builtin_none,
     builtin_range,
     builtin_slice,
+    builtin_ellipsis,
+    builtin_bytes,
+    builtin_bytearray,
+)
+builtin_collections = (
     builtin_list,
     builtin_tuple,
     builtin_set,
     builtin_dict,
-    builtin_bytes,
-    builtin_bytearray,
+)
+builtin_reflect = (
     builtin_func,
     builtin_type,
     builtin_module,
-    builtin_object,
+)
+
+builtin_all = [
+    (
+        builtin_bases,
+        builtin_collections,
+        builtin_reflect,
+        builtin_object,
+    ),
 ]

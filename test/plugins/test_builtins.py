@@ -6,7 +6,7 @@ import pytest
 from dill import source
 from easydict import EasyDict
 
-from potc.rules import rule_rename
+from potc.rules import rule
 from potc.rules.addons import Addons
 from potc.testing import obj_translate_assert
 
@@ -235,6 +235,7 @@ class TestTranslateBuiltins:
             assert name == 'builtin_object'
 
     def test_with_rules(self):
+        @rule()
         def _my_dict_rule(v, addon):
             addon.is_type(v, dict)
             return addon.rule((set(v.keys()), set(v.values())))
@@ -249,12 +250,12 @@ class TestTranslateBuiltins:
         class _MyDictV(dict):
             pass
 
-        @rule_rename('keys')
+        @rule('keys')
         def _my_dict_rule_k(v, addon):
             addon.is_type(v, _MyDictK)
             return addon.rule(set(v.keys()))
 
-        @rule_rename('values')
+        @rule('values')
         def _my_dict_rule_v(v, addon):
             addon.is_type(v, _MyDictV)
             return addon.rule([set(v.values()), 2, addon.obj(math).cos(len(v))])
@@ -268,18 +269,12 @@ class TestTranslateBuiltins:
             assert name == 'values'
 
         with pytest.raises(NameError):
-            @rule_rename('values892759834574(*)(&*(^&')
+            @rule('values892759834574(*)(&*(^&')
             def _my_dict_rule_t1(v, addon):
                 addon.is_type(v, _MyDictV)
                 return addon.rule(set(v.values()))
 
-        with pytest.raises(NameError):
-            @rule_rename('globals')
-            def _my_dict_rule_t2(v, addon):
-                addon.is_type(v, _MyDictV)
-                return addon.rule(set(v.values()))
-
-        @rule_rename('builtin_dict')
+        @rule('builtin_dict')
         def _my_dict_rule_t3(v, addon):
             addon.is_type(v, _MyDictV)
             return addon.rule(set(v.values()))
@@ -329,6 +324,7 @@ class TestTranslateBuiltins:
             assert name == 'builtin_slice'
 
     def test_new_addon_getitem(self):
+        @rule()
         def my_rule(v, addon: Addons):
             addon.is_type(v, tuple)
             return addon.obj(list)(list(reversed(v)))[::-2]
@@ -337,6 +333,7 @@ class TestTranslateBuiltins:
             assert obj == [1, 3, 5]
             assert name == 'my_rule'
 
+        @rule()
         def my_rule_2(v, addon: Addons):
             addon.is_type(v, tuple)
             return addon.obj(list)(list(reversed(v)))[-2]

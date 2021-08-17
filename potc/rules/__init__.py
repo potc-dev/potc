@@ -1,2 +1,3 @@
 from .addons import AddonProxy, Addons
-from .utils import rule_rename, rules_chain, unprocessable, UnprocessableError
+from .chain import build_chain, rules_combine
+from .common import rule, is_rule, unprocessable, UnprocessableError

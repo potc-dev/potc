@@ -5,8 +5,8 @@ from typing import Mapping, Any, Tuple
 from isort import code as sort_code_imports
 from yapf.yapflib.yapf_api import FormatCode
 
-from ..plugins import builtins_, external_
-from ..rules import UnprocessableError, rules_chain, Addons
+from ..plugins import rule_build
+from ..rules import UnprocessableError, Addons
 
 
 class TranslationFailed(Exception):
@@ -19,12 +19,11 @@ class TranslationFailed(Exception):
         return self.__obj
 
 
-def translate_object(obj, extend_rules=None) -> Tuple[str, Addons, str]:
-    final_ = rules_chain(*(extend_rules or []), *external_, *builtins_)
-
-    addon = Addons(rule=final_)
+def translate_object(obj, extern=None) -> Tuple[str, Addons, str]:
+    _rule = rule_build(extern)
+    addon = Addons(rule=_rule)
     try:
-        _code, _trace_name = final_(obj, addon)
+        _code, _trace_name = _rule(obj, addon)
         return _code.strip(), addon, _trace_name
     except UnprocessableError:
         raise TranslationFailed
