@@ -6,8 +6,7 @@ import pytest
 from dill import source
 from easydict import EasyDict
 
-from potc.rules import rule
-from potc.rules.addons import Addons
+from potc.fixture import rule, Addons
 from potc.testing import obj_translate_assert
 
 
@@ -51,7 +50,7 @@ class _MyPair:
 
 
 @pytest.mark.unittest
-class TestTranslateBuiltins:
+class TestRulesBuiltins:
     def test_str(self):
         with obj_translate_assert('str') as (obj, name):
             assert obj == 'str'

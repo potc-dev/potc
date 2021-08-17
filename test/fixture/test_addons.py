@@ -3,11 +3,11 @@ import numpy
 import pytest
 from numpy import ndarray
 
-from potc.rules.addons import Addons
+from potc.fixture import Addons
 
 
 @pytest.mark.unittest
-class TestTranslateAddonsAddons:
+class TestFixtureAddons:
     def test_addons(self):
         addons = Addons()
         with addons.transaction() as add:

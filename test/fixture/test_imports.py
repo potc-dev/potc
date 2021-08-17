@@ -1,10 +1,10 @@
 import pytest
 
-from potc.rules.imports import FromImport, DirectImport, ImportPool
+from potc.fixture.imports import FromImport, DirectImport, ImportPool
 
 
 @pytest.mark.unittest
-class TestTranslateAddonsImports:
+class TestFixtureImports:
     def test_from_import(self):
         _import = FromImport('treevalue.utils').import_('int_enums').as_('my_int_enums')
         assert str(_import) == 'from treevalue.utils import int_enums as my_int_enums'

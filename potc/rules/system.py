@@ -1,4 +1,4 @@
-from ..rules import Addons, AddonProxy, rule
+from ..fixture import Addons, AddonProxy, rule
 
 
 @rule()

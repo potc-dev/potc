@@ -2,7 +2,7 @@ import builtins
 import math
 import types
 
-from ..rules import Addons, rule
+from ..fixture import Addons, rule
 from ..supports import raw_object, typed_object, function, raw_type
 from ..supports.bin import dump_obj
 
@@ -166,7 +166,7 @@ def builtin_object(v, addon: Addons):
             return addon.obj(typed_object)(type(v), dump_obj(v))
 
 
-builtin_bases = (
+builtin_basic = (
     builtin_int,
     builtin_float,
     builtin_str,
@@ -177,7 +177,7 @@ builtin_bases = (
     builtin_bytes,
     builtin_bytearray,
 )
-builtin_collections = (
+builtin_collection = (
     builtin_list,
     builtin_tuple,
     builtin_set,
@@ -191,8 +191,8 @@ builtin_reflect = (
 
 builtin_all = [
     (
-        builtin_bases,
-        builtin_collections,
+        builtin_basic,
+        builtin_collection,
         builtin_reflect,
         builtin_object,
     ),

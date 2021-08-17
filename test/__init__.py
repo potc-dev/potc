@@ -1,4 +1,4 @@
 from .config import *
-from .plugins import *
+from .fixture import *
 from .rules import *
 from .utils import *
