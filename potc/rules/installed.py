@@ -23,10 +23,18 @@ def _autoload_plugin(plg):
 _GROUP_NAME = 'potc_plugin'
 
 
-@lru_cache()
+def _iter_plugins():
+    for ep in iter_entry_points(group=_GROUP_NAME):
+        yield ep.load()
+
+
 def _load_plugins():
-    return [_autoload_plugin(ep.load())
-            for ep in iter_entry_points(group=_GROUP_NAME)]
+    return [_autoload_plugin(item) for item in _iter_plugins()]
 
 
-installed_all = _load_plugins()
+@lru_cache()
+def _load_plugins_once():
+    return _load_plugins()
+
+
+installed_all = _load_plugins_once()
