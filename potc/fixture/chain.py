@@ -17,10 +17,10 @@ def build_chain(c: Union[List, Tuple, Callable], id_gen=None) -> List[Callable]:
             rules[id_gen(ci)] = ci
             return {id_gen(ci)}, {id_gen(ci)}, {id_gen(ci)}
         elif isinstance(ci, tuple):
-            if not ci:
+            children = list(filter(lambda x: x[0], map(_rule_walk, ci)))
+            if not children:
                 return set(), set(), set()
 
-            children = list(filter(lambda x: x[0], map(_rule_walk, ci)))
             for (_, _, _lasts), (_, _firsts, _) in zip(children[:-1], children[1:]):
                 for _last, _first in product(_lasts, _firsts):
                     edges.add((_last, _first))
@@ -30,10 +30,10 @@ def build_chain(c: Union[List, Tuple, Callable], id_gen=None) -> List[Callable]:
             _, _, _last_ids = children[-1]
             return _all_ids, _first_ids, _last_ids
         elif isinstance(ci, list):
-            if not ci:
+            children = list(filter(lambda x: x[0], map(_rule_walk, ci)))
+            if not children:
                 return set(), set(), set()
 
-            children = list(filter(lambda x: x[0], map(_rule_walk, ci)))
             _all_ids = reduce(__or__, map(lambda x: x[0], children))
             _first_ids = reduce(__or__, map(lambda x: x[1], children))
             _last_ids = reduce(__or__, map(lambda x: x[2], children))

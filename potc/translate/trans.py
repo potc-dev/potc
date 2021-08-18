@@ -1,4 +1,5 @@
 import os
+from abc import ABCMeta
 from itertools import chain
 from typing import Tuple, Mapping, Any
 
@@ -73,7 +74,7 @@ class VarsTranslation:
         yield self.__addons
 
 
-class RawTranslator:
+class _AbstractTranslator(metaclass=ABCMeta):
     def __init__(self, rules):
         self.__rule, self.__plain_rule = make_both_rules(rules)
 
@@ -83,7 +84,7 @@ class RawTranslator:
             _code, _trace_name = self.__rule(obj, addon)
             return ObjectTranslation(_code.strip(), addon, _trace_name)
         except UnprocessableError:
-            raise TranslationFailed
+            raise TranslationFailed(obj)
 
     def __transvars(self, vars_: Mapping[str, Any]):
         codes, addons = [], []
@@ -114,13 +115,25 @@ class RawTranslator:
         return VarsTranslation(_code, dict(_addons))
 
 
-class CleanTranslator:
+class BaseTranslator(_AbstractTranslator):
     def __init__(self, extend_rules=None):
-        _rule_args = (system_all, [(extend_rules or []), builtin_all])
-        RawTranslator.__init__(self, _rule_args)
+        _AbstractTranslator.__init__(self, (system_all, extend_rules or []))
 
 
-class Translator(RawTranslator):
+class BlankTranslator(BaseTranslator):
     def __init__(self, extend_rules=None):
-        _rule_args = (system_all, [(extend_rules or []), installed_all, builtin_all])
-        RawTranslator.__init__(self, _rule_args)
+        BaseTranslator.__init__(self, [(extend_rules or []), builtin_all])
+
+
+class Translator(BlankTranslator):
+    def __init__(self, extend_rules=None):
+        BlankTranslator.__init__(self, [(extend_rules or []), installed_all])
+
+
+def autotrans(trans):
+    if isinstance(trans, BaseTranslator):
+        return trans
+    elif isinstance(trans, type) and issubclass(trans, BaseTranslator):
+        return trans()
+    else:
+        return Translator(trans)

@@ -1,2 +1,3 @@
-from .trans import Translator, RawTranslator, TranslationFailed, \
-    ObjectTranslation, CleanTranslator, VarsTranslation
+from .quick import transobj, transvars
+from .trans import Translator, TranslationFailed, ObjectTranslation, VarsTranslation, BaseTranslator, BlankTranslator, \
+    autotrans
