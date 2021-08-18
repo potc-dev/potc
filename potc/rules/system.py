@@ -1,9 +1,8 @@
 from ..fixture import Addons, AddonProxy, rule
 
 
-@rule()
+@rule(type_=AddonProxy)
 def system_addon_proxy(v: AddonProxy, addon: Addons):
-    addon.is_type(v, AddonProxy)
     with addon.transaction():
         return str(v)
 

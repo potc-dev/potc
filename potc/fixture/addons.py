@@ -2,7 +2,7 @@ import copy
 from contextlib import contextmanager
 from functools import lru_cache
 from itertools import chain
-from typing import Tuple, Union
+from typing import Tuple
 
 from .imports import ImportPool, ImportStatement, FromImport, DirectImport
 from ..utils import try_import_info
@@ -90,13 +90,6 @@ class Addons:
     @property
     def import_items(self) -> Tuple[ImportStatement, ...]:
         return self.__imports.imports
-
-    def assert_(self, value):
-        if not value:
-            self.unprocessable()
-
-    def is_type(self, v, type_: Union[type, Tuple[type, ...]]):
-        self.assert_(isinstance(v, type_))
 
     # noinspection PyMethodMayBeStatic
     def unprocessable(self):

@@ -7,21 +7,18 @@ from ..supports import raw_object, typed_object, function, raw_type
 from ..supports.bin import dump_obj
 
 
-@rule()
-def builtin_ellipsis(v, addon: Addons):
-    addon.is_type(v, type(...))
+@rule(type_=type(...))
+def builtin_ellipsis():
     return '...'
 
 
-@rule()
-def builtin_int(v: int, addon: Addons):
-    addon.is_type(v, int)
+@rule(type_=int)
+def builtin_int(v: int):
     return repr(v)
 
 
-@rule()
+@rule(type_=float)
 def builtin_float(v: float, addon: Addons):
-    addon.is_type(v, float)
     if math.isinf(v):
         return ('+' if v > 0 else '-') + str(addon.obj(math).inf)
     elif math.isnan(v):
@@ -37,52 +34,58 @@ def builtin_float(v: float, addon: Addons):
             return repr(v)
 
 
-@rule()
-def builtin_str(v: str, addon: Addons):
-    addon.is_type(v, str)
+@rule(type_=str)
+def builtin_str(v: str):
     return repr(v)
 
 
-@rule()
-def builtin_none(v: None, addon: Addons):
-    if v is not None:
-        addon.unprocessable()
-    return repr(v)
+@rule(type_=type(None))
+def builtin_none():
+    return 'None'
 
 
-@rule()
+@rule(type_=range)
 def builtin_range(v: range, addon: Addons):
-    addon.is_type(v, range)
-    return addon.val(range)(v.start, v.stop, v.step)
+    if v.step == 1:
+        if v.start == 0:
+            _args = (v.stop,)
+        else:
+            _args = (v.start, v.stop,)
+    else:
+        _args = (v.start, v.stop, v.step)
+    return addon.val(range)(*_args)
 
 
-@rule()
+@rule(type_=slice)
 def builtin_slice(v: slice, addon: Addons):
-    addon.is_type(v, slice)
+    if v.step is None:
+        if v.start is None:
+            _args = (v.stop,)
+        else:
+            _args = (v.start, v.stop)
+    else:
+        _args = (v.start, v.stop, v.step)
     return addon.val(slice)(v.start, v.stop, v.step)
 
 
-@rule()
+@rule(type_=list)
 def builtin_list(v: list, addon: Addons):
-    addon.is_type(v, list)
     if type(v) == list:
         return f'[{", ".join(map(addon.rule, v))}]'
     else:
         return addon.obj(type(v))(list(v))
 
 
-@rule()
+@rule(type_=tuple)
 def builtin_tuple(v: tuple, addon: Addons):
-    addon.is_type(v, tuple)
     if type(v) == tuple:
         return f'({", ".join(map(addon.rule, v))}{", " if len(v) == 1 else ""})'
     else:
         return addon.obj(type(v))(tuple(v))
 
 
-@rule()
+@rule(type_=(set, frozenset))
 def builtin_set(v: set, addon: Addons):
-    addon.is_type(v, (set, frozenset))
     if type(v) == set:
         if len(v) > 0:
             return f'{{{", ".join(map(addon.rule, v))}}}'
@@ -92,18 +95,16 @@ def builtin_set(v: set, addon: Addons):
         return addon.obj(type(v))(set(v))
 
 
-@rule()
+@rule(type_=dict)
 def builtin_dict(v: dict, addon: Addons):
-    addon.is_type(v, dict)
     if type(v) == dict:
         return f'{{{", ".join(map(lambda e: f"{addon.rule(e[0])}: {addon.rule(e[1])}", v.items()))}}}'
     else:
         return addon.obj(type(v))(dict(v))
 
 
-@rule()
+@rule(type_=(bytes, bytearray, memoryview))
 def builtin_bytes(v: bytes, addon: Addons):
-    addon.is_type(v, (bytes, bytearray, memoryview))
     if type(v) == bytes:
         return repr(v)
     else:
@@ -121,9 +122,9 @@ def builtin_items(v, addon: Addons):
         addon.unprocessable()
 
 
-@rule()
+# noinspection PyTypeChecker
+@rule(type_=types.FunctionType)
 def builtin_func(v, addon: Addons):
-    addon.is_type(v, types.FunctionType)
     return addon.obj(function)(v.__name__, dump_obj(v))
 
 
@@ -131,9 +132,8 @@ _TYPES_TYPE_NAMES = {getattr(types, name): name for name in filter(lambda x: x.e
 _BUILTIN_TYPE_NAMES = {value: key for key, value in builtins.__dict__.items() if isinstance(value, type)}
 
 
-@rule()
+@rule(type_=type)
 def builtin_type(v: type, addon: Addons):
-    addon.is_type(v, type)
     try:
         if v in _BUILTIN_TYPE_NAMES.keys():
             return _BUILTIN_TYPE_NAMES[v]
@@ -146,9 +146,8 @@ def builtin_type(v: type, addon: Addons):
         return addon.obj(raw_type)(_full_name, dump_obj(v))
 
 
-@rule()
+@rule(type_=types.ModuleType)
 def builtin_module(v, addon: Addons):
-    addon.is_type(v, types.ModuleType)
     return addon.obj(v)
 
 

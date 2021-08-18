@@ -238,9 +238,8 @@ class TestRulesBuiltins:
             assert name == 'builtin_object'
 
     def test_with_rules(self):
-        @rule()
+        @rule(type_=dict)
         def _my_dict_rule(v, addon):
-            addon.is_type(v, dict)
             return addon.rule((set(v.keys()), set(v.values())))
 
         with obj_translate_assert({'a': 1}, [_my_dict_rule]) as (obj, name):
@@ -253,14 +252,12 @@ class TestRulesBuiltins:
         class _MyDictV(dict):
             pass
 
-        @rule('keys')
+        @rule('keys', type_=_MyDictK)
         def _my_dict_rule_k(v, addon):
-            addon.is_type(v, _MyDictK)
             return addon.rule(set(v.keys()))
 
-        @rule('values')
+        @rule('values', type_=_MyDictV)
         def _my_dict_rule_v(v, addon):
-            addon.is_type(v, _MyDictV)
             return addon.rule([set(v.values()), 2, addon.obj(math).cos(len(v))])
 
         with obj_translate_assert(_MyDictK({'a': 1}), [_my_dict_rule_k, _my_dict_rule_v]) as (obj, name):
@@ -272,14 +269,12 @@ class TestRulesBuiltins:
             assert name == 'values'
 
         with pytest.raises(NameError):
-            @rule('values892759834574(*)(&*(^&')
+            @rule('values892759834574(*)(&*(^&', type_=_MyDictV)
             def _my_dict_rule_t1(v, addon):
-                addon.is_type(v, _MyDictV)
                 return addon.rule(set(v.values()))
 
-        @rule('builtin_dict')
+        @rule('builtin_dict', type_=_MyDictV)
         def _my_dict_rule_t3(v, addon):
-            addon.is_type(v, _MyDictV)
             return addon.rule(set(v.values()))
 
         with pytest.raises(KeyError):
@@ -327,18 +322,16 @@ class TestRulesBuiltins:
             assert name == 'builtin_slice'
 
     def test_new_addon_getitem(self):
-        @rule()
+        @rule(type_=tuple)
         def my_rule(v, addon: Addons):
-            addon.is_type(v, tuple)
             return addon.obj(list)(list(reversed(v)))[::-2]
 
         with obj_translate_assert((1, 2, 3, 4, 5), extend_rules=[my_rule]) as (obj, name):
             assert obj == [1, 3, 5]
             assert name == 'my_rule'
 
-        @rule()
+        @rule(type_=tuple)
         def my_rule_2(v, addon: Addons):
-            addon.is_type(v, tuple)
             return addon.obj(list)(list(reversed(v)))[-2]
 
         with obj_translate_assert((1, 2, 3, 4, 5), extend_rules=[my_rule_2]) as (obj, name):
