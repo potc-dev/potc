@@ -326,7 +326,7 @@ class TestRulesBuiltins:
         def my_rule(v, addon: Addons):
             return addon.obj(list)(list(reversed(v)))[::-2]
 
-        with obj_translate_assert((1, 2, 3, 4, 5), extend_rules=[my_rule]) as (obj, name):
+        with obj_translate_assert((1, 2, 3, 4, 5), trans=[my_rule]) as (obj, name):
             assert obj == [1, 3, 5]
             assert name == 'my_rule'
 
@@ -334,7 +334,7 @@ class TestRulesBuiltins:
         def my_rule_2(v, addon: Addons):
             return addon.obj(list)(list(reversed(v)))[-2]
 
-        with obj_translate_assert((1, 2, 3, 4, 5), extend_rules=[my_rule_2]) as (obj, name):
+        with obj_translate_assert((1, 2, 3, 4, 5), trans=[my_rule_2]) as (obj, name):
             assert obj == 2
             assert name == 'my_rule_2'
 

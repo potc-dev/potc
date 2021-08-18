@@ -1,9 +1,9 @@
 import copy
 import io
 from contextlib import contextmanager
-from typing import Mapping, Any
+from typing import Mapping, Any, Callable, Union
 
-from ..translate import translate_object
+from ..translate import Translator, RawTranslator
 
 
 def run_script(source: str) -> Mapping[str, Any]:
@@ -22,8 +22,10 @@ _TEST_OBJ = '_TEST_OBJ'
 
 
 @contextmanager
-def obj_translate_assert(obj, extend_rules=None):
-    _code, _addon, _name = translate_object(obj, extend_rules)
+def obj_translate_assert(obj, trans: Union[RawTranslator, list, tuple, Callable, None] = None):
+    if not isinstance(trans, RawTranslator):
+        trans = Translator(trans)
+    _code, _addon, _name = trans.transobj(obj)
 
     with io.StringIO() as _source_file:
         for _import in sorted(set(_addon.import_items), key=lambda x: x.key):

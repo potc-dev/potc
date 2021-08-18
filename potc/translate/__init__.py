@@ -1,1 +1,2 @@
-from .translate import translate_object, translate_vars
+from .trans import Translator, RawTranslator, TranslationFailed, \
+    ObjectTranslation, CleanTranslator, VarsTranslation
