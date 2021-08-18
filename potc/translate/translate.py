@@ -5,7 +5,7 @@ from typing import Mapping, Any, Tuple
 from isort import code as sort_code_imports
 from yapf.yapflib.yapf_api import FormatCode
 
-from .make import make_rule
+from .make import make_both_rules
 from ..fixture import UnprocessableError, Addons
 
 
@@ -20,8 +20,8 @@ class TranslationFailed(Exception):
 
 
 def translate_object(obj, extern=None) -> Tuple[str, Addons, str]:
-    _rule = make_rule(extern)
-    addon = Addons(rule=_rule)
+    _rule, _plain_rule = make_both_rules(extern)
+    addon = Addons(rule=_plain_rule)
     try:
         _code, _trace_name = _rule(obj, addon)
         return _code.strip(), addon, _trace_name

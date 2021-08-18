@@ -84,8 +84,7 @@ class Addons:
 
     def rule(self, v):
         with self.transaction():
-            _result, _trace = self.__rule(v, self)
-            return str(_result)
+            return str(self.__rule(v, self))
 
     @property
     def import_items(self) -> Tuple[ImportStatement, ...]:
