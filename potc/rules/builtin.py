@@ -82,7 +82,7 @@ def builtin_tuple(v: tuple, addon: Addons):
 
 @rule()
 def builtin_set(v: set, addon: Addons):
-    addon.is_type(v, set)
+    addon.is_type(v, (set, frozenset))
     if type(v) == set:
         if len(v) > 0:
             return f'{{{", ".join(map(addon.rule, v))}}}'
@@ -103,14 +103,22 @@ def builtin_dict(v: dict, addon: Addons):
 
 @rule()
 def builtin_bytes(v: bytes, addon: Addons):
-    addon.is_type(v, bytes)
-    return repr(v)
+    addon.is_type(v, (bytes, bytearray, memoryview))
+    if type(v) == bytes:
+        return repr(v)
+    else:
+        return addon.val(type(v))(bytes(v))
+
+
+_BUILTIN_ITEMS_NAMES = {id(value): key for key, value in builtins.__dict__.items() if not isinstance(value, type)}
 
 
 @rule()
-def builtin_bytearray(v: bytearray, addon: Addons):
-    addon.is_type(v, bytearray)
-    return addon.val(bytearray)(bytes(v))
+def builtin_items(v, addon: Addons):
+    if id(v) in _BUILTIN_ITEMS_NAMES.keys():
+        return _BUILTIN_ITEMS_NAMES[id(v)]
+    else:
+        addon.unprocessable()
 
 
 @rule()
@@ -163,7 +171,6 @@ builtin_basic = (
     builtin_slice,
     builtin_ellipsis,
     builtin_bytes,
-    builtin_bytearray,
 )
 builtin_collection = (
     builtin_list,
@@ -172,6 +179,7 @@ builtin_collection = (
     builtin_dict,
 )
 builtin_reflect = (
+    builtin_items,
     builtin_func,
     builtin_type,
     builtin_module,

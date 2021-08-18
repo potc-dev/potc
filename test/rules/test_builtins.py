@@ -105,11 +105,10 @@ class TestRulesBuiltins:
             assert isinstance(obj, bytes)
             assert name == 'builtin_bytes'
 
-    def test_bytearray(self):
         with obj_translate_assert(bytearray(b'lsdjkflpisdjgp89erdjpo9\x00\x11')) as (obj, name):
             assert obj == bytearray(b'lsdjkflpisdjgp89erdjpo9\x00\x11')
             assert isinstance(obj, bytearray)
-            assert name == 'builtin_bytearray'
+            assert name == 'builtin_bytes'
 
     def test_type(self):
         with obj_translate_assert(int) as (obj, name):
@@ -196,6 +195,11 @@ class TestRulesBuiltins:
         with obj_translate_assert(_MySet({1, 2, 3})) as (obj, name):
             assert isinstance(obj, _MySet)
             assert obj == _MySet({1, 2, 3})
+            assert name == 'builtin_set'
+
+        with obj_translate_assert(frozenset({1, 2, 3})) as (obj, name):
+            assert isinstance(obj, frozenset)
+            assert obj == frozenset({1, 2, 3})
             assert name == 'builtin_set'
 
     def test_dict(self):
@@ -340,3 +344,13 @@ class TestRulesBuiltins:
         with obj_translate_assert((1, 2, 3, 4, 5), extend_rules=[my_rule_2]) as (obj, name):
             assert obj == 2
             assert name == 'my_rule_2'
+
+    def test_builtin_items(self):
+        with obj_translate_assert(min) as (obj, name):
+            assert obj is min
+            assert obj(1, 2, -1) == -1
+            assert name == 'builtin_items'
+
+        with obj_translate_assert(NotImplemented) as (obj, name):
+            assert obj is NotImplemented
+            assert name == 'builtin_items'
