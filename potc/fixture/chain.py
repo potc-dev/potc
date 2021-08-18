@@ -48,7 +48,7 @@ def build_chain(c: Union[List, Tuple, Callable], id_gen=None) -> List[Callable]:
     all_ids = set(rules.keys())
     count = len(all_ids)
     _name_to_id = dict(map(lambda x: (rule_name(x), id_gen(x)), rules.values()))
-    _names = sorted(map(lambda x: rule_name(x), rules.values()))
+    _names = sorted(set(map(lambda x: rule_name(x), rules.values())))
 
     if len(_names) < count:
         _duplicated_names = tuple(sorted(set(

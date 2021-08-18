@@ -277,7 +277,7 @@ class TestRulesBuiltins:
         def _my_dict_rule_t3(v, addon):
             return addon.rule(set(v.values()))
 
-        with pytest.raises(KeyError):
+        with pytest.raises(NameError):
             with obj_translate_assert({}, [_my_dict_rule_t3]):
                 pass
 
