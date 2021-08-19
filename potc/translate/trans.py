@@ -1,4 +1,5 @@
 import os
+import re
 from abc import ABCMeta
 from itertools import chain
 from typing import Tuple, Mapping, Any
@@ -74,6 +75,9 @@ class VarsTranslation:
         yield self.__addons
 
 
+_VARS_KEY_PATTERN = re.compile(r'^[_a-zA-Z][_0-9a-zA-Z]*$')
+
+
 class _AbstractTranslator(metaclass=ABCMeta):
     def __init__(self, rules):
         self.__rule, self.__plain_rule = make_both_rules(rules)
@@ -99,6 +103,10 @@ class _AbstractTranslator(metaclass=ABCMeta):
 
     def transvars(self, vars_: Mapping[str, Any], reformat=None, isort: bool = True):
         actual_vars = dict(vars_)
+        for key in actual_vars.keys():
+            if not _VARS_KEY_PATTERN.fullmatch(key):
+                raise NameError(f'Invalid variable name - {repr(key)}.')
+
         actual_vars.update(dict(__all__=sorted(vars_.keys())))
         _import_lines, _assignments, _addons = self.__transvars(actual_vars)
 

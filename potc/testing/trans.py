@@ -3,7 +3,7 @@ import io
 from contextlib import contextmanager
 from typing import Mapping, Any
 
-from ..translate import transobj
+from ..translate import transobj, transvars
 
 
 def run_script(source: str) -> Mapping[str, Any]:
@@ -22,7 +22,7 @@ _TEST_OBJ = '_TEST_OBJ'
 
 
 @contextmanager
-def obj_translate_assert(obj, trans=None):
+def transobj_assert(obj, trans=None):
     _code, _addon, _name = transobj(obj, trans)
 
     with io.StringIO() as _source_file:
@@ -36,3 +36,13 @@ def obj_translate_assert(obj, trans=None):
     _obj = _changes[_TEST_OBJ]
 
     yield _obj, _name
+
+
+@contextmanager
+def transvars_assert(vars_: Mapping[str, Any], trans=None, reformat=None, isort: bool = True):
+    _code, _addons = transvars(vars_, trans, reformat, isort)
+    _changes = run_script(_code)
+
+    assert '__all__' in _changes.keys(), f"No {repr('__all__')} variable found."
+    _vars = {key: _changes[key] for key in _changes['__all__']}
+    yield _vars, _code

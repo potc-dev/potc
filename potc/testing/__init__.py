@@ -1,1 +1,1 @@
-from .translate import obj_translate_assert
+from .trans import transobj_assert, transvars_assert
