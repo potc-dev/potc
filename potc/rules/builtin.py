@@ -17,6 +17,11 @@ def builtin_int(v: int):
     return repr(v)
 
 
+@rule(type_=complex)
+def builtin_complex(v: complex):
+    return repr(v)
+
+
 @rule(type_=float)
 def builtin_float(v: float, addon: Addons):
     if math.isinf(v):
@@ -163,6 +168,7 @@ def builtin_object(v, addon: Addons):
 
 builtin_basic = (
     builtin_int,
+    builtin_complex,
     builtin_float,
     builtin_str,
     builtin_none,

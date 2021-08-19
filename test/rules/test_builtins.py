@@ -347,3 +347,16 @@ class TestRulesBuiltins:
         with transobj_assert(NotImplemented) as (obj, name):
             assert obj is NotImplemented
             assert name == 'builtin_items'
+
+    def test_builtin_complex(self):
+        with transobj_assert(2 + 3j) as (obj, name):
+            assert obj == 2 + 3j
+            assert name == 'builtin_complex'
+
+        with transobj_assert(-4j) as (obj, name):
+            assert obj == 0 - 4j
+            assert name == 'builtin_complex'
+
+        with transobj_assert(2 - 0j) as (obj, name):
+            assert obj == 2 - 0j
+            assert name == 'builtin_complex'
