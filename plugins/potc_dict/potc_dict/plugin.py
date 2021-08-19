@@ -15,6 +15,6 @@ def pretty_dict(v: dict, addon: Addons):
     return addon.obj(type(v))(**{key: value for key, value in v.items()})
 
 
-rules = [
+__rules__ = [
     (pretty_dict, builtin_dict)
 ]

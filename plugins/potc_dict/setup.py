@@ -18,7 +18,7 @@ setup(
     ],
     entry_points={
         'potc_plugin': [
-            'pretty_dict=potc_dict.plugin:rules'
+            'pretty_dict=potc_dict.plugin:__rules__'
         ]
     },
 )

@@ -1,11 +1,12 @@
 import pytest
-from potc_dict.plugin import rules
+from potc_dict.plugin import __rules__
 
 from potc.testing import provement
+from potc.translate import BlankTranslator
 
 
 @pytest.mark.unittest
-class TestPlugin(provement(rules)):
+class TestPlugin(provement(BlankTranslator(__rules__))):
     def test_pretty_dict(self):
         with self.transobj_assert({'a': 1}) as (obj, name):
             assert obj == {'a': 1}

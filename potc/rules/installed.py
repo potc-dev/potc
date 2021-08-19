@@ -37,4 +37,4 @@ def _load_plugins_once():
     return _load_plugins()
 
 
-installed_all = _load_plugins_once()
+installed_loader = _load_plugins_once

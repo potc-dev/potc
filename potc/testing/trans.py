@@ -1,9 +1,20 @@
 import copy
 import io
 from contextlib import contextmanager
+from functools import lru_cache
 from typing import Mapping, Any
 
-from ..translate import transobj, transvars
+
+@lru_cache()
+def _transobj_func():
+    from ..translate import transobj
+    return transobj
+
+
+@lru_cache()
+def _transvars_func():
+    from ..translate import transvars
+    return transvars
 
 
 def run_script(source: str) -> Mapping[str, Any]:
@@ -23,7 +34,7 @@ _TEST_OBJ = '_TEST_OBJ'
 
 @contextmanager
 def transobj_assert(obj, trans=None):
-    _code, _addon, _name = transobj(obj, trans)
+    _code, _addon, _name = _transobj_func()(obj, trans)
 
     with io.StringIO() as _source_file:
         for _import in sorted(set(_addon.import_items), key=lambda x: x.key):
@@ -40,7 +51,7 @@ def transobj_assert(obj, trans=None):
 
 @contextmanager
 def transvars_assert(vars_: Mapping[str, Any], trans=None, reformat=None, isort: bool = True):
-    _code, _addons = transvars(vars_, trans, reformat, isort)
+    _code, _addons = _transvars_func()(vars_, trans, reformat, isort)
     _changes = run_script(_code)
 
     assert '__all__' in _changes.keys(), f"No {repr('__all__')} variable found."

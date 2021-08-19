@@ -63,7 +63,7 @@ jobs:
           fail_ci_if_error: false
 
   plugin_test:
-    name: Plugin demo test
+    name: Plugin demo test for ${{ matrix.plugin }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -74,6 +74,8 @@ jobs:
           - '3.7'
           - '3.8'
           - '3.9'
+        plugin:
+          - 'potc_dict'
 
     steps:
       - name: Checkout code
@@ -98,10 +100,7 @@ jobs:
           pip install -r requirements.txt
           pip install -r requirements-test.txt
           pip install .
-      - name: Enter potc plugin
-        run: |
-          cd plugins/potc_dict
-          pip install -e .
+          pip install "plugins/${{ matrix.plugin }}"
       - name: Test the basic environment
         run: |
           python -V
@@ -114,4 +113,4 @@ jobs:
         env:
           CI: 'true'
         run: |
-          make unittest
+          make -C plugins/${{ matrix.plugin }} unittest

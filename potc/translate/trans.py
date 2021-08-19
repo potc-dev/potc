@@ -10,7 +10,7 @@ from yapf.yapflib.yapf_api import FormatCode
 from .base import make_both_rules
 from ..fixture import Addons, UnprocessableError
 from ..fixture.imports import ImportStatement
-from ..rules import builtin_all, installed_all, system_all
+from ..rules import builtin_all, installed_loader, system_all
 
 
 class TranslationFailed(Exception):
@@ -135,7 +135,7 @@ class BlankTranslator(BaseTranslator):
 
 class Translator(BlankTranslator):
     def __init__(self, extend_rules=None):
-        BlankTranslator.__init__(self, [(extend_rules or []), installed_all])
+        BlankTranslator.__init__(self, [(extend_rules or []), installed_loader()])
 
 
 def autotrans(trans):
