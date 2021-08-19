@@ -12,3 +12,7 @@ install:
 uninstall:
 	for p in ${PLUGINS}; do \
 		pip uninstall $$p -y; done
+
+test:
+	for p in ${PLUGINS}; do \
+		make -C `readlink -f $$p` test; done
