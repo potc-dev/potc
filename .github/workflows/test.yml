@@ -51,6 +51,7 @@ jobs:
       - name: Run unittest
         env:
           CI: 'true'
+          MIN_COVERAGE: '90'
         run: |
           make unittest
       - name: Upload coverage to Codecov
@@ -63,7 +64,7 @@ jobs:
           fail_ci_if_error: false
 
   plugin_test:
-    name: Plugin demo test for ${{ matrix.plugin }}
+    name: Plugin ${{ matrix.plugin }} test, python ${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -112,5 +113,6 @@ jobs:
       - name: Run unittest
         env:
           CI: 'true'
+          MIN_COVERAGE: '90'
         run: |
           make -C plugins/${{ matrix.plugin }} unittest
