@@ -256,4 +256,16 @@ def provement(trans=None):
             with self.transobj_assert(2 - 0j) as (obj, name):
                 assert obj == 2 - 0j
 
+        def test_mixed_case(self):
+            with self.transobj_assert({
+                'a': 1,
+                1: {'ab', 1, 2, (), (1, 'dkls')},
+                'feat': [None, type, int, 233, 'sdfkl', (5, 6, -3 + 1j), {}, set(), []],
+            }) as (obj, name):
+                assert obj == {
+                    'a': 1,
+                    1: {'ab', 1, 2, (), (1, 'dkls')},
+                    'feat': [None, type, int, 233, 'sdfkl', (5, 6, -3 + 1j), {}, set(), []],
+                }
+
     return _Provement
