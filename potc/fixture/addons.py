@@ -28,8 +28,11 @@ class AddonProxy:
 
     def __getitem__(self, item):
         if isinstance(item, slice):
-            _temp_rule = lambda x: '' if x is None else self.__rule(x)
-            _item_str = f'{_temp_rule(item.start)}:{_temp_rule(item.stop)}:{_temp_rule(item.step)}'
+            _items = [item.start, item.stop, *((item.step,) if item.step is not None else ())]
+            _item_str = ':'.join(map(lambda x: '' if x is None else self.__rule(x), _items))
+        elif isinstance(item, tuple) and len(item) > 0:
+            _item_str = ', '.join(map(self.__rule, item))
+            _item_str = _item_str + (', ' if len(item) == 1 else '')
         else:
             _item_str = self.__rule(item)
         return AddonProxy(f'{self.__base}[{_item_str}]', self.__rule)

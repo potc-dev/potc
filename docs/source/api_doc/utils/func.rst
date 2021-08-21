@@ -48,3 +48,9 @@ freduce
 
 .. autofunction:: potc.utils.func.freduce
 
+
+get_callable_hint
+-----------------------
+
+.. autofunction:: potc.utils.func.get_callable_hint
+

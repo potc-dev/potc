@@ -338,6 +338,37 @@ class TestRulesBuiltins:
             assert obj == 2
             assert name == 'my_rule_2'
 
+        @rule(type_=tuple)
+        def my_rule_3(v, addon: Addons):
+            return addon.obj(list)(list(reversed(v)))[:-2]
+
+        with transobj_assert((1, 2, 3, 4, 5), trans=[my_rule_3]) as (obj, name):
+            assert obj == [5, 4, 3]
+            assert name == 'my_rule_3'
+
+        @rule(type_=list)
+        def my_rule_4(v, addon: Addons):
+            _pool = {
+                (1, 2): 1,
+                (2,): 2,
+                (3, 4, 5): 3,
+                (): 6,
+            }
+            return addon.val(_pool)[tuple(v)]
+
+        with transobj_assert([1, 2], trans=[my_rule_4]) as (obj, name):
+            assert obj == 1
+            assert name == 'my_rule_4'
+        with transobj_assert([2, ], trans=[my_rule_4]) as (obj, name):
+            assert obj == 2
+            assert name == 'my_rule_4'
+        with transobj_assert([3, 4, 5], trans=[my_rule_4]) as (obj, name):
+            assert obj == 3
+            assert name == 'my_rule_4'
+        with transobj_assert([], trans=[my_rule_4]) as (obj, name):
+            assert obj == 6
+            assert name == 'my_rule_4'
+
     def test_builtin_items(self):
         with transobj_assert(min) as (obj, name):
             assert obj is min

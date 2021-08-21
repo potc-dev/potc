@@ -1,8 +1,10 @@
 from functools import wraps
+from typing import Callable, Any, Union, Optional, List, Tuple
 
 import pytest
 
-from potc.utils import args_iter, dynamic_call, static_call, post_process, pre_process, freduce, raising, warning_
+from potc.utils import args_iter, dynamic_call, static_call, post_process, pre_process, freduce, raising, warning_, \
+    get_callable_hint
 
 
 @pytest.mark.unittest
@@ -183,3 +185,27 @@ class TestUtilsFunc:
             f8(1)
         with pytest.warns(RuntimeWarning):
             f8(-1)
+
+    def test_get_callable_hint(self):
+        def f1(x, y) -> int:
+            pass
+
+        assert get_callable_hint(f1) == Callable[[Any, Any], int]
+
+        def f2(x: int, y: float, z: Union[Optional[str], List[float]]) -> Tuple[int, float, str]:
+            pass
+
+        assert get_callable_hint(f2) == Callable[
+            [int, float, Union[Optional[str], List[float]]],
+            Tuple[int, float, str]
+        ]
+
+        def f3(x, y: int, *, z=1) -> float:
+            pass
+
+        assert get_callable_hint(f3) == Callable[..., float]
+
+        def f4(x, y: int, *, z=1):
+            pass
+
+        assert get_callable_hint(f4) == Callable[..., Any]

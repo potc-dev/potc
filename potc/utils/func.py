@@ -2,7 +2,7 @@ import warnings
 from functools import wraps
 from inspect import signature, Parameter
 from itertools import chain
-from typing import Callable, TypeVar, Union, Type
+from typing import Callable, TypeVar, Union, Type, get_type_hints, Any
 
 from .singleton import SingletonMark
 
@@ -326,3 +326,39 @@ def freduce(init=NO_INITIAL, pass_kwargs: bool = True):
         return _new_func
 
     return _decorator
+
+
+def get_callable_hint(f: Callable):
+    """
+    Overview:
+        Get type hint of callable.
+
+    Arguments:
+        - f (:obj:`Callable`): Callable object.
+
+    Returns:
+        - hint: Hint of the callable.
+
+    Example:
+        >>> def f1(x: float, y: str) -> int:
+        >>>     pass
+        >>> get_callable_hint(f1)  # Callable[[float, str], int]
+        >>>
+        >>> def f2(x: float, y: str, *, z: int):
+        >>>     pass
+        >>> get_callable_hint(f2)  # Callable[..., Any]
+    """
+    count, ponly = 0, True
+    for key, value in signature(f).parameters.items():
+        if value.kind in {Parameter.POSITIONAL_ONLY, Parameter.POSITIONAL_OR_KEYWORD}:
+            count += 1
+        else:
+            ponly = False
+
+    _type_hints = get_type_hints(f)
+    _return_type = _type_hints.get('return', Any)
+    if ponly:
+        _items = [_type_hints.get(key, Any) for key in signature(f).parameters.keys()]
+        return Callable[[*_items], _return_type]
+    else:
+        return Callable[..., _return_type]
