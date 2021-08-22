@@ -19,6 +19,6 @@
 [![Contributors](https://img.shields.io/github/contributors/hansbug/potc)](https://github.com/hansbug/potc/graphs/contributors)
 [![GitHub license](https://img.shields.io/github/license/hansbug/potc)](https://github.com/hansbug/potc/blob/master/LICENSE)
 
-Python object to code framework
+Python object to code framework, expression any python object to runnable python code.
 
 (Still under developing)

@@ -42,7 +42,7 @@ setup(
     author=meta['__AUTHOR__'],
     author_email=meta['__AUTHOR_EMAIL__'],
     license='Apache License, Version 2.0',
-    keywords='Tree-structured Value Management',
+    keywords='Python expressions of any objects',
     url='https://github.com/HansBug/potc',
 
     # environment
