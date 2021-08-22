@@ -8,27 +8,67 @@ class ImportStatement(metaclass=ABCMeta):
     @property
     @abstractmethod
     def target(self):
+        """
+        Overview:
+            Import target.
+
+            - ``from aa import bb``  --> bb.
+            - ``from aa import bb as cc``  --> cc.
+            - ``import aa``  --> aa.
+            - ``import aa.bb``  --> bb.
+
+            Just seen target as the actual sign name of the imported object.
+        """
         raise NotImplementedError  # pragma: no cover
 
     @property
     @abstractmethod
     def key(self):
+        """
+        Overview:
+            Key value of the import statement.
+            Used for sorting.
+        """
         raise NotImplementedError  # pragma: no cover
 
     @abstractmethod
-    def _is_valid(self):
+    def _is_valid(self) -> bool:
+        """
+        Overview:
+            Whether this import statement is valid.
+
+        Return:
+            - valid (:obj:`bool`): Is valid or not.
+        """
         raise NotImplementedError  # pragma: no cover
 
     @abstractmethod
     def _str(self) -> str:
+        """
+        Overview:
+            String format of this import statement.
+
+        Returns:
+            - str (:obj:`str`): String format.
+        """
         raise NotImplementedError  # pragma: no cover
 
     def _check_valid(self):
+        """
+        Overview:
+            Check if this statement is valid.
+            if not valid, raise ``ValueError``.
+        """
         if not self._is_valid():
             raise ValueError(f'Invalid import statement - {repr(self._str())}.')
 
     @contextmanager
     def _with_check(self):
+        """
+        Overview:
+            Open a context, do some update and make sure the final statement is valid.
+            If not, this statement will be rolled back, and all the updates will be ignored.
+        """
         _state = self.__getstate__()
 
         try:
@@ -40,17 +80,42 @@ class ImportStatement(metaclass=ABCMeta):
 
     @abstractmethod
     def __getstate__(self):
+        """
+        Overview:
+            Get value state of statement.
+
+        Returns:
+            - state: Value state.
+        """
         raise NotImplementedError  # pragma: no cover
 
     @abstractmethod
     def __setstate__(self, state):
+        """
+        Overview:
+            Set value state of statement.
+        """
         raise NotImplementedError  # pragma: no cover
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """
+        Overview:
+            Get string format, will check its validity before return.
+
+        Returns:
+            - str (:obj:`str`): String format.
+        """
         self._check_valid()
         return self._str()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """
+        Overview:
+            Get representation format.
+
+        Returns:
+            - repr (:obj:`str`): Representation format.
+        """
         return f'<{type(self).__name__} {repr(self._str())}>'
 
 
@@ -59,17 +124,51 @@ _LINK_PATTERN = re.compile('[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*')
 
 
 class FromImport(ImportStatement):
+    """
+    Overview:
+        ``from xxx import yyy as zzz`` formatted import statement.
+    """
+
     def __init__(self, _from: str, _import: Optional[str] = None, _as: Optional[str] = None):
+        """
+        Overview:
+            Constructor of ``FromImport``.
+
+        Arguments:
+            - \_from (:obj:`str`): From source.
+            - \_import (:obj:`Optional[str]`): Import item, default is ``None``.
+            - \_as (:obj:`Optional[str]`): Alias name, default is ``None`` which means no alias.
+        """
         self.__from = _from
         self.__import = _import
         self.__as = _as
 
     def import_(self, obj_name: str) -> 'FromImport':
+        """
+        Overview:
+            Import from source.
+
+        Arguments:
+            - obj_name (:obj:`str`): Import object name.
+
+        Returns:
+            - self: Self object.
+        """
         with self._with_check():
             self.__import = obj_name
             return self
 
     def as_(self, alias_name: Optional[str]) -> 'FromImport':
+        """
+        Overview:
+            Alias imported item.
+
+        Arguments:
+            - alias_name (:obj:`Optional[str]`): Alias name.
+
+        Returns:
+            - self: Self object.
+        """
         with self._with_check():
             self.__as = alias_name
             return self
@@ -120,11 +219,34 @@ class FromImport(ImportStatement):
 
 
 class DirectImport(ImportStatement):
+    """
+    Overview:
+        ``import xxx as yyy`` formatted import statement.
+    """
+
     def __init__(self, _import: str, _as: Optional[str] = None):
+        """
+        Overview:
+            Constructor of ``DirectImport``.
+
+        Arguments:
+            - \_import (:obj:`Optional[str]`): Import item, default is ``None``.
+            - \_as (:obj:`Optional[str]`): Alias name, default is ``None`` which means no alias.
+        """
         self.__import = _import
         self.__as = _as
 
     def as_(self, alias_name: Optional[str]) -> 'DirectImport':
+        """
+        Overview:
+            Alias imported item.
+
+        Arguments:
+            - alias_name (:obj:`Optional[str]`): Alias name.
+
+        Returns:
+            - self: Self object.
+        """
         with self._with_check():
             self.__as = alias_name
             return self
@@ -217,28 +339,85 @@ class _SelfDirectImport(DirectImport):
 
 
 class ImportPool:
+    """
+    Overview:
+        Pool of import statements.
+    """
+
     def __init__(self, *imports: ImportStatement):
+        """
+        Overview:
+            Constructor of ``ImportPool``.
+
+        Arguments:
+            - imports: Import statements.
+        """
         self.__imports = list(imports)
         self.__ids = {id(item): item.target for item in self.__imports}
         _this = self
 
     def append(self, import_: ImportStatement):
+        """
+        Overview:
+            Append new statement.
+
+        Arguments:
+            - import\_: Import statement.
+        """
         if id(import_) not in self.__ids.keys():
             self.__imports.append(import_)
             self.__ids[id(import_)] = import_.target
 
-    def import_(self, _import: str):
+    def import_(self, _import: str) -> _SelfDirectImport:
+        """
+        Overview:
+            Start a direct import statement.
+
+        Arguments:
+            - \_import (:obj:`str`): Import item.
+
+        Returns:
+            - statement (:obj:`DirectImport`): Direct import statement.
+        """
         return _SelfDirectImport(_import, _this=self)
 
     def from_(self, _from: str) -> _SelfFormImport:
+        """
+        Overview:
+            Start a from import statement.
+
+        Arguments:
+            - from (:obj:`str`): Import source.
+
+        Returns:
+            - statement (:obj:`FromImport`): From import statement.
+        """
         return _SelfFormImport(_from, _this=self)
 
     @property
     def imports(self) -> Tuple['ImportStatement', ...]:
+        """
+        Overview:
+            Get tuple of current import statements.
+
+        Returns:
+            - imports (:obj:`Tuple['ImportStatement', ...]`): Import statements.
+        """
         return tuple(self.__imports)
 
     def __getstate__(self):
+        """
+        Overview:
+            Get value state of import pool.
+
+        Returns:
+            - state: Value state.
+        """
         return self.__imports, self.__ids
 
     def __setstate__(self, state):
+        """
+        Overview:
+            Set value state of import pool.
+        """
         self.__imports, self.__ids = state
