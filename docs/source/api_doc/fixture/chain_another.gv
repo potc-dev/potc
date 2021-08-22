@@ -1,0 +1,20 @@
+digraph chain_simple {
+    label = "Order of (r1, [(r2, r3), (r4, r5)], r6)";
+    compound = true;
+    graph [bgcolor = "#ffffff00"]
+
+    subgraph cluster_1 {
+    label = "[(r2, r3), (r4, r5)]";
+    subgraph cluster_11 {
+    label = "(r2, r3)";
+    r2 -> r3;
+    }
+    subgraph cluster_12 {
+    label = "(r4, r5)";
+    r4 -> r5;
+    }
+    }
+
+    r1 -> r2 [lhead = cluster_1];
+    r5 -> r6 [ltail = cluster_1];
+}

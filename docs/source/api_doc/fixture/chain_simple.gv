@@ -1,0 +1,18 @@
+digraph chain_simple {
+    label = "Relation of tuple and list";
+    graph [bgcolor = "#ffffff00"]
+
+    subgraph cluster_tuple {
+    label = "(r1, r2)";
+    tr1 [label = "r1"];
+    tr2 [label = "r2"];
+
+    tr1 -> tr2 [label = "before"];
+    }
+
+    subgraph cluster_list {
+    label = "[r1, r2]"
+    lr1 [label = "r1"];
+    lr2 [label = "r2"];
+    }
+}

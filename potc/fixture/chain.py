@@ -1,13 +1,33 @@
 from functools import reduce
 from itertools import product
 from operator import __or__
-from typing import Union, Callable, List, Tuple
+from typing import Union, Callable, List, Tuple, Optional
 
 from .common import is_rule, rule_name, unprocessable, UnprocessableError
 from ..utils import topological, dynamic_call
 
 
-def build_chain(c: Union[List, Tuple, Callable], id_gen=None) -> List[Callable]:
+def build_chain(c: Union[List, Tuple, Callable],
+                id_gen: Optional[Callable] = None) -> List[Callable]:
+    """
+    Overview:
+        Build chain of the rules.
+        Bases on orders which depends by tuples and lists.
+
+    Arguments:
+        - c (:obj:`Union[List, Tuple, Callable]`): Rule structure object, can be a list, \
+            tuple or rule, or the nested structure of them.
+        - id_gen (:obj:`Optional[Callable]`): Id generator of the rules, default is ``None`` \
+            which means ``id`` function.
+
+    Returns:
+        - chain (:obj:`List[Callable]`): List of the rules in order.
+
+    Example:
+        >>> build_chain(r1)                        # [r1]
+        >>> build_chain([(r1, r2), (r3, r2)])      # [r1, r3, r2] or [r3, r1, r2]
+        >>> build_chain((r1, [r2, (r3, r4)], r5))  # [r1, r2, r3, r4, r5] or [r1, r3, r2, r4, r5] or [r1, r3, r4, r2, r5]
+    """
     id_gen = id_gen or id
     rules = {}
     edges = set()
@@ -75,6 +95,16 @@ def build_chain(c: Union[List, Tuple, Callable], id_gen=None) -> List[Callable]:
 
 
 def rules_combine(*rules):
+    """
+    Overview:
+        Combined the ordered rule list to be a executable rule-like function (but not a rule object actually).
+
+    Arguments:
+        - rules: List of the rules (may be the result of function ``build_chain``.
+
+    Returns:
+        - func: Combined rule function.
+    """
     for r in rules:
         if not is_rule(r):
             raise TypeError(f"Not a rule - {repr(r)}.")
