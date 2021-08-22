@@ -18,7 +18,7 @@ _VAR_NAME = re.compile(r'^[a-zA-Z_][a-zA-Z0-9_]*$')
 
 @rule(type_=dict)
 def my_dict(v: dict, addon: Addons):
-    if all([_VAR_NAME.fullmatch(key) for key in v.keys()]):
+    if all([isinstance(key, str) and _VAR_NAME.fullmatch(key) for key in v.keys()]):
         return addon.val(type(v))(**v)
     else:
         addon.unprocessable()  # give up rule replacing
@@ -36,7 +36,14 @@ if __name__ == '__main__':
             'e': {
                 '0': np.array([1, 2]),
                 'p': 2j,
-            }
+                'f': {
+                    123: np.ones((3, 2)),
+                    None: np.zeros((1, 5)),
+                },
+                'g': {
+                    'a': 'dict here.'
+                }
+            },
         },
         'np_module': np,
     }, [
