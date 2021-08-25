@@ -1,4 +1,3 @@
-
 from ..fixture import Addons, rule
 from ..supports import raw_object
 from ..supports.bin import dump_obj
@@ -6,7 +5,7 @@ from ..supports.bin import dump_obj
 
 @rule()
 def default_object(v, addon: Addons):
-    return addon.obj(raw_object)(addon.raw(dump_obj(v)))
+    return addon.obj(raw_object)(addon.raw(dump_obj(v), func=repr))
 
 
 default_all = [
