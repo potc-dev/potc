@@ -231,11 +231,11 @@ class TestRulesBuiltins:
     def test_object(self):
         with transobj_assert(_MyPair(1, 2)) as (obj, name):
             assert obj == _MyPair(1, 2)
-            assert name == 'default_object'
+            assert name == 'builtin_object'
 
         with transobj_assert(self._MyInnerPair(1, 2)) as (obj, name):
             assert obj == self._MyInnerPair(1, 2)
-            assert name == 'default_object'
+            assert name == 'builtin_object'
 
     def test_with_rules(self):
         @rule(type_=dict)

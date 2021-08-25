@@ -125,12 +125,12 @@ class _AbstractTranslator(metaclass=ABCMeta):
 
 class BaseTranslator(_AbstractTranslator):
     def __init__(self, extend_rules=None):
-        _AbstractTranslator.__init__(self, (system_all, extend_rules or []))
+        _AbstractTranslator.__init__(self, (system_all, extend_rules or [], default_all))
 
 
 class BlankTranslator(BaseTranslator):
     def __init__(self, extend_rules=None):
-        BaseTranslator.__init__(self, ([(extend_rules or []), builtin_all], default_all))
+        BaseTranslator.__init__(self, [(extend_rules or []), builtin_all])
 
 
 class Translator(BlankTranslator):

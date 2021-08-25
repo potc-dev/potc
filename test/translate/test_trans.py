@@ -5,7 +5,7 @@ from yapf.yapflib.yapf_api import FormatCode
 
 from potc.fixture import rule
 from potc.testing import transobj_assert, transvars_assert
-from potc.translate import Translator, BaseTranslator, TranslationFailed
+from potc.translate import Translator, BaseTranslator
 
 
 @pytest.mark.unittest
@@ -30,17 +30,13 @@ class TestTranslateTrans:
         assert _trace == 'builtin_list'
 
     def test_base_translator(self):
-        with pytest.raises(TranslationFailed) as ei:
-            with transobj_assert(1, trans=BaseTranslator):
-                pytest.fail('Should not reach here.')
-        err = ei.value
-        assert err.obj == 1
+        with transobj_assert(1, trans=BaseTranslator) as(obj, name):
+            assert obj == 1
+            assert name == 'default_object'
 
-        with pytest.raises(TranslationFailed) as ei:
-            with transobj_assert(1, trans=BaseTranslator()):
-                pytest.fail('Should not reach here.')
-        err = ei.value
-        assert err.obj == 1
+        with transobj_assert(1, trans=BaseTranslator()) as(obj, name):
+            assert obj == 1
+            assert name == 'default_object'
 
     def test_diy_translator(self):
         @rule(type_=int)
@@ -61,11 +57,9 @@ class TestTranslateTrans:
         with transobj_assert(1.0, trans=MyTranslator()) as (obj, name):
             assert obj == 1.0
             assert name == 'fs'
-        with pytest.raises(TranslationFailed) as ei:
-            with transobj_assert('str', trans=MyTranslator()):
-                pytest.fail('Should not reach here.')
-        err = ei.value
-        assert err.obj == 'str'
+        with transobj_assert('str', trans=MyTranslator()) as (obj, name):
+            assert obj == 'str'
+            assert name == 'default_object'
 
     def test_transvars(self):
         with transvars_assert({

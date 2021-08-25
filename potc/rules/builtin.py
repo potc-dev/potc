@@ -1,9 +1,10 @@
 import builtins
 import math
 import types
+from functools import partial
 
 from ..fixture import Addons, rule
-from ..supports import function, raw_type
+from ..supports import function, raw_type, raw_object, typed_object
 from ..supports.bin import dump_obj
 
 
@@ -156,6 +157,18 @@ def builtin_module(v, addon: Addons):
     return addon.obj(v)
 
 
+@rule()
+def builtin_object(v, addon: Addons):
+    try:
+        _i = addon.obj(type(v))
+    except (ImportError, TypeError):
+        _call = partial(addon.obj(raw_object))
+    else:
+        _call = partial(addon.obj(typed_object), type(v))
+
+    return _call(dump_obj(v))
+
+
 builtin_basic = (
     builtin_int,
     builtin_complex,
@@ -184,5 +197,6 @@ builtin_all = [
         builtin_basic,
         builtin_collection,
         builtin_reflect,
+        builtin_object,
     ),
 ]
