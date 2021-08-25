@@ -3,7 +3,7 @@ import math
 import types
 
 from ..fixture import Addons, rule
-from ..supports import raw_object, typed_object, function, raw_type
+from ..supports import function, raw_type
 from ..supports.bin import dump_obj
 
 
@@ -156,16 +156,6 @@ def builtin_module(v, addon: Addons):
     return addon.obj(v)
 
 
-@rule()
-def builtin_object(v, addon: Addons):
-    try:
-        _i = addon.obj(type(v))
-    except (ImportError, TypeError):
-        return addon.obj(raw_object)(dump_obj(v))
-    else:
-        return addon.obj(typed_object)(type(v), dump_obj(v))
-
-
 builtin_basic = (
     builtin_int,
     builtin_complex,
@@ -194,6 +184,5 @@ builtin_all = [
         builtin_basic,
         builtin_collection,
         builtin_reflect,
-        builtin_object,
     ),
 ]

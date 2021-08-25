@@ -5,7 +5,7 @@ Addons
 ---------------
 
 .. autoclass:: potc.fixture.addons.Addons
-    :members: __init__, obj, val, rule, import_items, unprocessable, transaction, __getstate__, __setstate__
+    :members: __init__, obj, val, rule, import_items, unprocessable, transaction, __getstate__, __setstate__, raw
 
 
 AddonProxy

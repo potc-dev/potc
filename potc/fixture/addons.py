@@ -147,9 +147,6 @@ class Addons:
         """
         with self.transaction():
             segments = try_import_info(obj, alias=alias)
-            if alias is None and segments[:2] == ('from', 'builtins'):
-                return self.val(obj)
-
             _import = self
             for sign, content in zip(segments[::2], segments[1::2]):
                 if sign == 'from':
@@ -178,6 +175,22 @@ class Addons:
         """
         with self.transaction():
             return AddonProxy(self.rule(obj), self.rule)
+
+    # noinspection PyMethodMayBeStatic
+    def raw(self, val, *, func=None) -> AddonProxy:
+        """
+        Overview:
+            Generate raw proxy.
+
+        Arguments:
+            - val: Raw object.
+            - func: Translation function, default is ``None`` which means just \
+                turn it to string by builtin function ``str``.
+
+        Returns:
+            - proxy (:obj:`AddonProxy`): Raw proxy object.
+        """
+        return AddonProxy((func or str)(val), self.rule)
 
     def rule(self, v) -> str:
         """
