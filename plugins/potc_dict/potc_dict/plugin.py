@@ -1,7 +1,7 @@
 import re
 
 from potc.fixture import rule, Addons
-from potc.rules import builtin_dict, builtin_object
+from potc.rules import builtin_dict
 
 _KEY_PATTERN = re.compile('^[_a-zA-Z][_0-9a-zA-Z]*$')
 
@@ -15,11 +15,7 @@ def pretty_dict(v: dict, addon: Addons):
     return addon.obj(type(v))(**{key: value for key, value in v.items()})
 
 
-__rules__ = (
-    [
-        # pretty_dict will be executed before builtin_dict
-        (pretty_dict, builtin_dict,),
-    ],
-    # add this to make sure that all the new rules will be executed before builtin_object
-    builtin_object,
-)
+__rules__ = [
+    # pretty_dict will be executed before builtin_dict
+    (pretty_dict, builtin_dict,),
+]
