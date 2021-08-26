@@ -121,7 +121,7 @@ class TestRulesBuiltins:
 
         with transobj_assert(self._MyInnerPair) as (obj, name):
             assert obj == self._MyInnerPair
-            assert name == 'builtin_type'
+            assert name == 'builtin_raw_type'
 
         with transobj_assert(types.ModuleType) as (obj, name):
             assert obj is types.ModuleType

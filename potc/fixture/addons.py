@@ -123,10 +123,10 @@ class Addons:
         self.__imports = ImportPool()
         self.__rule = rule
 
-    def __import(self, _import: str) -> DirectImport:
+    def import_(self, _import: str) -> DirectImport:
         return self.__imports.import_(_import)
 
-    def __from(self, _from: str) -> FromImport:
+    def from_(self, _from: str) -> FromImport:
         return self.__imports.from_(_from)
 
     def obj(self, obj, alias: Optional[str] = None) -> AddonProxy:
@@ -150,9 +150,9 @@ class Addons:
             _import = self
             for sign, content in zip(segments[::2], segments[1::2]):
                 if sign == 'from':
-                    _import = _import.__from(content)
+                    _import = _import.from_(content)
                 elif sign == 'import':
-                    _import = (_import.__import if _import is self else _import.import_)(content)
+                    _import = _import.import_(content)
                 else:
                     _import = _import.as_(content)
 

@@ -3,9 +3,9 @@ import math
 import types
 from functools import partial
 
-from ..fixture import Addons, rule
-from ..supports import function, raw_type, raw_object, typed_object
-from ..supports.bin import dump_obj
+from potc.fixture import Addons, rule
+from potc.supports import function, raw_type, raw_object, typed_object
+from potc.supports.bin import dump_obj
 
 
 @rule(type_=type(...))
@@ -148,8 +148,13 @@ def builtin_type(v: type, addon: Addons):
         else:
             return addon.obj(v)
     except (ImportError, TypeError):
-        _full_name = ((v.__module__ + '.') if hasattr(v, '__module__') else '') + v.__name__
-        return addon.obj(raw_type)(_full_name, dump_obj(v))
+        addon.unprocessable()
+
+
+@rule(type_=type)
+def builtin_raw_type(v: type, addon: Addons):
+    _full_name = ((v.__module__ + '.') if hasattr(v, '__module__') else '') + v.__name__
+    return addon.obj(raw_type)(_full_name, dump_obj(v))
 
 
 @rule(type_=types.ModuleType)
@@ -190,6 +195,7 @@ builtin_reflect = (
     builtin_items,
     builtin_func,
     builtin_type,
+    builtin_raw_type,
     builtin_module,
 )
 builtin_all = [
