@@ -121,6 +121,10 @@ class TestRulesBuiltins:
             assert obj == int
             assert name == 'builtin_type'
 
+        with transobj_assert(list) as (obj, name):
+            assert obj == list
+            assert name == 'builtin_type'
+
         with transobj_assert(_LocalType) as (obj, name):
             assert obj == _LocalType
             assert name == 'builtin_type'
