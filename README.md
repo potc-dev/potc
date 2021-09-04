@@ -21,4 +21,145 @@
 
 Python object to code framework, expression any python object to runnable python code.
 
-(Still under developing)
+Almost all the primitive types in python can be translated to source code format, and they will be runnable.
+
+
+## Installation
+
+You can simply install it with `pip` command line from the official PyPI site.
+
+```shell
+pip install potc
+```
+
+For more information about installation, you can refer to [Installation](https://hansbug.github.io/potc/main/tutorials/installation/index.html).
+
+
+## Documentation
+
+The detailed documentation are hosted on [https://hansbug.github.io/potc/main/index.html](https://hansbug.github.io/potc/main/index.html).
+
+Only english version is provided now, the chinese documentation is still under development.
+
+
+## Quick Start
+
+The native `potc` can transform many types, such as
+
+```python
+from potc import transobj
+from easydict import EasyDict
+import numpy as np
+
+transobj(1)         # "1", int format
+transobj('233')     # "'233'", str format
+transobj(1.2)       # "1.2", float format
+transobj([1, '2'])  # "[1, '2']", list format
+transobj((1, '2'))  # "(1, '2')", tuple format
+transobj({1, '2'})  # "{1, '2'}", set format  
+transobj({1: '2'})  # "{1: '2'}", dict format
+transobj(EasyDict(a=1, b=2))  # "EasyDict({'a': 1, 'b': 2})", external dict format
+transobj(EasyDict)  # "EasyDict", type format
+transobj(np)        # "numpy", module format
+```
+
+And so on, most of the native python types are covered.
+
+In some cases, we need to translate the values into python script instead of simple expression, we can use `transvars`
+
+```python
+import math
+
+from potc import transvars
+
+if __name__ == '__main__':
+    _code = transvars({
+        'arr': [
+            1, 1.5, math.e,
+        ],
+        'vbytes_': b'klsdjflkds\\\x00',
+        'empty_str': '',
+        'ba': bytearray(b'a' * 20),
+    }, reformat='pep8')  # auto reformat the code
+    print(_code)
+
+```
+
+The output should be
+
+```python
+import math
+
+__all__ = ['arr', 'ba', 'empty_str', 'vbytes_']
+arr = [1, 1.5, math.e]
+ba = bytearray(b'aaaaaaaaaaaaaaaaaaaa')
+empty_str = ''
+vbytes_ = b'klsdjflkds\\\x00'
+
+```
+
+This script are runnable, can be imported directly into your python code. The import packages will also be generated (like `import math`).
+
+In some complex cases, You can define you own rules to support more data types, such as
+
+```python
+import math
+
+from potc import transvars
+from potc.fixture import rule, Addons
+
+
+class MyPair:
+    def __init__(self, first, second):
+        self.first = first
+        self.second = second
+
+
+@rule(type_=MyPair)
+def mypair_support(v: MyPair, addon: Addons):
+    return addon.obj(MyPair)(v.first, v.second)
+
+
+if __name__ == '__main__':
+    _code = transvars({
+        'arr': [
+            1, 1.5, math.e,
+        ],
+        'vbytes_': b'klsdjflkds\\\x00',
+        'empty_str': '',
+        'ba': bytearray(b'a' * 20),
+        'c': MyPair(1, 2),
+    }, trans=[mypair_support], reformat='pep8')  # auto reformat the code
+    print(_code)
+
+```
+
+The output should be like below, the `MyPair` class is supported by the new rule.
+
+```python
+import math
+
+from __main__ import MyPair
+
+__all__ = ['arr', 'ba', 'c', 'empty_str', 'vbytes_']
+arr = [1, 1.5, math.e]
+ba = bytearray(b'aaaaaaaaaaaaaaaaaaaa')
+c = MyPair(1, 2)
+empty_str = ''
+vbytes_ = b'klsdjflkds\\\x00'
+```
+
+For more quick start explanation and further usage, take a look at:
+
+* [Quick Start](https://hansbug.github.io/potc/main/tutorials/quick_start/index.html)
+
+
+# Contributing
+
+We appreciate all contributions to improve `potc`, both logic and system designs. Please refer to CONTRIBUTING.md for more guides.
+
+
+# License
+
+`potc` released under the Apache 2.0 license.
+

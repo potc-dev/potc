@@ -2,6 +2,7 @@ import builtins
 import math
 import types
 from functools import partial
+from typing import Type
 
 from ..fixture import Addons, rule
 from ..supports import function, raw_type, raw_object, typed_object
@@ -82,10 +83,20 @@ def builtin_list(v: list, addon: Addons):
         return addon.obj(type(v))(list(v))
 
 
+def _is_namedtuple_class(t: Type[tuple]) -> bool:
+    _fields = getattr(t, '_fields', None)
+    _field_ok = isinstance(_fields, tuple) and all(isinstance(name, str) for name in _fields)
+    _asdict = getattr(t, '_asdict', None)
+    _asdict_ok = isinstance(_asdict, types.FunctionType)
+    return all((_field_ok, _asdict_ok))
+
+
 @rule(type_=tuple)
 def builtin_tuple(v: tuple, addon: Addons):
     if type(v) == tuple:
         return f'({", ".join(map(addon.rule, v))}{", " if len(v) == 1 else ""})'
+    elif _is_namedtuple_class(type(v)):
+        return addon.obj(type(v))(*tuple(v))
     else:
         return addon.obj(type(v))(tuple(v))
 

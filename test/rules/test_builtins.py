@@ -1,5 +1,6 @@
 import math
 import types
+from typing import NamedTuple
 
 import easydict
 import pytest
@@ -24,6 +25,11 @@ class _MyList(list):
 
 class _MyTuple(tuple):
     pass
+
+
+class _MyNamedTuple(NamedTuple):
+    first: object
+    second: object
 
 
 class _MyPair:
@@ -174,6 +180,11 @@ class TestRulesBuiltins:
             assert obj[:3] == (1, 'klsdfj', -1.15)
             assert obj[3](2) == 4
             assert obj[3](3) == 27
+            assert name == 'builtin_tuple'
+
+        with transobj_assert(_MyNamedTuple(1, 2)) as (obj, name):
+            assert isinstance(obj, _MyNamedTuple)
+            assert obj == _MyNamedTuple(1, 2)
             assert name == 'builtin_tuple'
 
         with transobj_assert(_MyTuple((1, 2, 3))) as (obj, name):
