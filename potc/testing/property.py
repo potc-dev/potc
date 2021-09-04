@@ -1,6 +1,7 @@
 import math
 import types
 from functools import partial
+from typing import NamedTuple
 
 from dill import source
 
@@ -21,6 +22,11 @@ class _MyList(list):
 
 class _MyTuple(tuple):
     pass
+
+
+class _MyNamedTuple(NamedTuple):
+    first: object
+    second: object
 
 
 class _MyDict(dict):
@@ -163,6 +169,10 @@ def provement(trans=None):
                 assert obj[:3] == (1, 'klsdfj', -1.15)
                 assert obj[3](2) == 4
                 assert obj[3](3) == 27
+
+            with transobj_assert(_MyNamedTuple(1, 2)) as (obj, name):
+                assert isinstance(obj, _MyNamedTuple)
+                assert obj == _MyNamedTuple(1, 2)
 
             with self.transobj_assert(_MyTuple((1, 2, 3))) as (obj, name):
                 assert isinstance(obj, _MyTuple)
