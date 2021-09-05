@@ -1,8 +1,12 @@
 import re
 import typing
-from collections import Callable as _CollectionCallable
+
+try:
+    from collections import Callable as _CollectionCallable
+except ImportError:
+    _CollectionCallable = None
 from collections import OrderedDict
-from functools import lru_cache
+from functools import lru_cache, wraps
 from types import FunctionType
 from typing import TypeVar, Callable
 
@@ -32,32 +36,43 @@ def _origin_trans(v):
         return _get_origin_trans_map().get(o, o)
 
 
+def _is_wrapper(func):
+    @wraps(func)
+    def _new_func(v, addon: Addons):
+        if hasattr(v, '__origin__') and hasattr(v, '__args__'):
+            return func(v, addon)
+        else:
+            addon.unprocessable()
+
+    return _new_func
+
+
 @rule()
+@_is_wrapper
 def typing_callable(v, addon: Addons):
-    if hasattr(v, '__origin__') and hasattr(v, '__args__') \
-            and v.__origin__ in (_CollectionCallable, Callable):
+    if (_CollectionCallable is not None and v.__origin__ == _CollectionCallable) or \
+            (Callable is not None and v.__origin__ == Callable):
         _base = addon.val(_origin_trans(v))
         _args, _ret = v.__args__[:-1], v.__args__[-1]
         if _args == (Ellipsis,):
             return _base[v.__args__]
         else:
             return _base[list(_args), _ret]
+
     else:
         addon.unprocessable()
 
 
 @rule()
+@_is_wrapper
 def typing_wrapper(v, addon: Addons):
-    if hasattr(v, '__origin__') and hasattr(v, '__args__'):
-        _base = addon.val(_origin_trans(v))
-        if len(v.__args__) == 0:
-            return _base
-        elif len(v.__args__) == 1:
-            return _base[v.__args__[0]]
-        else:
-            return _base[v.__args__]
+    _base = addon.val(_origin_trans(v))
+    if len(v.__args__) == 0:
+        return _base
+    elif len(v.__args__) == 1:
+        return _base[v.__args__[0]]
     else:
-        addon.unprocessable()
+        return _base[v.__args__]
 
 
 _common_types = (type, FunctionType)

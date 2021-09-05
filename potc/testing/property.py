@@ -1,7 +1,7 @@
 import math
 import types
 from functools import partial
-from typing import NamedTuple
+from typing import NamedTuple, NoReturn, List, Set, Dict, Tuple, Callable, Any, TypeVar
 
 from dill import source
 
@@ -277,5 +277,83 @@ def provement(trans=None):
                     1: {'ab', 1, 2, (), (1, 'dkls')},
                     'feat': [None, type, int, 233, 'sdfkl', (5, 6, -3 + 1j), {}, set(), []],
                 }
+
+        def test_typing(self):
+            with transobj_assert(NoReturn) as (obj, name):
+                assert obj is NoReturn
+
+            with transobj_assert(List) as (obj, name):
+                assert obj == List
+            with transobj_assert(Dict) as (obj, name):
+                assert obj == Dict
+            with transobj_assert(Set) as (obj, name):
+                assert obj == Set
+            with transobj_assert(Tuple) as (obj, name):
+                assert obj == Tuple
+            with transobj_assert(Callable) as (obj, name):
+                assert obj == Callable
+
+            with transobj_assert(List[int]) as (obj, name):
+                assert obj == List[int]
+            with transobj_assert(Dict[int, List[str]]) as (obj, name):
+                assert obj == Dict[int, List[str]]
+            with transobj_assert(Set[str]) as (obj, name):
+                assert obj == Set[str]
+            with transobj_assert(Tuple[int, str, List[str]]) as (obj, name):
+                assert obj == Tuple[int, str, List[str]]
+            with transobj_assert(Callable[..., int]) as (obj, name):
+                assert obj == Callable[..., int]
+            with transobj_assert(Callable[[], int]) as (obj, name):
+                assert obj == Callable[[], int]
+            with transobj_assert(Callable[[int, Any], str]) as (obj, name):
+                assert obj == Callable[[int, Any], str]
+            with transobj_assert(Callable[[int], Any]) as (obj, name):
+                assert obj == Callable[[int], Any]
+
+            try:
+                _ = list[int]
+            except TypeError:
+                pass
+            else:
+                with transobj_assert(list[int]) as (obj, name):
+                    assert obj == list[int]
+                with transobj_assert(dict[int, list[int]]) as (obj, name):
+                    assert obj == dict[int, list[int]]
+
+            K = TypeVar('K', bound=int, contravariant=True)
+            V = TypeVar('V', int, str, covariant=True)
+
+            with transobj_assert(K) as (obj, name):
+                assert isinstance(obj, TypeVar)
+                assert obj.__name__ == 'K'
+                assert obj.__constraints__ == ()
+                assert obj.__bound__ == int
+                assert not obj.__covariant__
+                assert obj.__contravariant__
+
+            with transobj_assert(V) as (obj, name):
+                assert isinstance(obj, TypeVar)
+                assert obj.__name__ == 'V'
+                assert obj.__constraints__ == (int, str)
+                assert obj.__bound__ is None
+                assert obj.__covariant__
+                assert not obj.__contravariant__
+
+            with transobj_assert(Dict[K, V]) as (obj, name):
+                assert obj.__origin__ in {Dict, dict}
+                _k, _v = obj.__args__
+                assert isinstance(_k, TypeVar)
+                assert _k.__name__ == 'K'
+                assert _k.__constraints__ == ()
+                assert _k.__bound__ == int
+                assert not _k.__covariant__
+                assert _k.__contravariant__
+
+                assert isinstance(_v, TypeVar)
+                assert _v.__name__ == 'V'
+                assert _v.__constraints__ == (int, str)
+                assert _v.__bound__ is None
+                assert _v.__covariant__
+                assert not _v.__contravariant__
 
     return _Provement
