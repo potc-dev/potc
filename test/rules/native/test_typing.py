@@ -1,4 +1,4 @@
-from typing import List, Dict, TypeVar
+from typing import List, Dict, TypeVar, NoReturn
 
 import pytest
 
@@ -23,6 +23,12 @@ only_3_9 = pytest.mark.unittest if is_3_9 else pytest.mark.ignore
 
 
 class TestRuleNativeTyping:
+    @pytest.mark.unittest
+    def test_typing_items(self):
+        with transobj_assert(NoReturn) as (obj, name):
+            assert obj is NoReturn
+            assert name == 'typing_items'
+
     @pytest.mark.unittest
     def test_collection_types(self):
         with transobj_assert(List) as (obj, name):
