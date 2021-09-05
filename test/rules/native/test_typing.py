@@ -1,4 +1,4 @@
-from typing import List, Dict, TypeVar, NoReturn
+from typing import List, Dict, TypeVar, NoReturn, Callable
 
 import pytest
 
@@ -49,6 +49,20 @@ class TestRuleNativeTyping:
             assert obj == Dict[int, List[int]]
             assert name == 'typing_wrapper'
 
+    @pytest.mark.unittest
+    def test_callable(self):
+        with transobj_assert(Callable[[], int]) as (obj, name):
+            assert obj == Callable[[], int]
+            assert name == 'typing_callable'
+
+        with transobj_assert(Callable[..., int]) as (obj, name):
+            assert obj == Callable[..., int]
+            assert name == 'typing_callable'
+
+        with transobj_assert(Callable[[int, str], List[int]]) as (obj, name):
+            assert obj == Callable[[int, str], List[int]]
+            assert name == 'typing_callable'
+
     @only_3_9
     def test_advanced_general_alias(self):
         with transobj_assert(list[int]) as (obj, name):
@@ -61,14 +75,17 @@ class TestRuleNativeTyping:
 
     @pytest.mark.unittest
     def test_typevar(self):
-        K = TypeVar('K', bound=int)
-        V = TypeVar('V', int, str)
+        K = TypeVar('K', bound=int, contravariant=True)
+        V = TypeVar('V', int, str, covariant=True)
 
         with transobj_assert(K) as (obj, name):
             assert isinstance(obj, TypeVar)
             assert obj.__name__ == 'K'
             assert obj.__constraints__ == ()
             assert obj.__bound__ == int
+            assert not obj.__covariant__
+            assert obj.__contravariant__
+
             assert name == 'typing_typevar'
 
         with transobj_assert(V) as (obj, name):
@@ -76,6 +93,9 @@ class TestRuleNativeTyping:
             assert obj.__name__ == 'V'
             assert obj.__constraints__ == (int, str)
             assert obj.__bound__ is None
+            assert obj.__covariant__
+            assert not obj.__contravariant__
+
             assert name == 'typing_typevar'
 
         with transobj_assert(Dict[K, V]) as (obj, name):
@@ -85,8 +105,14 @@ class TestRuleNativeTyping:
             assert _k.__name__ == 'K'
             assert _k.__constraints__ == ()
             assert _k.__bound__ == int
+            assert not _k.__covariant__
+            assert _k.__contravariant__
+
             assert isinstance(_v, TypeVar)
             assert _v.__name__ == 'V'
             assert _v.__constraints__ == (int, str)
             assert _v.__bound__ is None
+            assert _v.__covariant__
+            assert not _v.__contravariant__
+
             assert name == 'typing_wrapper'

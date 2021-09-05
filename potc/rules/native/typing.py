@@ -1,9 +1,10 @@
 import re
 import typing
+from collections import Callable as _CollectionCallable
 from collections import OrderedDict
 from functools import lru_cache
 from types import FunctionType
-from typing import TypeVar
+from typing import TypeVar, Callable
 
 from .builtin import builtin_type, builtin_raw_type
 from ...fixture import rule, Addons
@@ -29,6 +30,20 @@ def _origin_trans(v):
         return o
     else:
         return _get_origin_trans_map().get(o, o)
+
+
+@rule()
+def typing_callable(v, addon: Addons):
+    if hasattr(v, '__origin__') and hasattr(v, '__args__') \
+            and v.__origin__ in (_CollectionCallable, Callable):
+        _base = addon.val(_origin_trans(v))
+        _args, _ret = v.__args__[:-1], v.__args__[-1]
+        if _args == (Ellipsis,):
+            return _base[v.__args__]
+        else:
+            return _base[list(_args), _ret]
+    else:
+        addon.unprocessable()
 
 
 @rule()
@@ -101,6 +116,7 @@ _typing_self_all = [
     (
         typing_typevar,
         typing_items,
+        typing_callable,
         typing_wrapper,
     )
 ]

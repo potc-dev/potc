@@ -1,4 +1,5 @@
-from typing import Type, TypeVar, Callable
+from functools import wraps
+from typing import Type, TypeVar
 
 from .bin import load_obj
 
@@ -51,17 +52,23 @@ def typed_object(type_: Type[_T], data: bytes) -> _T:
     return load_obj(data)
 
 
-def function(name: str, data: bytes) -> Callable:
+def function(name: str, scheme, data: bytes):
     """
     Overview:
         Function function support.
 
     Arguments:
-        Arguments:
         - name (:obj:`str`): Name of the function.
+        - scheme (:obj:`Type[Callable]`): Scheme of the function.
         - data (:obj:`bytes`): Binary data.
 
     Returns:
         - obj (:obj:`Callable`): Loaded function.
     """
-    return load_obj(data)
+    _original_func = load_obj(data)
+
+    @wraps(_original_func)
+    def _new_func(*args, **kwargs) -> scheme:
+        return _original_func(*args, **kwargs)
+
+    return _new_func

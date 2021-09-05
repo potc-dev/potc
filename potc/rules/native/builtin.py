@@ -4,9 +4,10 @@ import types
 from functools import partial
 from typing import Type
 
-from potc.fixture import Addons, rule
-from potc.supports import function, raw_type, raw_object, typed_object
-from potc.supports.bin import dump_obj
+from ...fixture import Addons, rule
+from ...supports import function, raw_type, raw_object, typed_object
+from ...supports.bin import dump_obj
+from ...utils import get_callable_hint
 
 
 @rule(type_=type(...))
@@ -142,7 +143,7 @@ def builtin_items(v, addon: Addons):
 # noinspection PyTypeChecker
 @rule(type_=types.FunctionType)
 def builtin_func(v, addon: Addons):
-    return addon.obj(function)(v.__name__, dump_obj(v))
+    return addon.obj(function)(v.__name__, get_callable_hint(v), dump_obj(v))
 
 
 _TYPES_TYPE_NAMES = {getattr(types, name): name for name in filter(lambda x: x.endswith('Type'), dir(types))}
