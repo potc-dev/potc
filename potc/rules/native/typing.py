@@ -9,11 +9,9 @@ from .builtin import builtin_type, builtin_raw_type
 from ...fixture import rule, Addons
 
 try:
-    _ = getattr([], '__class_getitem__')
-except AttributeError:
-    _need_origin_trans = True
-else:
-    _need_origin_trans = False
+    from types import GenericAlias
+except ImportError:
+    GenericAlias = None
 
 
 @lru_cache()
@@ -25,8 +23,9 @@ def _get_origin_trans_map():
     }
 
 
-def _origin_trans(o):
-    if not _need_origin_trans:
+def _origin_trans(v):
+    o = v.__origin__
+    if GenericAlias is not None and isinstance(v, GenericAlias):
         return o
     else:
         return _get_origin_trans_map().get(o, o)
@@ -35,7 +34,7 @@ def _origin_trans(o):
 @rule()
 def typing_wrapper(v, addon: Addons):
     if hasattr(v, '__origin__') and hasattr(v, '__args__'):
-        _base = addon.val(_origin_trans(v.__origin__))
+        _base = addon.val(_origin_trans(v))
         if len(v.__args__) == 0:
             return _base
         elif len(v.__args__) == 1:
