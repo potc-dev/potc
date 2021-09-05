@@ -15,11 +15,14 @@ DEMOS_MK    := ${SOURCEDIR}/demos.mk
 DEMOS       := $(MAKE) -f "${DEMOS_MK}" SOURCE=${SOURCEDIR}
 
 _CURRENT_PATH := ${PATH}
+_PROJ_DIR     := $(shell readlink -f ${CURDIR}/..)
+_LIBS_DIR     := $(shell readlink -f ${SOURCEDIR}/_libs)
+_SHIMS_DIR    := $(shell readlink -f ${SOURCEDIR}/_shims)
 
 .EXPORT_ALL_VARIABLES:
 
-PYTHONPATH = $(shell readlink -f ${CURDIR}/..)
-PATH       = $(shell readlink -f ${SOURCEDIR}/_shims):${_CURRENT_PATH}
+PYTHONPATH = ${_PROJ_DIR}:${_LIBS_DIR}
+PATH       = ${_SHIMS_DIR}:${_CURRENT_PATH}
 NO_CONTENTS_BUILD = true
 
 # Catch-all target: route all unknown targets to Sphinx using the new
