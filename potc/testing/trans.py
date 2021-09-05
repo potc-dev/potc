@@ -18,7 +18,7 @@ def _transvars_func():
 
 
 def run_script(source: str) -> Mapping[str, Any]:
-    vs = {}
+    vs = {key: value for key, value in globals().items() if key.startswith('__') and key.endswith('__')}
     exec('', vs)
     original_vs = copy.deepcopy(vs)
     exec(source, vs)

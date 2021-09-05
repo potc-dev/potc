@@ -89,9 +89,9 @@ def typing_typevar(v: TypeVar, addon: Addons):
     _kwargs = OrderedDict()
     if v.__bound__ is not None:
         _kwargs['bound'] = v.__bound__
-    if not v.__covariant__:
+    if v.__covariant__:
         _kwargs['covariant'] = v.__covariant__
-    if not v.__contravariant__:
+    if v.__contravariant__:
         _kwargs['contravariant'] = v.__contravariant__
 
     return addon.obj(TypeVar)(v.__name__, *v.__constraints__, **_kwargs)

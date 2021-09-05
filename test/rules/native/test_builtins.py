@@ -56,7 +56,7 @@ class _MyPair:
 
 
 @pytest.mark.unittest
-class TestRulesBuiltins:
+class TestRulesNativeBuiltins:
     def test_str(self):
         with transobj_assert('str') as (obj, name):
             assert obj == 'str'
@@ -123,6 +123,18 @@ class TestRulesBuiltins:
 
         with transobj_assert(list) as (obj, name):
             assert obj == list
+            assert name == 'builtin_type'
+
+        with transobj_assert(set) as (obj, name):
+            assert obj == set
+            assert name == 'builtin_type'
+
+        with transobj_assert(dict) as (obj, name):
+            assert obj == dict
+            assert name == 'builtin_type'
+
+        with transobj_assert(tuple) as (obj, name):
+            assert obj == tuple
             assert name == 'builtin_type'
 
         with transobj_assert(_LocalType) as (obj, name):
