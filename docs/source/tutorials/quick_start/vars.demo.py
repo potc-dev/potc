@@ -1,4 +1,5 @@
 import math
+from typing import Callable, Dict, List
 
 import numpy as np
 
@@ -26,5 +27,6 @@ if __name__ == '__main__':
         'long_list': [123, {'1', b'klsdjf'}] * 10,
         'np_object': np.array([[1, 2, ], [3, 4]]),
         'np_module': np,
+        'typing_': Callable[[int, str], Dict[str, List[int]]],
     }, reformat='pep8')  # auto reformat the code
     print(_code)
