@@ -62,5 +62,9 @@ setup(
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: Implementation :: PyPy'
     ],
-    entry_points={},
+    entry_points={
+        'console_scripts': [
+            'potc=potc.entry.cli:potc_cli'
+        ]
+    },
 )

@@ -116,7 +116,7 @@ class _AbstractTranslator(metaclass=ABCMeta):
         if isort:
             _code = sort_code_imports(_code)
         if reformat is not None:
-            if hasattr(reformat, '__call__'):
+            if callable(reformat):
                 _code = reformat(_code)
             else:
                 _code, _ = FormatCode(_code, style_config=reformat)
