@@ -3,7 +3,7 @@ from collections import namedtuple
 from functools import wraps
 from typing import Callable, Type, Union, Tuple, Optional
 
-from ..utils import dynamic_call
+from hbutils.reflection import dynamic_call
 
 
 class UnprocessableError(Exception):

@@ -2,11 +2,11 @@ from functools import wraps
 from typing import Union, Tuple
 
 import click
+from hbutils.reflection import dynamic_call
 
 from ...fixture.addons import Addons
 from ...fixture.common import is_rule, rule, rule_name
 from ...rules import builtin_all
-from ...utils import dynamic_call
 
 
 def validator(func):

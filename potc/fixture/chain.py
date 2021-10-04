@@ -4,9 +4,9 @@ from operator import __or__
 from typing import Union, Callable, List, Tuple, Optional
 
 from hbutils.algorithm import topoids
+from hbutils.reflection import dynamic_call
 
 from .common import is_rule, rule_name, unprocessable, UnprocessableError
-from ..utils import dynamic_call
 
 
 def build_chain(c: Union[List, Tuple, Callable],

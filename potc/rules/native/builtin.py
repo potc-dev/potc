@@ -4,10 +4,11 @@ import types
 from functools import partial
 from typing import Type
 
+from hbutils.reflection import get_callable_hint
+
 from ...fixture import Addons, rule
 from ...supports import function, raw_type, raw_object, typed_object
 from ...supports.bin import dump_obj
-from ...utils import get_callable_hint
 
 
 @rule(type_=type(...))
