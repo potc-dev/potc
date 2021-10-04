@@ -4,7 +4,7 @@ from inspect import signature, Parameter
 from itertools import chain
 from typing import Callable, TypeVar, Union, Type, get_type_hints, Any
 
-from .singleton import SingletonMark
+from hbutils.design import SingletonMark
 
 
 def args_iter(*args, **kwargs):

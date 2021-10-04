@@ -3,8 +3,10 @@ from itertools import product
 from operator import __or__
 from typing import Union, Callable, List, Tuple, Optional
 
+from hbutils.algorithm import topoids
+
 from .common import is_rule, rule_name, unprocessable, UnprocessableError
-from ..utils import topological, dynamic_call
+from ..utils import dynamic_call
 
 
 def build_chain(c: Union[List, Tuple, Callable],
@@ -82,7 +84,7 @@ def build_chain(c: Union[List, Tuple, Callable],
     new_edges = set(map(lambda x: (_id_to_index[x[0]], _id_to_index[x[1]]), edges))
 
     try:
-        order = topological(count, new_edges)
+        order = topoids(count, new_edges)
     except ArithmeticError as err:
         _, conflict_indices = err.args
         _index_to_name = {nid: name for nid, name in enumerate(_names)}

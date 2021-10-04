@@ -4,11 +4,11 @@ from string import Template
 from typing import List, Tuple, Union, Iterable
 
 import click
+from hbutils.reflection import quick_import_object, iter_import_objects
 
 from .base import CONTEXT_SETTINGS, _is_rule_block
 from .utils import validator, err_validator, multiple_validator
 from ...translate import transvars
-from ...utils import quick_import_object, iter_import_objects
 
 
 @err_validator((ImportError,))

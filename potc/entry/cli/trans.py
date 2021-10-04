@@ -1,11 +1,11 @@
 from typing import Tuple, List
 
 import click
+from hbutils.reflection import quick_import_object
 
 from .base import CONTEXT_SETTINGS, _is_rule_block
 from .utils import validator, err_validator, multiple_validator, rules_struct
 from ...translate import transobj
-from ...utils import quick_import_object
 
 
 @err_validator((ImportError,))
