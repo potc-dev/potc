@@ -5,7 +5,7 @@ from typing import List, Tuple, Union, Iterable
 
 import click
 
-from .base import CONTEXT_SETTINGS
+from .base import CONTEXT_SETTINGS, _is_rule_block
 from .utils import validator, err_validator, multiple_validator
 from ...translate import transvars
 from ...utils import quick_import_object, iter_import_objects
@@ -15,7 +15,7 @@ from ...utils import quick_import_object, iter_import_objects
 @multiple_validator
 @validator
 def validate_rules(value: str):
-    rule, _, _ = quick_import_object(value)
+    rule, _, _ = quick_import_object(value, _is_rule_block)
     return rule
 
 
@@ -37,10 +37,14 @@ def validate_value(value: str):
     return result
 
 
+def _is_reformatter(item):
+    return isinstance(item, (dict, str)) or callable(item)
+
+
 @validator
 def validate_reformat(value: str):
     try:
-        _object, _, _ = quick_import_object(value)
+        _object, _, _ = quick_import_object(value, _is_reformatter)
     except ImportError:
         return value
     else:

@@ -2,6 +2,7 @@ import click
 from click.core import Context, Option
 
 from ...config.meta import __TITLE__, __VERSION__, __AUTHOR__, __AUTHOR_EMAIL__
+from ...fixture import is_rule
 
 _raw_authors = [item.strip() for item in __AUTHOR__.split(',') if item.strip()]
 _raw_emails = [item.strip() for item in __AUTHOR_EMAIL__.split(',')]
@@ -35,6 +36,10 @@ def print_version(ctx: Context, param: Option, value: bool) -> None:
     if _authors:
         click.echo('Developed by {authors}.'.format(authors=', '.join(_authors)))
     ctx.exit()
+
+
+def _is_rule_block(item):
+    return isinstance(item, (list, tuple)) or is_rule(item)
 
 
 CONTEXT_SETTINGS = dict(

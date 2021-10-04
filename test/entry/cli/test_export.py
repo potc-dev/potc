@@ -156,7 +156,6 @@ class TestEntryCliExport:
             '-f', 'test.entry.cli.test_export.reformatter',
         ])
 
-        print(result.output)
         assert result.exit_code == 0
         assert "F_INT = 2345" in result.stdout
         assert "F_TUPLE = (1, '94', [4, 5, -6, 9, math.e])" in result.stdout

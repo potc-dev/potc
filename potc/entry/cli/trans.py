@@ -2,7 +2,7 @@ from typing import Tuple, List
 
 import click
 
-from .base import CONTEXT_SETTINGS
+from .base import CONTEXT_SETTINGS, _is_rule_block
 from .utils import validator, err_validator, multiple_validator, rules_struct
 from ...translate import transobj
 from ...utils import quick_import_object
@@ -12,7 +12,7 @@ from ...utils import quick_import_object
 @multiple_validator
 @validator
 def validate_rules(value: str):
-    rule, _, _ = quick_import_object(value)
+    rule, _, _ = quick_import_object(value, _is_rule_block)
     return rule
 
 
