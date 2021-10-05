@@ -42,6 +42,8 @@ for modname in modnames:
 if not os.environ.get("NO_CONTENTS_BUILD"):
     _env = dict(os.environ)
     _env.update(dict(
+        SOURCEDIR=_DOC_PATH,
+        BUILDDIR=os.path.abspath(os.path.join(_DOC_PATH, '..', 'build')),
         PYTHONPATH=':'.join([_PROJ_PATH, _LIBS_PATH]),
         PATH=':'.join([_SHIMS_PATH, os.environ.get('PATH', '')]),
     ))
@@ -58,23 +60,11 @@ if not os.environ.get("NO_CONTENTS_BUILD"):
     if pip_docs.wait() != 0:
         raise ChildProcessError("Pip docs install failed with %d." % (pip.returncode,))
 
-    diagrams_cmd = (where.first('make'), '-f', "diagrams.mk", "build")
-    print("Building diagrams {cmd} at {cp}...".format(cmd=repr(diagrams_cmd), cp=repr(_DOC_PATH)))
-    diagrams = Popen(diagrams_cmd, stdout=sys.stdout, stderr=sys.stderr, env=_env, cwd=_DOC_PATH)
-    if diagrams.wait() != 0:
-        raise ChildProcessError("Diagrams failed with %d." % (diagrams.returncode,))
-
-    graphviz_cmd = (where.first('make'), '-f', "graphviz.mk", "build")
-    print("Building graphs {cmd} at {cp}...".format(cmd=repr(graphviz_cmd), cp=repr(_DOC_PATH)))
-    graphviz = Popen(graphviz_cmd, stdout=sys.stdout, stderr=sys.stderr, env=_env, cwd=_DOC_PATH)
-    if graphviz.wait() != 0:
-        raise ChildProcessError("Graphviz failed with %d." % (graphviz.returncode,))
-
-    demos_cmd = (where.first('make'), '-f', "demos.mk", "build")
-    print("Building demos {cmd} at {cp}...".format(cmd=repr(demos_cmd), cp=repr(_DOC_PATH)))
-    demos = Popen(demos_cmd, stdout=sys.stdout, stderr=sys.stderr, env=_env, cwd=_DOC_PATH)
-    if demos.wait() != 0:
-        raise ChildProcessError("Demos failed with %d." % (demos.returncode,))
+    all_cmd = (where.first('make'), '-f', "all.mk", "build")
+    print("Building all {cmd} at {cp}...".format(cmd=repr(all_cmd), cp=repr(_DOC_PATH)))
+    all_ = Popen(all_cmd, stdout=sys.stdout, stderr=sys.stderr, env=_env, cwd=_DOC_PATH)
+    if all_.wait() != 0:
+        raise ChildProcessError("Diagrams failed with %d." % (all_.returncode,))
 
     print("Build of contents complete.")
 

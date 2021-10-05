@@ -1,28 +1,18 @@
 # You can set these variables from the command line, and also
 # from the environment for the first two.
+PROJ_DIR           ?= ${CURDIR}
 SPHINXOPTS         ?=
 SPHINXBUILD        ?= $(shell which sphinx-build)
 SPHINXMULTIVERSION ?= $(shell which sphinx-multiversion)
-SOURCEDIR          ?= source
-BUILDDIR           ?= build
+SOURCEDIR          ?= ${PROJ_DIR}/source
+BUILDDIR           ?= ${PROJ_DIR}/build
 
 # Minimal makefile for Sphinx documentation
-DIAGRAMS_MK := ${SOURCEDIR}/diagrams.mk
-DIAGRAMS    := $(MAKE) -f "${DIAGRAMS_MK}" SOURCE=${SOURCEDIR}
-GRAPHVIZ_MK := ${SOURCEDIR}/graphviz.mk
-GRAPHVIZ    := $(MAKE) -f "${GRAPHVIZ_MK}" SOURCE=${SOURCEDIR}
-DEMOS_MK    := ${SOURCEDIR}/demos.mk
-DEMOS       := $(MAKE) -f "${DEMOS_MK}" SOURCE=${SOURCEDIR}
-
-_CURRENT_PATH := ${PATH}
-_PROJ_DIR     := $(shell readlink -f ${CURDIR}/..)
-_LIBS_DIR     := $(shell readlink -f ${SOURCEDIR}/_libs)
-_SHIMS_DIR    := $(shell readlink -f ${SOURCEDIR}/_shims)
+ALL_MK := ${SOURCEDIR}/all.mk
+ALL    := $(MAKE) -f "${ALL_MK}" SOURCE=${SOURCEDIR}
 
 .EXPORT_ALL_VARIABLES:
 
-PYTHONPATH = ${_PROJ_DIR}:${_LIBS_DIR}
-PATH       = ${_SHIMS_DIR}:${_CURRENT_PATH}
 NO_CONTENTS_BUILD = true
 
 # Catch-all target: route all unknown targets to Sphinx using the new
@@ -34,9 +24,7 @@ help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 contents:
-	@$(DIAGRAMS) build
-	@$(GRAPHVIZ) build
-	@$(DEMOS) build
+	@$(ALL) build
 build: html
 html: contents
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
@@ -47,9 +35,7 @@ prod:
 	@touch "$(BUILDDIR)/html/.nojekyll"
 
 clean:
-	@$(DIAGRAMS) clean
-	@$(GRAPHVIZ) clean
-	@$(DEMOS) clean
+	@$(ALL) clean
 	@$(SPHINXBUILD) -M clean "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 sourcedir:
