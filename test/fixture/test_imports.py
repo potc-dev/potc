@@ -1,10 +1,26 @@
+import dill
 import pytest
 
-from potc.fixture.imports import FromImport, DirectImport, ImportPool
+from potc.fixture.imports import FromImport, DirectImport, ImportPool, try_import_info
 
 
 @pytest.mark.unittest
 class TestFixtureImports:
+    def test_imports(self):
+        assert try_import_info(dill) == ('import', 'dill')
+        assert try_import_info(dill, 'dx') == ('import', 'dill', 'as', 'dx')
+        assert try_import_info(dill.source) == ('from', 'dill', 'import', 'source')
+        assert try_import_info(dill.source, 'src') == ('from', 'dill', 'import', 'source', 'as', 'src')
+
+        with pytest.raises(TypeError):
+            try_import_info(1)
+
+        p = lambda x: x + 1
+        p.__module__ = 'dill'
+        p.__name = 'p'
+        with pytest.raises(TypeError):
+            try_import_info(p)
+
     def test_from_import(self):
         _import = FromImport('treevalue.utils').import_('int_enums').as_('my_int_enums')
         assert str(_import) == 'from treevalue.utils import int_enums as my_int_enums'

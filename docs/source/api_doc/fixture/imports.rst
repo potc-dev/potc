@@ -1,6 +1,13 @@
 potc.fixture.imports
 ======================
 
+try_import_info
+-------------------
+
+.. autofunction:: potc.fixture.imports.try_import_info
+
+
+
 ImportStatement
 ----------------------
 

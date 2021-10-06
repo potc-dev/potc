@@ -4,8 +4,7 @@ from functools import lru_cache
 from itertools import chain
 from typing import Tuple, Optional
 
-from .imports import ImportPool, ImportStatement, FromImport, DirectImport
-from ..utils import try_import_info
+from .imports import ImportPool, ImportStatement, FromImport, DirectImport, try_import_info
 
 
 @lru_cache()

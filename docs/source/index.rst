@@ -27,7 +27,6 @@ imported and built.
     api_doc/config/index
     api_doc/fixture/index
     api_doc/supports/index
-    api_doc/utils/index
 
 .. toctree::
     :maxdepth: 2
