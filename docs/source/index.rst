@@ -26,6 +26,7 @@ imported and built.
 
     api_doc/config/index
     api_doc/fixture/index
+    api_doc/rules/index
     api_doc/supports/index
 
 .. toctree::

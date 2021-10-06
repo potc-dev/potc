@@ -187,6 +187,19 @@ def builtin_object(v, addon: Addons):
     return _call(dump_obj(v))
 
 
+#: Overview:
+#:      Basic builtin types.
+#:
+#: Items:
+#:      - :class:`int`
+#:      - :class:`complex`
+#:      - :class:`float`
+#:      - :class:`str`
+#:      - :class:`none`
+#:      - :class:`range`
+#:      - :class:`slice`
+#:      - :class:`ellipsis`
+#:      - :class:`bytes`
 builtin_basic = (
     builtin_int,
     builtin_complex,
@@ -198,12 +211,30 @@ builtin_basic = (
     builtin_ellipsis,
     builtin_bytes,
 )
+
+#: Overview:
+#:      Builtin collection types
+#:
+#: Items:
+#:      - :class:`list`
+#:      - :class:`tuple`
+#:      - :class:`set`
+#:      - :class:`dict`
 builtin_collection = (
     builtin_list,
     builtin_tuple,
     builtin_set,
     builtin_dict,
 )
+
+#: Overview:
+#:      Builtin reflectance types
+#:
+#: Items:
+#:      - Builtin items (items in module ``builtins``)
+#:      - Functions
+#:      - Types (including importable ones and unimportable ones)
+#:      - Modules
 builtin_reflect = (
     builtin_items,
     builtin_func,
@@ -211,6 +242,10 @@ builtin_reflect = (
     builtin_raw_type,
     builtin_module,
 )
+
+#: Overview:
+#:      All Builtin types.
+#:
 builtin_all = [
     (
         builtin_basic,

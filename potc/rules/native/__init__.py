@@ -5,8 +5,6 @@ from .builtin import builtin_all, builtin_reflect, builtin_collection, builtin_b
 from .typing import typing_wrapper, typing_all, typing_typevar, typing_callable, typing_items
 
 native_all = [
-    [
-        typing_all
-    ],
-    builtin_all
+    typing_all,
+    builtin_all,
 ]

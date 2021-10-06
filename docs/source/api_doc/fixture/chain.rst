@@ -1,10 +1,15 @@
 potc.fixture.chain
 ======================
 
+.. currentmodule:: potc.fixture.chain
+
+.. automodule:: potc.fixture.chain
+
+
 build_chain
 -------------------
 
-.. autofunction:: potc.fixture.chain.build_chain
+.. autofunction:: build_chain
 
 .. note::
 
@@ -43,6 +48,6 @@ So one of the final order should be ``[r1, r2, r4, r5, r3, r6]`` \
 rules_combine
 -------------------
 
-.. autofunction:: potc.fixture.chain.rules_combine
+.. autofunction:: rules_combine
 
 

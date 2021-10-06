@@ -1,14 +1,18 @@
 potc.supports.bin
 =====================
 
+.. currentmodule:: potc.supports.bin
+
+.. automodule:: potc.supports.bin
+
 dump_obj
 ----------------
 
-.. autofunction:: potc.supports.bin.dump_obj
+.. autofunction:: dump_obj
 
 
 load_obj
 ----------------
 
-.. autofunction:: potc.supports.bin.load_obj
+.. autofunction:: load_obj
 

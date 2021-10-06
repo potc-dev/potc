@@ -7,6 +7,11 @@ def system_addon_proxy(v: AddonProxy, addon: Addons):
         return str(v)
 
 
+#: Overview:
+#:      Rules for potc system.
+#:
+#: Items:
+#:      - :class:`potc.fixture.addons.AddonProxy`.
 system_all = [
     system_addon_proxy,
 ]

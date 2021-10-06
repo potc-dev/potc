@@ -33,8 +33,12 @@ def _load_plugins():
 
 
 @lru_cache()
-def _load_plugins_once():
+def installed_loader():
+    """
+    Overview:
+        Load rules from installed potc plugins.
+
+    Returns:
+        - rules: Rules from installed plugins.
+    """
     return _load_plugins()
-
-
-installed_loader = _load_plugins_once

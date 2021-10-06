@@ -1,6 +1,10 @@
 potc.fixture
 =====================
 
+.. currentmodule:: potc.fixture
+
+.. automodule:: potc.fixture
+
 .. toctree::
     :maxdepth: 3
 

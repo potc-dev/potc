@@ -1,38 +1,43 @@
 potc.fixture.common
 ======================
 
+.. currentmodule:: potc.fixture.common
+
+.. automodule:: potc.fixture.common
+
+
 UnprocessableError
 ------------------------
 
-.. autoclass:: potc.fixture.common.UnprocessableError
+.. autoclass:: UnprocessableError
 
 
 unprocessable
 ---------------------
 
-.. autofunction:: potc.fixture.common.unprocessable
+.. autofunction:: unprocessable
 
 
 rule
 ---------------------
 
-.. autofunction:: potc.fixture.common.rule
+.. autofunction:: rule
 
 
 is_rule
 ---------------------
 
-.. autofunction:: potc.fixture.common.is_rule
+.. autofunction:: is_rule
 
 
 rule_name
 ---------------------
 
-.. autofunction:: potc.fixture.common.rule_name
+.. autofunction:: rule_name
 
 
 rule_origin
 ---------------------
 
-.. autofunction:: potc.fixture.common.rule_origin
+.. autofunction:: rule_origin
 

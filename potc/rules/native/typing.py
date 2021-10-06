@@ -136,6 +136,14 @@ _typing_self_all = [
     )
 ]
 
+#: Overview:
+#:      Typing types
+#:
+#: Items:
+#:      - :class:`TypeVar`
+#:      - Items in module ``typing``
+#:      - :class:`Callable`
+#:      - :class:`Wrapper`
 typing_all = [
     (builtin_type, _typing_self_all, builtin_raw_type),
 ]
