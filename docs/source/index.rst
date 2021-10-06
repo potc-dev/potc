@@ -28,6 +28,8 @@ imported and built.
     api_doc/fixture/index
     api_doc/rules/index
     api_doc/supports/index
+    api_doc/testing/index
+    api_doc/translate/index
 
 .. toctree::
     :maxdepth: 2
