@@ -1,6 +1,7 @@
 import importlib
 import re
 import types
+import uuid
 from abc import ABCMeta, abstractmethod
 from contextlib import contextmanager
 from typing import Optional, Tuple
@@ -71,6 +72,21 @@ def _validate_import_info(*args):
 
 
 class ImportStatement(metaclass=ABCMeta):
+    def __init__(self):
+        """
+        Overview:
+            Constructor of :class:`ImportStatement`.
+        """
+        self.__uuid = uuid.uuid4()
+
+    @property
+    def uuid(self):
+        """
+        Overview:
+            UUID of the import statement, will be unique when generated.
+        """
+        return self.__uuid
+
     @property
     @abstractmethod
     def target(self):
@@ -153,7 +169,7 @@ class ImportStatement(metaclass=ABCMeta):
         Returns:
             - state: Value state.
         """
-        raise NotImplementedError  # pragma: no cover
+        return self.__uuid
 
     @abstractmethod
     def __setstate__(self, state):
@@ -161,7 +177,7 @@ class ImportStatement(metaclass=ABCMeta):
         Overview:
             Set value state of statement.
         """
-        raise NotImplementedError  # pragma: no cover
+        self.__uuid = state
 
     def __str__(self) -> str:
         """
@@ -205,6 +221,7 @@ class FromImport(ImportStatement):
             - \_import (:obj:`Optional[str]`): Import item, default is ``None``.
             - \_as (:obj:`Optional[str]`): Alias name, default is ``None`` which means no alias.
         """
+        ImportStatement.__init__(self)
         self.__from = _from
         self.__import = _import
         self.__as = _as
@@ -278,10 +295,11 @@ class FromImport(ImportStatement):
             return False
 
     def __setstate__(self, state):
-        self.__from, self.__import, self.__as = state
+        self.__from, self.__import, self.__as, _state = state
+        ImportStatement.__setstate__(self, _state)
 
     def __getstate__(self):
-        return self.__from, self.__import, self.__as
+        return self.__from, self.__import, self.__as, ImportStatement.__getstate__(self)
 
 
 class DirectImport(ImportStatement):
@@ -299,6 +317,7 @@ class DirectImport(ImportStatement):
             - \_import (:obj:`Optional[str]`): Import item, default is ``None``.
             - \_as (:obj:`Optional[str]`): Alias name, default is ``None`` which means no alias.
         """
+        ImportStatement.__init__(self)
         self.__import = _import
         self.__as = _as
 
@@ -355,10 +374,11 @@ class DirectImport(ImportStatement):
             return False
 
     def __setstate__(self, state):
-        self.__import, self.__as = state
+        self.__import, self.__as, _state = state
+        ImportStatement.__setstate__(self, _state)
 
     def __getstate__(self):
-        return self.__import, self.__as
+        return self.__import, self.__as, ImportStatement.__getstate__(self)
 
 
 class _SelfFormImport(FromImport):
@@ -419,7 +439,7 @@ class ImportPool:
             - imports: Import statements.
         """
         self.__imports = list(imports)
-        self.__ids = {id(item): item.target for item in self.__imports}
+        self.__ids = {item.uuid: item.target for item in self.__imports}
         _this = self
 
     def append(self, import_: ImportStatement):
@@ -430,9 +450,9 @@ class ImportPool:
         Arguments:
             - import\_: Import statement.
         """
-        if id(import_) not in self.__ids.keys():
+        if import_.uuid not in self.__ids.keys():
             self.__imports.append(import_)
-            self.__ids[id(import_)] = import_.target
+            self.__ids[import_.uuid] = import_.target
 
     def import_(self, _import: str) -> _SelfDirectImport:
         """
