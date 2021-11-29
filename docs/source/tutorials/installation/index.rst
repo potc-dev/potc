@@ -13,7 +13,7 @@ You can also install with the newest version through GitHub:
 
 .. code:: shell
 
-    pip install -U git+https://github.com/hansbug/potc.git@main
+    pip install -U git+https://github.com/potc-dev/potc.git@main
 
 You can check your installation by the following python \
 script:
@@ -30,4 +30,4 @@ is successful.
     :linenos:
 
 Potc is still under development, you can also check out the \
-documents in stable version through `https://hansbug.github.io/potc/ <https://hansbug.github.io/potc/>`_.
+documents in stable version through `https://potc-dev.github.io/potc/ <https://potc-dev.github.io/potc/>`_.

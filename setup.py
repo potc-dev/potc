@@ -43,7 +43,7 @@ setup(
     author_email=meta['__AUTHOR_EMAIL__'],
     license='Apache License, Version 2.0',
     keywords='Python expressions of any objects',
-    url='https://github.com/HansBug/potc',
+    url='https://github.com/potc-dev/potc',
 
     # environment
     python_requires=">=3.6",

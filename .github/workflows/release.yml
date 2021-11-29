@@ -8,7 +8,7 @@ jobs:
   release:
     name: Publish to official pypi
     runs-on: ${{ matrix.os }}
-    if: ${{ github.repository == 'hansbug/potc' }}
+    if: ${{ github.repository == 'potc-dev/potc' }}
     strategy:
       matrix:
         os:

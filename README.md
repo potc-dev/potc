@@ -5,19 +5,19 @@
 ![Loc](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/HansBug/eaabf18edb37af48c7e67a9a9ec9aa8e/raw/loc.json)
 ![Comments](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/HansBug/eaabf18edb37af48c7e67a9a9ec9aa8e/raw/comments.json)
 
-[![Docs Deploy](https://github.com/hansbug/potc/workflows/Docs%20Deploy/badge.svg)](https://github.com/hansbug/potc/actions?query=workflow%3A%22Docs+Deploy%22)
-[![Code Test](https://github.com/hansbug/potc/workflows/Code%20Test/badge.svg)](https://github.com/hansbug/potc/actions?query=workflow%3A%22Code+Test%22)
-[![Badge Creation](https://github.com/hansbug/potc/workflows/Badge%20Creation/badge.svg)](https://github.com/hansbug/potc/actions?query=workflow%3A%22Badge+Creation%22)
-[![Package Release](https://github.com/hansbug/potc/workflows/Package%20Release/badge.svg)](https://github.com/hansbug/potc/actions?query=workflow%3A%22Package+Release%22)
-[![codecov](https://codecov.io/gh/hansbug/potc/branch/main/graph/badge.svg?token=XJVDP4EFAT)](https://codecov.io/gh/hansbug/potc)
+[![Docs Deploy](https://github.com/potc-dev/potc/workflows/Docs%20Deploy/badge.svg)](https://github.com/potc-dev/potc/actions?query=workflow%3A%22Docs+Deploy%22)
+[![Code Test](https://github.com/potc-dev/potc/workflows/Code%20Test/badge.svg)](https://github.com/potc-dev/potc/actions?query=workflow%3A%22Code+Test%22)
+[![Badge Creation](https://github.com/potc-dev/potc/workflows/Badge%20Creation/badge.svg)](https://github.com/potc-dev/potc/actions?query=workflow%3A%22Badge+Creation%22)
+[![Package Release](https://github.com/potc-dev/potc/workflows/Package%20Release/badge.svg)](https://github.com/potc-dev/potc/actions?query=workflow%3A%22Package+Release%22)
+[![codecov](https://codecov.io/gh/potc-dev/potc/branch/main/graph/badge.svg?token=XJVDP4EFAT)](https://codecov.io/gh/potc-dev/potc)
 
-[![GitHub stars](https://img.shields.io/github/stars/hansbug/potc)](https://github.com/hansbug/potc/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/hansbug/potc)](https://github.com/hansbug/potc/network)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/hansbug/potc)
-[![GitHub issues](https://img.shields.io/github/issues/hansbug/potc)](https://github.com/hansbug/potc/issues)
-[![GitHub pulls](https://img.shields.io/github/issues-pr/hansbug/potc)](https://github.com/hansbug/potc/pulls)
-[![Contributors](https://img.shields.io/github/contributors/hansbug/potc)](https://github.com/hansbug/potc/graphs/contributors)
-[![GitHub license](https://img.shields.io/github/license/hansbug/potc)](https://github.com/hansbug/potc/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/potc-dev/potc)](https://github.com/potc-dev/potc/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/potc-dev/potc)](https://github.com/potc-dev/potc/network)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/potc-dev/potc)
+[![GitHub issues](https://img.shields.io/github/issues/potc-dev/potc)](https://github.com/potc-dev/potc/issues)
+[![GitHub pulls](https://img.shields.io/github/issues-pr/potc-dev/potc)](https://github.com/potc-dev/potc/pulls)
+[![Contributors](https://img.shields.io/github/contributors/potc-dev/potc)](https://github.com/potc-dev/potc/graphs/contributors)
+[![GitHub license](https://img.shields.io/github/license/potc-dev/potc)](https://github.com/potc-dev/potc/blob/master/LICENSE)
 
 Python object to code framework, expression any python object to runnable python code.
 
@@ -32,12 +32,12 @@ You can simply install it with `pip` command line from the official PyPI site.
 pip install potc
 ```
 
-For more information about installation, you can refer to [Installation](https://hansbug.github.io/potc/main/tutorials/installation/index.html).
+For more information about installation, you can refer to [Installation](https://potc-dev.github.io/potc/main/tutorials/installation/index.html).
 
 
 ## Documentation
 
-The detailed documentation are hosted on [https://hansbug.github.io/potc/main/index.html](https://hansbug.github.io/potc/main/index.html).
+The detailed documentation are hosted on [https://potc-dev.github.io/potc/main/index.html](https://potc-dev.github.io/potc/main/index.html).
 
 Only english version is provided now, the chinese documentation is still under development.
 
@@ -151,7 +151,7 @@ vbytes_ = b'klsdjflkds\\\x00'
 
 For more quick start explanation and further usage, take a look at:
 
-* [Quick Start](https://hansbug.github.io/potc/main/tutorials/quick_start/index.html)
+* [Quick Start](https://potc-dev.github.io/potc/main/tutorials/quick_start/index.html)
 
 
 # Contributing
