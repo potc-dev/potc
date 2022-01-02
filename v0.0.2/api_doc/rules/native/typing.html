@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>potc.rules.native.typing &mdash; potc 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="potc.rules.default" href="../default.html" />
+    <link rel="prev" title="potc.rules.native.builtin" href="builtin.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> potc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/quick_start/index.html">Quick Start</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../config/index.html">potc.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fixture/index.html">potc.fixture</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">potc.rules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">potc.rules.native</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="builtin.html">potc.rules.native.builtin</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">potc.rules.native.typing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#typing-all">typing_all</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typing-wrapper">typing_wrapper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typing-typevar">typing_typevar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typing-callable">typing_callable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typing-items">typing_items</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../default.html">potc.rules.default</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installed.html">potc.rules.installed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system.html">potc.rules.system</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../supports/index.html">potc.supports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/index.html">potc.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translate/index.html">potc.translate</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">potc</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">potc.rules</a> &raquo;</li>
+        
+          <li><a href="index.html">potc.rules.native</a> &raquo;</li>
+        
+      <li>potc.rules.native.typing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/api_doc/rules/native/typing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+    
+    
+  <div class="section" id="module-potc.rules.native.typing">
+<span id="potc-rules-native-typing"></span><h1>potc.rules.native.typing<a class="headerlink" href="#module-potc.rules.native.typing" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="typing-all">
+<h2>typing_all<a class="headerlink" href="#typing-all" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="potc.rules.native.typing.typing_all">
+<code class="sig-prename descclassname">potc.rules.native.typing.</code><code class="sig-name descname">typing_all</code><em class="property"> = [(&lt;function builtin_type&gt;, [(&lt;function typing_typevar&gt;, &lt;function typing_items&gt;, &lt;function typing_callable&gt;, &lt;function typing_wrapper&gt;)], &lt;function builtin_raw_type&gt;)]</em><a class="headerlink" href="#potc.rules.native.typing.typing_all" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Typing types</p>
+</dd>
+<dt>Items:</dt><dd><ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code></p></li>
+<li><p>Items in module <code class="docutils literal notranslate"><span class="pre">typing</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Wrapper</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="typing-wrapper">
+<h2>typing_wrapper<a class="headerlink" href="#typing-wrapper" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.typing.typing_wrapper">
+<code class="sig-prename descclassname">potc.rules.native.typing.</code><code class="sig-name descname">typing_wrapper</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/typing.html#typing_wrapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.typing.typing_wrapper" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="typing-typevar">
+<h2>typing_typevar<a class="headerlink" href="#typing-typevar" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.typing.typing_typevar">
+<code class="sig-prename descclassname">potc.rules.native.typing.</code><code class="sig-name descname">typing_typevar</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">TypeVar</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/typing.html#typing_typevar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.typing.typing_typevar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="typing-callable">
+<h2>typing_callable<a class="headerlink" href="#typing-callable" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.typing.typing_callable">
+<code class="sig-prename descclassname">potc.rules.native.typing.</code><code class="sig-name descname">typing_callable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/typing.html#typing_callable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.typing.typing_callable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="typing-items">
+<h2>typing_items<a class="headerlink" href="#typing-items" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.typing.typing_items">
+<code class="sig-prename descclassname">potc.rules.native.typing.</code><code class="sig-name descname">typing_items</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/typing.html#typing_items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.typing.typing_items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../default.html" class="btn btn-neutral float-right" title="potc.rules.default" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="builtin.html" class="btn btn-neutral float-left" title="potc.rules.native.builtin" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HansBug
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+    <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: v0.0.2
+    <span class="fa fa-caret-down"></span>
+  </span>
+        <div class="rst-other-versions">
+                <dl>
+                    <dt>Tags</dt>
+                        <dd><a href="typing.html">v0.0.2</a></dd>
+                </dl>
+                <dl>
+                    <dt>Branches</dt>
+                        <dd><a href="../../../../main/api_doc/rules/native/typing.html">main</a></dd>
+                </dl>
+        </div>
+    </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

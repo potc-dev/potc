@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>potc.fixture.addons &mdash; potc 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="potc.fixture.chain" href="chain.html" />
+    <link rel="prev" title="potc.fixture" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> potc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/quick_start/index.html">Quick Start</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../config/index.html">potc.config</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">potc.fixture</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">potc.fixture.addons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#addons">Addons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#addonproxy">AddonProxy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chain.html">potc.fixture.chain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common.html">potc.fixture.common</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imports.html">potc.fixture.imports</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rules/index.html">potc.rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supports/index.html">potc.supports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/index.html">potc.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translate/index.html">potc.translate</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">potc</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">potc.fixture</a> &raquo;</li>
+        
+      <li>potc.fixture.addons</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api_doc/fixture/addons.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+    
+    
+  <div class="section" id="module-potc.fixture.addons">
+<span id="potc-fixture-addons"></span><h1>potc.fixture.addons<a class="headerlink" href="#module-potc.fixture.addons" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="addons">
+<h2>Addons<a class="headerlink" href="#addons" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="potc.fixture.addons.Addons">
+<em class="property">class </em><code class="sig-prename descclassname">potc.fixture.addons.</code><code class="sig-name descname">Addons</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rule</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/fixture/addons.html#Addons"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.Addons" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Addon object used in rules.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="potc.fixture.addons.Addons.__getstate__">
+<code class="sig-name descname">__getstate__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/fixture/addons.html#Addons.__getstate__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.Addons.__getstate__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Get state value of this object.</p>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>state: State value.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.fixture.addons.Addons.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rule</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/fixture/addons.html#Addons.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.Addons.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Constructor of <code class="docutils literal notranslate"><span class="pre">Addons</span></code>.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>rule: Translation rule, default is <code class="docutils literal notranslate"><span class="pre">None</span></code> which means no translation rule,                 auto translation will also be disabled when <code class="docutils literal notranslate"><span class="pre">None</span></code> is used.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.fixture.addons.Addons.__setstate__">
+<code class="sig-name descname">__setstate__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/fixture/addons.html#Addons.__setstate__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.Addons.__setstate__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Set state value of this object.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>state: State value.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.fixture.addons.Addons.import_items">
+<em class="property">property </em><code class="sig-name descname">import_items</code><a class="headerlink" href="#potc.fixture.addons.Addons.import_items" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Import statements.</p>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>statements (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Tuple[ImportStatement,</span> <span class="pre">...]</span></code>): Tuple of import statements.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.fixture.addons.Addons.obj">
+<code class="sig-name descname">obj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em>, <em class="sig-param"><span class="n">alias</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#potc.fixture.addons.AddonProxy" title="potc.fixture.addons.AddonProxy">potc.fixture.addons.AddonProxy</a><a class="reference internal" href="../../_modules/potc/fixture/addons.html#Addons.obj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.Addons.obj" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Generate an object proxy.
+Object proxy means a object which need to be automatically imported,             such as <code class="docutils literal notranslate"><span class="pre">json</span></code>, an import statement <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">json</span></code> will be generated.
+If the object cannot be imported, it will raise exception.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>obj: Target object.</p></li>
+<li><p>alias (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Optional[str]</span></code>): Alias name of the imported object,                 default is <code class="docutils literal notranslate"><span class="pre">None</span></code> which means do not alias.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>proxy (<a class="reference internal" href="#potc.fixture.addons.AddonProxy" title="potc.fixture.addons.AddonProxy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AddonProxy</span></code></a>): Expression proxy object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.fixture.addons.Addons.raw">
+<code class="sig-name descname">raw</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">val</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">func</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#potc.fixture.addons.AddonProxy" title="potc.fixture.addons.AddonProxy">potc.fixture.addons.AddonProxy</a><a class="reference internal" href="../../_modules/potc/fixture/addons.html#Addons.raw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.Addons.raw" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Generate raw proxy.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>val: Raw object.</p></li>
+<li><p>func: Translation function, default is <code class="docutils literal notranslate"><span class="pre">None</span></code> which means just                 turn it to string by builtin function <code class="docutils literal notranslate"><span class="pre">str</span></code>.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>proxy (<a class="reference internal" href="#potc.fixture.addons.AddonProxy" title="potc.fixture.addons.AddonProxy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AddonProxy</span></code></a>): Raw proxy object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.fixture.addons.Addons.rule">
+<code class="sig-name descname">rule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../../_modules/potc/fixture/addons.html#Addons.rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.Addons.rule" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Express the value with the rule translator.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>v: Value object.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>str (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>): String formatted expression.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.fixture.addons.Addons.transaction">
+<code class="sig-name descname">transaction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/fixture/addons.html#Addons.transaction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.Addons.transaction" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Overview:</dt><dd><p>Open up an atomic transaction context.
+If exception is thrown in this context, all the update in this             addon object will be undone.</p>
+</dd>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">addon</span><span class="o">.</span><span class="n">transaction</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">addon</span><span class="o">.</span><span class="n">rule</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">addon</span><span class="o">.</span><span class="n">val</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">addon</span><span class="o">.</span><span class="n">obj</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">raise</span> <span class="ne">RuntimeError</span>  <span class="c1"># the changes above will be undone</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.fixture.addons.Addons.unprocessable">
+<code class="sig-name descname">unprocessable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/fixture/addons.html#Addons.unprocessable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.Addons.unprocessable" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Raise an exception <code class="docutils literal notranslate"><span class="pre">UnprocessableError</span></code>.
+Announce that the current rule cannot express this value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.fixture.addons.Addons.val">
+<code class="sig-name descname">val</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#potc.fixture.addons.AddonProxy" title="potc.fixture.addons.AddonProxy">potc.fixture.addons.AddonProxy</a><a class="reference internal" href="../../_modules/potc/fixture/addons.html#Addons.val"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.Addons.val" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Generate a value proxy.
+Differs from <code class="docutils literal notranslate"><span class="pre">obj</span></code> method, this method will not do automatic import,             it will just generate the string expression with the rule translator.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>obj: Value object.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>proxy (<a class="reference internal" href="#potc.fixture.addons.AddonProxy" title="potc.fixture.addons.AddonProxy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AddonProxy</span></code></a>): Expression proxy object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="addonproxy">
+<h2>AddonProxy<a class="headerlink" href="#addonproxy" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="potc.fixture.addons.AddonProxy">
+<em class="property">class </em><code class="sig-prename descclassname">potc.fixture.addons.</code><code class="sig-name descname">AddonProxy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">rule</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/fixture/addons.html#AddonProxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.AddonProxy" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Proxy of addon expression.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="potc.fixture.addons.AddonProxy.__call__">
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/fixture/addons.html#AddonProxy.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.AddonProxy.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Generate item call expression,             like <code class="docutils literal notranslate"><span class="pre">base(1,</span> <span class="pre">2,</span> <span class="pre">x=1,</span> <span class="pre">y=2)</span></code>.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>args: Positional arguments.</p></li>
+<li><p>kwargs: Key-word arguments.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>proxy: New generated proxy.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.fixture.addons.AddonProxy.__getattr__">
+<code class="sig-name descname">__getattr__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">item</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/fixture/addons.html#AddonProxy.__getattr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.AddonProxy.__getattr__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Generate attribute-getting expression,             like <code class="docutils literal notranslate"><span class="pre">base.xxx</span></code>.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>item (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>): Attribute name.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>proxy: New generated proxy.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.fixture.addons.AddonProxy.__getitem__">
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">item</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/fixture/addons.html#AddonProxy.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.AddonProxy.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Generate item-getting expression,             like <code class="docutils literal notranslate"><span class="pre">base[233]</span></code>, <code class="docutils literal notranslate"><span class="pre">base[::-1]</span></code> or <code class="docutils literal notranslate"><span class="pre">base[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code>.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>item (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>): Item value, can be simple value, slice or tuple.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>proxy: New generated proxy.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.fixture.addons.AddonProxy.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">rule</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/fixture/addons.html#AddonProxy.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.AddonProxy.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Constructor of <code class="docutils literal notranslate"><span class="pre">AddonProxy</span></code></p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>base: Base unit of the proxy.</p></li>
+<li><p>rule: Translation rule.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.fixture.addons.AddonProxy.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../../_modules/potc/fixture/addons.html#AddonProxy.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.addons.AddonProxy.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>String format of expression.</p>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>return (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>): String formatted expression.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="chain.html" class="btn btn-neutral float-right" title="potc.fixture.chain" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="potc.fixture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HansBug
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+    <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: v0.0.2
+    <span class="fa fa-caret-down"></span>
+  </span>
+        <div class="rst-other-versions">
+                <dl>
+                    <dt>Tags</dt>
+                        <dd><a href="addons.html">v0.0.2</a></dd>
+                </dl>
+                <dl>
+                    <dt>Branches</dt>
+                        <dd><a href="../../../main/api_doc/fixture/addons.html">main</a></dd>
+                </dl>
+        </div>
+    </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
