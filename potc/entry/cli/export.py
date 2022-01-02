@@ -57,7 +57,7 @@ def _export_cli(cli: click.Group):
     @click.option('-r', '--rules', 'rules', type=click.UNPROCESSED, callback=validate_rules, multiple=True,
                   default=[], help='External rules definition.')
     @click.option('-v', '--value', 'items', type=click.UNPROCESSED, callback=validate_value, multiple=True,
-                  default=None, help='Compress algorithm, can be a single lib name or a tuple, default use \'zlib\'.')
+                  help='Value to be exported, such as \'mypackage.subpack.var1\'.')
     @click.option('-f', '--reformat', 'reformat', type=click.UNPROCESSED, callback=validate_reformat, show_default=True,
                   default='google', help='Code reformatter afterwards.')
     @click.option('-F', '--no-reformat', 'no_reformat', is_flag=True, default=False,
