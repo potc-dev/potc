@@ -165,7 +165,7 @@
 <span class="kn">import</span> <span class="nn">typing</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Callable</span> <span class="k">as</span> <span class="n">_CollectionCallable</span>
+    <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Callable</span> <span class="k">as</span> <span class="n">_CollectionCallable</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="n">_CollectionCallable</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
@@ -345,11 +345,6 @@
     <span class="fa fa-caret-down"></span>
   </span>
         <div class="rst-other-versions">
-                <dl>
-                    <dt>Tags</dt>
-                        <dd><a href="../../../../../v0.0.1/index.html">v0.0.1</a></dd>
-                        <dd><a href="../../../../../v0.0.2/index.html">v0.0.2</a></dd>
-                </dl>
                 <dl>
                     <dt>Branches</dt>
                         <dd><a href="typing.html">main</a></dd>
