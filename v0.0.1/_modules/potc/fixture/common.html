@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>potc.fixture.common &mdash; potc 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> potc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/quick_start/index.html">Quick Start</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/config/index.html">potc.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/fixture/index.html">potc.fixture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/rules/index.html">potc.rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/supports/index.html">potc.supports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/testing/index.html">potc.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/translate/index.html">potc.translate</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">potc</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>potc.fixture.common</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+    
+    
+  <h1>Source code for potc.fixture.common</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">hbutils.reflection</span> <span class="kn">import</span> <span class="n">dynamic_call</span>
+
+
+<div class="viewcode-block" id="UnprocessableError"><a class="viewcode-back" href="../../../api_doc/fixture/common.html#potc.fixture.common.UnprocessableError">[docs]</a><span class="k">class</span> <span class="nc">UnprocessableError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Signal exception which means the rules before cannot process this data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="unprocessable"><a class="viewcode-back" href="../../../api_doc/fixture/common.html#potc.fixture.common.unprocessable">[docs]</a><span class="k">def</span> <span class="nf">unprocessable</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Raise an ``UnprocessableError``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="n">UnprocessableError</span><span class="p">()</span></div>
+
+
+<span class="n">RuleInfo</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;RuleInfo&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;origin&#39;</span><span class="p">])</span>
+
+<span class="n">_RULE_TAG</span> <span class="o">=</span> <span class="s1">&#39;__rule__&#39;</span>
+<span class="n">_NAME_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[a-zA-Z0-9_]+$&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="rule"><a class="viewcode-back" href="../../../api_doc/fixture/common.html#potc.fixture.common.rule">[docs]</a><span class="k">def</span> <span class="nf">rule</span><span class="p">(</span><span class="n">alias</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">type_</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Type</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Type</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Make a common function to a rule function.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        - alias (:obj:`Optional[str]`): Alias name of this rule, default is ``None`` which means \</span>
+<span class="sd">            just use the name of the wrapped function.</span>
+<span class="sd">        - type\\_ (:obj:`Union[Type, Tuple[Type, ...], None]`): Type of the data, can be a type \</span>
+<span class="sd">            or a tuple of types, default is ``None`` which means no type limit.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - decorator: A function decorator of the raw rule function.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        There are some example from builtin part.</span>
+
+<span class="sd">        - builtin_int (A very easy case)</span>
+
+<span class="sd">        &gt;&gt;&gt; @rule(type_=int)</span>
+<span class="sd">        &gt;&gt;&gt; def builtin_int(v: int):</span>
+<span class="sd">        &gt;&gt;&gt;     return repr(v)</span>
+
+<span class="sd">        - builtin_float (A little complex case)</span>
+
+<span class="sd">        &gt;&gt;&gt; @rule(type_=float)</span>
+<span class="sd">        &gt;&gt;&gt; def builtin_float(v: float, addon: Addons):</span>
+<span class="sd">        &gt;&gt;&gt;     if math.isinf(v):</span>
+<span class="sd">        &gt;&gt;&gt;         return (&#39;+&#39; if v &gt; 0 else &#39;-&#39;) + str(addon.obj(math).inf)</span>
+<span class="sd">        &gt;&gt;&gt;     elif math.isnan(v):</span>
+<span class="sd">        &gt;&gt;&gt;         return addon.obj(math).nan</span>
+<span class="sd">        &gt;&gt;&gt;     else:</span>
+<span class="sd">        &gt;&gt;&gt;         if math.isclose(v, math.e):</span>
+<span class="sd">        &gt;&gt;&gt;             return addon.obj(math).e</span>
+<span class="sd">        &gt;&gt;&gt;         elif math.isclose(v, math.pi):</span>
+<span class="sd">        &gt;&gt;&gt;             return addon.obj(math).pi</span>
+<span class="sd">        &gt;&gt;&gt;         elif math.isclose(v, math.tau):</span>
+<span class="sd">        &gt;&gt;&gt;             return addon.obj(math).tau</span>
+<span class="sd">        &gt;&gt;&gt;         else:</span>
+<span class="sd">        &gt;&gt;&gt;             return repr(v)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">is_rule</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+            <span class="n">_name</span> <span class="o">=</span> <span class="n">alias</span> <span class="ow">or</span> <span class="n">rule_name</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">rule</span><span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">type_</span><span class="p">)(</span><span class="n">rule_origin</span><span class="p">(</span><span class="n">func</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_name</span> <span class="o">=</span> <span class="n">alias</span> <span class="ow">or</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="n">_actual_func</span> <span class="o">=</span> <span class="n">dynamic_call</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_NAME_PATTERN</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">_name</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invalid rule name, &#39;</span>
+                                <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">_NAME_PATTERN</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span><span class="si">}</span><span class="s1"> expected but </span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">_name</span><span class="p">)</span><span class="si">}</span><span class="s1"> found.&#39;</span><span class="p">)</span>
+
+            <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+            <span class="k">def</span> <span class="nf">_new_func</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">addon</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">type_</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">type_</span><span class="p">):</span>
+                    <span class="n">unprocessable</span><span class="p">()</span>
+                <span class="k">with</span> <span class="n">addon</span><span class="o">.</span><span class="n">transaction</span><span class="p">():</span>
+                    <span class="k">return</span> <span class="n">_actual_func</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">addon</span><span class="p">)</span>
+
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">_new_func</span><span class="p">,</span> <span class="n">_RULE_TAG</span><span class="p">,</span> <span class="n">RuleInfo</span><span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">func</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">_new_func</span>
+
+    <span class="k">return</span> <span class="n">_decorator</span></div>
+
+
+<div class="viewcode-block" id="is_rule"><a class="viewcode-back" href="../../../api_doc/fixture/common.html#potc.fixture.common.is_rule">[docs]</a><span class="k">def</span> <span class="nf">is_rule</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Check if a function is a potc rule.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        - func (:obj:`Callable`): Function object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - is_rule (:obj:`bool`): Is a rule or not.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; is_rule(builtin_int)            # True</span>
+<span class="sd">        &gt;&gt;&gt; is_rule(lambda x, addon: None)  # False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">_RULE_TAG</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">RuleInfo</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="rule_name"><a class="viewcode-back" href="../../../api_doc/fixture/common.html#potc.fixture.common.rule_name">[docs]</a><span class="k">def</span> <span class="nf">rule_name</span><span class="p">(</span><span class="n">rule_</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Name of the rule.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        - rule\\_ (:obj:`Callable`): Rule object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - name (:obj:`str`): Name of the rule.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; rule_name(builtin_int)  # &#39;builtin_int&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">rule_</span><span class="p">,</span> <span class="n">_RULE_TAG</span><span class="p">)</span><span class="o">.</span><span class="n">name</span></div>
+
+
+<div class="viewcode-block" id="rule_origin"><a class="viewcode-back" href="../../../api_doc/fixture/common.html#potc.fixture.common.rule_origin">[docs]</a><span class="k">def</span> <span class="nf">rule_origin</span><span class="p">(</span><span class="n">rule_</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Original function of the rule.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        - rule\\_ (:obj:`Callable`): Rule object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - func (:obj:`str`): Original function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">rule_</span><span class="p">,</span> <span class="n">_RULE_TAG</span><span class="p">)</span><span class="o">.</span><span class="n">origin</span></div>
+</pre></div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HansBug
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+    <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: v0.0.1
+    <span class="fa fa-caret-down"></span>
+  </span>
+        <div class="rst-other-versions">
+                <dl>
+                    <dt>Tags</dt>
+                        <dd><a href="common.html">v0.0.1</a></dd>
+                        <dd><a href="../../../../v0.0.2/index.html">v0.0.2</a></dd>
+                </dl>
+                <dl>
+                    <dt>Branches</dt>
+                        <dd><a href="../../../../main/index.html">main</a></dd>
+                </dl>
+        </div>
+    </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
