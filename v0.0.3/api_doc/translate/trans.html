@@ -1,0 +1,663 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>potc.translate.trans &mdash; potc 0.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="potc.translate.quick" href="quick.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> potc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/quick_start/index.html">Quick Start</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../config/index.html">potc.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fixture/index.html">potc.fixture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rules/index.html">potc.rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supports/index.html">potc.supports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/index.html">potc.testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">potc.translate</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quick.html">potc.translate.quick</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">potc.translate.trans</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#translator">Translator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#translationfailed">TranslationFailed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#objecttranslation">ObjectTranslation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#varstranslation">VarsTranslation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#basetranslator">BaseTranslator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#blanktranslator">BlankTranslator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#autotrans">autotrans</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">potc</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">potc.translate</a> &raquo;</li>
+        
+      <li>potc.translate.trans</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api_doc/translate/trans.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+    
+    
+  <div class="section" id="module-potc.translate.trans">
+<span id="potc-translate-trans"></span><h1>potc.translate.trans<a class="headerlink" href="#module-potc.translate.trans" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="translator">
+<h2>Translator<a class="headerlink" href="#translator" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="potc.translate.trans.Translator">
+<em class="property">class </em><code class="sig-prename descclassname">potc.translate.trans.</code><code class="sig-name descname">Translator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">extend_rules</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/translate/trans.html#Translator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.Translator" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Overview:</dt><dd><p>Common translator for the common translation cases.</p>
+<p>This class is based on <a class="reference internal" href="#potc.translate.trans.BlankTranslator" title="potc.translate.trans.BlankTranslator"><code class="xref py py-class docutils literal notranslate"><span class="pre">BlankTranslator</span></code></a>, contains all the         rules from the installed plugins. It is the best choice for being used directly.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="potc.translate.trans.Translator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">extend_rules</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/translate/trans.html#Translator.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.Translator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Constructor of <a class="reference internal" href="#potc.translate.trans.Translator" title="potc.translate.trans.Translator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Translator</span></code></a>.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>extend_rules: Rules for base translator.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.Translator.transobj">
+<code class="sig-name descname">transobj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#potc.translate.trans.ObjectTranslation" title="potc.translate.trans.ObjectTranslation">potc.translate.trans.ObjectTranslation</a><a class="headerlink" href="#potc.translate.trans.Translator.transobj" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Do translation to the given object <code class="docutils literal notranslate"><span class="pre">obj</span></code>.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>obj: Object to be translated.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>result (<a class="reference internal" href="#potc.translate.trans.ObjectTranslation" title="potc.translate.trans.ObjectTranslation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ObjectTranslation</span></code></a>): Result of object translation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.Translator.transvars">
+<code class="sig-name descname">transvars</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vars_</span><span class="p">:</span> <span class="n">Mapping<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">reformat</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">isort</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#potc.translate.trans.VarsTranslation" title="potc.translate.trans.VarsTranslation">potc.translate.trans.VarsTranslation</a><a class="headerlink" href="#potc.translate.trans.Translator.transvars" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Do translation to the given variables <code class="docutils literal notranslate"><span class="pre">vars_</span></code>, and create a runnable code.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>vars_ (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Mapping[str,</span> <span class="pre">Any]</span></code>): Variables to be translated.</p></li>
+<li><dl class="simple">
+<dt>reformat: Reformatter for the final source code, default is <code class="docutils literal notranslate"><span class="pre">None</span></code> which means </dt><dd><p>do not reformat the code.</p>
+</dd>
+</dl>
+</li>
+<li><p>isort (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>): Sort the import statements, default is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>result (<a class="reference internal" href="#potc.translate.trans.VarsTranslation" title="potc.translate.trans.VarsTranslation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VarsTranslation</span></code></a>): Result of vars translation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="translationfailed">
+<h2>TranslationFailed<a class="headerlink" href="#translationfailed" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="potc.translate.trans.TranslationFailed">
+<em class="property">class </em><code class="sig-prename descclassname">potc.translate.trans.</code><code class="sig-name descname">TranslationFailed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/translate/trans.html#TranslationFailed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.TranslationFailed" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Exception when translation is failed.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="potc.translate.trans.TranslationFailed.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/translate/trans.html#TranslationFailed.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.TranslationFailed.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Constructor of <a class="reference internal" href="#potc.translate.trans.TranslationFailed" title="potc.translate.trans.TranslationFailed"><code class="xref py py-class docutils literal notranslate"><span class="pre">TranslationFailed</span></code></a>.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>obj: Object which is failed to be translated.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.TranslationFailed.obj">
+<em class="property">property </em><code class="sig-name descname">obj</code><a class="headerlink" href="#potc.translate.trans.TranslationFailed.obj" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>The object which is failed to be translated.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="objecttranslation">
+<h2>ObjectTranslation<a class="headerlink" href="#objecttranslation" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="potc.translate.trans.ObjectTranslation">
+<em class="property">class </em><code class="sig-prename descclassname">potc.translate.trans.</code><code class="sig-name descname">ObjectTranslation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em>, <em class="sig-param"><span class="n">trace</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/translate/trans.html#ObjectTranslation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.ObjectTranslation" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Result of object translation.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="potc.translate.trans.ObjectTranslation.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em>, <em class="sig-param"><span class="n">trace</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/translate/trans.html#ObjectTranslation.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.ObjectTranslation.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Constructor of <a class="reference internal" href="#potc.translate.trans.ObjectTranslation" title="potc.translate.trans.ObjectTranslation"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectTranslation</span></code></a>.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>code (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>): String translated code.</p></li>
+<li><p>addon (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Addons</span></code>): Addon object for this translation.</p></li>
+<li><p>trace (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>): Rule name for the translated object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.ObjectTranslation.__iter__">
+<code class="sig-name descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/translate/trans.html#ObjectTranslation.__iter__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.ObjectTranslation.__iter__" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Overview:</dt><dd><p>Iterate this object.</p>
+</dd>
+<dt>Examples::</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ot</span> <span class="o">=</span> <span class="n">ObjectTranslation</span><span class="p">(</span><span class="n">cc</span><span class="p">,</span> <span class="n">aa</span><span class="p">,</span> <span class="n">tt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">ot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">c</span> <span class="ow">is</span> <span class="n">cc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">aa</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">t</span> <span class="ow">is</span> <span class="n">tt</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.ObjectTranslation.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/translate/trans.html#ObjectTranslation.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.ObjectTranslation.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Just get the string code, such as for the <code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code> function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.ObjectTranslation.addon">
+<em class="property">property </em><code class="sig-name descname">addon</code><a class="headerlink" href="#potc.translate.trans.ObjectTranslation.addon" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Addon object for this translation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.ObjectTranslation.code">
+<em class="property">property </em><code class="sig-name descname">code</code><a class="headerlink" href="#potc.translate.trans.ObjectTranslation.code" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>String translated code.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.ObjectTranslation.imports">
+<em class="property">property </em><code class="sig-name descname">imports</code><a class="headerlink" href="#potc.translate.trans.ObjectTranslation.imports" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Import statements of this translation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.ObjectTranslation.trace">
+<em class="property">property </em><code class="sig-name descname">trace</code><a class="headerlink" href="#potc.translate.trans.ObjectTranslation.trace" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Rule name for the translated object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="varstranslation">
+<h2>VarsTranslation<a class="headerlink" href="#varstranslation" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="potc.translate.trans.VarsTranslation">
+<em class="property">class </em><code class="sig-prename descclassname">potc.translate.trans.</code><code class="sig-name descname">VarsTranslation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">addons</span><span class="p">:</span> <span class="n">Mapping<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/translate/trans.html#VarsTranslation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.VarsTranslation" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Result of vars translation.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="potc.translate.trans.VarsTranslation.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">addons</span><span class="p">:</span> <span class="n">Mapping<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/translate/trans.html#VarsTranslation.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.VarsTranslation.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Constructor of <a class="reference internal" href="#potc.translate.trans.VarsTranslation" title="potc.translate.trans.VarsTranslation"><code class="xref py py-class docutils literal notranslate"><span class="pre">VarsTranslation</span></code></a>.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>code (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>): String translated code.</p></li>
+<li><p>addons (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Mapping[str,</span> <span class="pre">Addons]</span></code>): Addon objects for the sub translations.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.VarsTranslation.__iter__">
+<code class="sig-name descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/translate/trans.html#VarsTranslation.__iter__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.VarsTranslation.__iter__" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Overview:</dt><dd><p>Iterate this object.</p>
+</dd>
+<dt>Examples::</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ot</span> <span class="o">=</span> <span class="n">VarsTranslation</span><span class="p">(</span><span class="n">cc</span><span class="p">,</span> <span class="n">aa</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">ot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">c</span> <span class="ow">is</span> <span class="n">cc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">aa</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.VarsTranslation.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../../_modules/potc/translate/trans.html#VarsTranslation.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.VarsTranslation.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Just get the string code, such as for the <code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code> function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.VarsTranslation.addons">
+<em class="property">property </em><code class="sig-name descname">addons</code><a class="headerlink" href="#potc.translate.trans.VarsTranslation.addons" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Addon objects for the sub translations.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.VarsTranslation.code">
+<em class="property">property </em><code class="sig-name descname">code</code><a class="headerlink" href="#potc.translate.trans.VarsTranslation.code" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>String translated code.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="basetranslator">
+<h2>BaseTranslator<a class="headerlink" href="#basetranslator" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="potc.translate.trans.BaseTranslator">
+<em class="property">class </em><code class="sig-prename descclassname">potc.translate.trans.</code><code class="sig-name descname">BaseTranslator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">extend_rules</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/translate/trans.html#BaseTranslator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.BaseTranslator" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Overview:</dt><dd><p>Base translator for the common translation cases.</p>
+<p>This class is based on <code class="xref py py-class docutils literal notranslate"><span class="pre">_AbstractTranslator</span></code>, contains only         system-leveled and default object-leveled translation rules.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="potc.translate.trans.BaseTranslator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">extend_rules</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/translate/trans.html#BaseTranslator.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.BaseTranslator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Constructor of <a class="reference internal" href="#potc.translate.trans.BaseTranslator" title="potc.translate.trans.BaseTranslator"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTranslator</span></code></a>.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>extend_rules: Rules for base translator.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.BaseTranslator.transobj">
+<code class="sig-name descname">transobj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#potc.translate.trans.ObjectTranslation" title="potc.translate.trans.ObjectTranslation">potc.translate.trans.ObjectTranslation</a><a class="headerlink" href="#potc.translate.trans.BaseTranslator.transobj" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Do translation to the given object <code class="docutils literal notranslate"><span class="pre">obj</span></code>.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>obj: Object to be translated.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>result (<a class="reference internal" href="#potc.translate.trans.ObjectTranslation" title="potc.translate.trans.ObjectTranslation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ObjectTranslation</span></code></a>): Result of object translation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.BaseTranslator.transvars">
+<code class="sig-name descname">transvars</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vars_</span><span class="p">:</span> <span class="n">Mapping<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">reformat</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">isort</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#potc.translate.trans.VarsTranslation" title="potc.translate.trans.VarsTranslation">potc.translate.trans.VarsTranslation</a><a class="headerlink" href="#potc.translate.trans.BaseTranslator.transvars" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Do translation to the given variables <code class="docutils literal notranslate"><span class="pre">vars_</span></code>, and create a runnable code.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>vars_ (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Mapping[str,</span> <span class="pre">Any]</span></code>): Variables to be translated.</p></li>
+<li><dl class="simple">
+<dt>reformat: Reformatter for the final source code, default is <code class="docutils literal notranslate"><span class="pre">None</span></code> which means </dt><dd><p>do not reformat the code.</p>
+</dd>
+</dl>
+</li>
+<li><p>isort (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>): Sort the import statements, default is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>result (<a class="reference internal" href="#potc.translate.trans.VarsTranslation" title="potc.translate.trans.VarsTranslation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VarsTranslation</span></code></a>): Result of vars translation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="blanktranslator">
+<h2>BlankTranslator<a class="headerlink" href="#blanktranslator" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="potc.translate.trans.BlankTranslator">
+<em class="property">class </em><code class="sig-prename descclassname">potc.translate.trans.</code><code class="sig-name descname">BlankTranslator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">extend_rules</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/translate/trans.html#BlankTranslator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.BlankTranslator" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Overview:</dt><dd><p>Blank translator for the common translation cases.</p>
+<p>This class is based on <a class="reference internal" href="#potc.translate.trans.BaseTranslator" title="potc.translate.trans.BaseTranslator"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTranslator</span></code></a>, contains all the native rules         in this project. May be the best choice for DIY and testings.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The rules from the plugins will be not be here,         and will certainly not be applied when translation is processed.</p>
+</div>
+<dl class="py method">
+<dt id="potc.translate.trans.BlankTranslator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">extend_rules</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/translate/trans.html#BlankTranslator.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.BlankTranslator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Constructor of <a class="reference internal" href="#potc.translate.trans.BlankTranslator" title="potc.translate.trans.BlankTranslator"><code class="xref py py-class docutils literal notranslate"><span class="pre">BlankTranslator</span></code></a>.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>extend_rules: Rules for base translator.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.BlankTranslator.transobj">
+<code class="sig-name descname">transobj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#potc.translate.trans.ObjectTranslation" title="potc.translate.trans.ObjectTranslation">potc.translate.trans.ObjectTranslation</a><a class="headerlink" href="#potc.translate.trans.BlankTranslator.transobj" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Do translation to the given object <code class="docutils literal notranslate"><span class="pre">obj</span></code>.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>obj: Object to be translated.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>result (<a class="reference internal" href="#potc.translate.trans.ObjectTranslation" title="potc.translate.trans.ObjectTranslation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ObjectTranslation</span></code></a>): Result of object translation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="potc.translate.trans.BlankTranslator.transvars">
+<code class="sig-name descname">transvars</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vars_</span><span class="p">:</span> <span class="n">Mapping<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">reformat</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">isort</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#potc.translate.trans.VarsTranslation" title="potc.translate.trans.VarsTranslation">potc.translate.trans.VarsTranslation</a><a class="headerlink" href="#potc.translate.trans.BlankTranslator.transvars" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Do translation to the given variables <code class="docutils literal notranslate"><span class="pre">vars_</span></code>, and create a runnable code.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>vars_ (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Mapping[str,</span> <span class="pre">Any]</span></code>): Variables to be translated.</p></li>
+<li><dl class="simple">
+<dt>reformat: Reformatter for the final source code, default is <code class="docutils literal notranslate"><span class="pre">None</span></code> which means </dt><dd><p>do not reformat the code.</p>
+</dd>
+</dl>
+</li>
+<li><p>isort (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>): Sort the import statements, default is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>result (<a class="reference internal" href="#potc.translate.trans.VarsTranslation" title="potc.translate.trans.VarsTranslation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VarsTranslation</span></code></a>): Result of vars translation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="autotrans">
+<h2>autotrans<a class="headerlink" href="#autotrans" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.translate.trans.autotrans">
+<code class="sig-prename descclassname">potc.translate.trans.</code><code class="sig-name descname">autotrans</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trans</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference internal" href="#potc.translate.trans.BaseTranslator" title="potc.translate.trans.BaseTranslator">potc.translate.trans.BaseTranslator</a><span class="p">, </span>Type<span class="p">[</span><a class="reference internal" href="#potc.translate.trans.BaseTranslator" title="potc.translate.trans.BaseTranslator">potc.translate.trans.BaseTranslator</a><span class="p">]</span><span class="p">, </span>list<span class="p">, </span>tuple<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#potc.translate.trans.BaseTranslator" title="potc.translate.trans.BaseTranslator">potc.translate.trans.BaseTranslator</a><a class="reference internal" href="../../_modules/potc/translate/trans.html#autotrans"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.trans.autotrans" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Turn the given object <code class="docutils literal notranslate"><span class="pre">trans</span></code> to a <a class="reference internal" href="#potc.translate.trans.BaseTranslator" title="potc.translate.trans.BaseTranslator"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTranslator</span></code></a> instance.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>trans (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Union[BaseTranslator,</span> <span class="pre">Type[BaseTranslator],</span> <span class="pre">list,</span> <span class="pre">tuple]</span></code>):             Any object to be transformed to <a class="reference internal" href="#potc.translate.trans.BaseTranslator" title="potc.translate.trans.BaseTranslator"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTranslator</span></code></a> instance.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>translator (<a class="reference internal" href="#potc.translate.trans.BaseTranslator" title="potc.translate.trans.BaseTranslator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseTranslator</span></code></a>): Translator instance which can be directly used.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="quick.html" class="btn btn-neutral float-left" title="potc.translate.quick" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HansBug
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+    <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: v0.0.3
+    <span class="fa fa-caret-down"></span>
+  </span>
+        <div class="rst-other-versions">
+                <dl>
+                    <dt>Tags</dt>
+                        <dd><a href="trans.html">v0.0.3</a></dd>
+                </dl>
+                <dl>
+                    <dt>Branches</dt>
+                        <dd><a href="../../../main/api_doc/translate/trans.html">main</a></dd>
+                </dl>
+        </div>
+    </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

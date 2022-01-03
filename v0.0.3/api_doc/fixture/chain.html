@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>potc.fixture.chain &mdash; potc 0.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="potc.fixture.common" href="common.html" />
+    <link rel="prev" title="potc.fixture.addons" href="addons.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> potc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/quick_start/index.html">Quick Start</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../config/index.html">potc.config</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">potc.fixture</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="addons.html">potc.fixture.addons</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">potc.fixture.chain</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-chain">build_chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rules-combine">rules_combine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="common.html">potc.fixture.common</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imports.html">potc.fixture.imports</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rules/index.html">potc.rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supports/index.html">potc.supports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/index.html">potc.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translate/index.html">potc.translate</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">potc</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">potc.fixture</a> &raquo;</li>
+        
+      <li>potc.fixture.chain</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api_doc/fixture/chain.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+    
+    
+  <div class="section" id="module-potc.fixture.chain">
+<span id="potc-fixture-chain"></span><h1>potc.fixture.chain<a class="headerlink" href="#module-potc.fixture.chain" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="build-chain">
+<h2>build_chain<a class="headerlink" href="#build-chain" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.fixture.chain.build_chain">
+<code class="sig-prename descclassname">potc.fixture.chain.</code><code class="sig-name descname">build_chain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>List<span class="p">, </span>Tuple<span class="p">, </span>Callable<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">id_gen</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Callable<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Callable<span class="p">]</span><a class="reference internal" href="../../_modules/potc/fixture/chain.html#build_chain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.chain.build_chain" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Overview:</dt><dd><p>Build chain of the rules.
+Bases on orders which depends by tuples and lists.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>c (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Union[List,</span> <span class="pre">Tuple,</span> <span class="pre">Callable]</span></code>): Rule structure object, can be a list,             tuple or rule, or the nested structure of them.</p></li>
+<li><p>id_gen (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Optional[Callable]</span></code>): Id generator of the rules, default is <code class="docutils literal notranslate"><span class="pre">None</span></code>             which means <code class="docutils literal notranslate"><span class="pre">id</span></code> function.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>chain (<code class="xref py py-obj docutils literal notranslate"><span class="pre">List[Callable]</span></code>): List of the rules in order.</p></li>
+</ul>
+</dd>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">build_chain</span><span class="p">(</span><span class="n">r1</span><span class="p">)</span>                        <span class="c1"># [r1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">build_chain</span><span class="p">([(</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">),</span> <span class="p">(</span><span class="n">r3</span><span class="p">,</span> <span class="n">r2</span><span class="p">)])</span>      <span class="c1"># [r1, r3, r2] or [r3, r1, r2]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">build_chain</span><span class="p">((</span><span class="n">r1</span><span class="p">,</span> <span class="p">[</span><span class="n">r2</span><span class="p">,</span> <span class="p">(</span><span class="n">r3</span><span class="p">,</span> <span class="n">r4</span><span class="p">)],</span> <span class="n">r5</span><span class="p">))</span>  <span class="c1"># [r1, r2, r3, r4, r5] or [r1, r3, r2, r4, r5] or [r1, r3, r4, r2, r5]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">build_chain</span></code> function, there are 2 main structure which represents different structures:</p>
+<ul class="simple">
+<li><p>list, which means the elements in it are paralleled with each other.</p></li>
+<li><p>tuple, which means the element in it should be in order one by one.</p></li>
+</ul>
+</div>
+<p>Here are some examples about this problem.</p>
+<p>In the simplest case, here is the difference between <code class="docutils literal notranslate"><span class="pre">(r1,</span> <span class="pre">r2)</span></code> and <code class="docutils literal notranslate"><span class="pre">[r1,</span> <span class="pre">r2]</span></code>. In the tuple’s case, it means <code class="docutils literal notranslate"><span class="pre">t1</span></code> must be processed earlier than <code class="docutils literal notranslate"><span class="pre">t2</span></code>, while in list’s case, it just means they are put together here without orders’ limit.</p>
+<img alt="../../_images/chain_simple.gv.svg" class="align-center" src="../../_images/chain_simple.gv.svg" /><p>In another case of <code class="docutils literal notranslate"><span class="pre">(r1,</span> <span class="pre">[(r2,</span> <span class="pre">r3),</span> <span class="pre">(r4,</span> <span class="pre">r5)],</span> <span class="pre">r6)</span></code>, its order graph should be like below.</p>
+<img alt="../../_images/chain_another.gv.svg" class="align-center" src="../../_images/chain_another.gv.svg" /><p>Actually, <code class="docutils literal notranslate"><span class="pre">r1</span></code> should be ahead of <code class="docutils literal notranslate"><span class="pre">[(r2,</span> <span class="pre">r3),</span> <span class="pre">(r4,</span> <span class="pre">r5)]</span></code>, <code class="docutils literal notranslate"><span class="pre">r2</span></code> should be ahead of <code class="docutils literal notranslate"><span class="pre">r3</span></code>, <code class="docutils literal notranslate"><span class="pre">r4</span></code> should be ahead of <code class="docutils literal notranslate"><span class="pre">r5</span></code>, <code class="docutils literal notranslate"><span class="pre">[(r2,</span> <span class="pre">r3),</span> <span class="pre">(r4,</span> <span class="pre">r5)]</span></code> should be ahead of <code class="docutils literal notranslate"><span class="pre">r6</span></code>. So one of the final order should be <code class="docutils literal notranslate"><span class="pre">[r1,</span> <span class="pre">r2,</span> <span class="pre">r4,</span> <span class="pre">r5,</span> <span class="pre">r3,</span> <span class="pre">r6]</span></code> (the valid orders are not unique in this case).</p>
+</div>
+<div class="section" id="rules-combine">
+<h2>rules_combine<a class="headerlink" href="#rules-combine" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.fixture.chain.rules_combine">
+<code class="sig-prename descclassname">potc.fixture.chain.</code><code class="sig-name descname">rules_combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">rules</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/fixture/chain.html#rules_combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.chain.rules_combine" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Combined the ordered rule list to be a executable rule-like function (but not a rule object actually).</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>rules: List of the rules (may be the result of function <code class="docutils literal notranslate"><span class="pre">build_chain</span></code>.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>func: Combined rule function.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="common.html" class="btn btn-neutral float-right" title="potc.fixture.common" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="addons.html" class="btn btn-neutral float-left" title="potc.fixture.addons" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HansBug
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+    <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: v0.0.3
+    <span class="fa fa-caret-down"></span>
+  </span>
+        <div class="rst-other-versions">
+                <dl>
+                    <dt>Tags</dt>
+                        <dd><a href="chain.html">v0.0.3</a></dd>
+                </dl>
+                <dl>
+                    <dt>Branches</dt>
+                        <dd><a href="../../../main/api_doc/fixture/chain.html">main</a></dd>
+                </dl>
+        </div>
+    </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
