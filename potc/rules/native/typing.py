@@ -2,7 +2,7 @@ import re
 import typing
 
 try:
-    from collections import Callable as _CollectionCallable
+    from collections.abc import Callable as _CollectionCallable
 except ImportError:
     _CollectionCallable = None
 from collections import OrderedDict
