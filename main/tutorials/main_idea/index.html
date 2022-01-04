@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>potc.supports &mdash; potc 0.0.3 documentation</title>
+  <title>Main Idea &mdash; potc 0.0.3 documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="potc.supports.bin" href="bin.html" />
-    <link rel="prev" title="potc.rules.system" href="../rules/system.html" /> 
+    <link rel="next" title="potc.config" href="../../api_doc/config/index.html" />
+    <link rel="prev" title="Quick Start" href="../quick_start/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,23 +86,22 @@
             
             
               <p class="caption"><span class="caption-text">Tutorials</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/installation/index.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/quick_start/index.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/main_idea/index.html">Main Idea</a></li>
-</ul>
-<p class="caption"><span class="caption-text">API Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../config/index.html">potc.config</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fixture/index.html">potc.fixture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rules/index.html">potc.rules</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">potc.supports</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="bin.html">potc.supports.bin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="func.html">potc.supports.func</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start/index.html">Quick Start</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Main Idea</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#why-potc-is-designed">Why potc is designed?</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../testing/index.html">potc.testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../translate/index.html">potc.translate</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api_doc/config/index.html">potc.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_doc/fixture/index.html">potc.fixture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_doc/rules/index.html">potc.rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_doc/supports/index.html">potc.supports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_doc/testing/index.html">potc.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_doc/translate/index.html">potc.translate</a></li>
 </ul>
 
             
@@ -148,13 +147,13 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>potc.supports</li>
+      <li>Main Idea</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/api_doc/supports/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/tutorials/main_idea/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -169,23 +168,18 @@
             
     
     
-  <div class="section" id="module-potc.supports">
-<span id="potc-supports"></span><h1>potc.supports<a class="headerlink" href="#module-potc.supports" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="bin.html">potc.supports.bin</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="bin.html#dump-obj">dump_obj</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bin.html#load-obj">load_obj</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="func.html">potc.supports.func</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="func.html#raw-object">raw_object</a></li>
-<li class="toctree-l2"><a class="reference internal" href="func.html#raw-type">raw_type</a></li>
-<li class="toctree-l2"><a class="reference internal" href="func.html#typed-object">typed_object</a></li>
-<li class="toctree-l2"><a class="reference internal" href="func.html#function">function</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="main-idea">
+<h1>Main Idea<a class="headerlink" href="#main-idea" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="why-potc-is-designed">
+<h2>Why potc is designed?<a class="headerlink" href="#why-potc-is-designed" title="Permalink to this headline">¶</a></h2>
+<p>In practical applications, we often need to export or visualize an existing python object,
+and we need to ensure that the exported product has clear and visible meaning and can be loaded correctly
+by the python interpreter again after modification. However, the existing data serialization tools
+are difficult to make the exported data still clearly visible, so they can not support modification.
+Based on this requirement, Potc provides a method to convert existing python objects into runnable python code,
+as shown in the following figure</p>
+<img alt="../../_images/potc-doing.svg" class="align-center" src="../../_images/potc-doing.svg" /><p>Therefore, it is obvious that what <code class="docutils literal notranslate"><span class="pre">potc</span></code> does is to convert existing python objects into source
+code that can run and support import.</p>
 </div>
 </div>
 
@@ -198,10 +192,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="bin.html" class="btn btn-neutral float-right" title="potc.supports.bin" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../api_doc/config/index.html" class="btn btn-neutral float-right" title="potc.config" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../rules/system.html" class="btn btn-neutral float-left" title="potc.rules.system" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../quick_start/index.html" class="btn btn-neutral float-left" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
