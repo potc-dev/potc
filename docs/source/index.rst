@@ -15,6 +15,9 @@ imported and built.
     tutorials/installation/index
     tutorials/quick_start/index
     tutorials/main_idea/index
+    tutorials/basic_usage/index
+    tutorials/advanced_usage/index
+    tutorials/cli_usage/index
 
 .. toctree::
     :maxdepth: 2
