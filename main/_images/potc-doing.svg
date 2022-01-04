@@ -2,12 +2,12 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="120mm"
-   height="120mm"
-   viewBox="0 0 191.99999 192"
+   width="310"
+   height="310"
+   viewBox="0 0 194.3793 194.3793"
    version="1.1"
    id="svg5"
-   sodipodi:docname="新建文档 1.2022_01_04_15_03_08.0.svg"
+   sodipodi:docname="potc-doing.svg"
    inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -21,14 +21,14 @@
      inkscape:pageshadow="0"
      inkscape:pageopacity="0"
      inkscape:pagecheckerboard="true"
-     inkscape:document-units="mm"
+     inkscape:document-units="px"
      showgrid="false"
      borderlayer="true"
      inkscape:showpageshadow="true"
      showborder="true"
-     inkscape:zoom="0.98651786"
-     inkscape:cx="238.2116"
-     inkscape:cy="328.93475"
+     inkscape:zoom="1"
+     inkscape:cx="161"
+     inkscape:cy="328.5"
      inkscape:window-width="1920"
      inkscape:window-height="1001"
      inkscape:window-x="-9"
@@ -36,7 +36,9 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      width="197mm"
-     scale-x="1.6" />
+     scale-x="0.52703"
+     units="px"
+     viewbox-height="195" />
   <defs
      id="defs2">
     <marker
@@ -202,7 +204,7 @@
      id="layer1">
     <g
        id="g5166"
-       transform="translate(13.195402,-1.6628352)">
+       transform="translate(12.122605,-0.05363983)">
       <g
          id="g13626"
          style="filter:url(#filter14120)"
