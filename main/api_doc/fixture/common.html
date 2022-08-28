@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>potc.fixture.common &mdash; potc 0.0.4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="potc.fixture.imports" href="imports.html" />
+    <link rel="prev" title="potc.fixture.chain" href="chain.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> potc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/quick_start/index.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/main_idea/index.html">Main Idea</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basic_usage/index.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/advanced_usage/index.html">Advanced Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/cli_usage/index.html">CLI Usage</a></li>
+</ul>
+<p><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../config/index.html">potc.config</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">potc.fixture</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="addons.html">potc.fixture.addons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chain.html">potc.fixture.chain</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">potc.fixture.common</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#unprocessableerror">UnprocessableError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unprocessable">unprocessable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rule">rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#is-rule">is_rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rule-name">rule_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rule-origin">rule_origin</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="imports.html">potc.fixture.imports</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rules/index.html">potc.rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supports/index.html">potc.supports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/index.html">potc.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translate/index.html">potc.translate</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">potc</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">potc.fixture</a> &raquo;</li>
+        
+      <li>potc.fixture.common</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api_doc/fixture/common.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+    
+    
+  <section id="module-potc.fixture.common">
+<span id="potc-fixture-common"></span><h1>potc.fixture.common<a class="headerlink" href="#module-potc.fixture.common" title="Permalink to this headline">¶</a></h1>
+<section id="unprocessableerror">
+<h2>UnprocessableError<a class="headerlink" href="#unprocessableerror" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="potc.fixture.common.UnprocessableError">
+<em class="property">class </em><code class="sig-prename descclassname">potc.fixture.common.</code><code class="sig-name descname">UnprocessableError</code><a class="reference internal" href="../../_modules/potc/fixture/common.html#UnprocessableError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.common.UnprocessableError" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Signal exception which means the rules before cannot process this data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="unprocessable">
+<h2>unprocessable<a class="headerlink" href="#unprocessable" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.fixture.common.unprocessable">
+<code class="sig-prename descclassname">potc.fixture.common.</code><code class="sig-name descname">unprocessable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/fixture/common.html#unprocessable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.common.unprocessable" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Raise an <code class="docutils literal notranslate"><span class="pre">UnprocessableError</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="rule">
+<h2>rule<a class="headerlink" href="#rule" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.fixture.common.rule">
+<code class="sig-prename descclassname">potc.fixture.common.</code><code class="sig-name descname">rule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">alias</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">type_</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span>Type<span class="p">, </span>Tuple<span class="p">[</span>Type<span class="p">, </span><span class="p">…</span><span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/fixture/common.html#rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.common.rule" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Overview:</dt><dd><p>Make a common function to a rule function.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>alias (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Optional[str]</span></code>): Alias name of this rule, default is <code class="docutils literal notranslate"><span class="pre">None</span></code> which means             just use the name of the wrapped function.</p></li>
+<li><p>type_ (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Union[Type,</span> <span class="pre">Tuple[Type,</span> <span class="pre">...],</span> <span class="pre">None]</span></code>): Type of the data, can be a type             or a tuple of types, default is <code class="docutils literal notranslate"><span class="pre">None</span></code> which means no type limit.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>decorator: A function decorator of the raw rule function.</p></li>
+</ul>
+</dd>
+<dt>Examples:</dt><dd><p>There are some example from builtin part.</p>
+<ul class="simple">
+<li><p>builtin_int (A very easy case)</p></li>
+</ul>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@rule</span><span class="p">(</span><span class="n">type_</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">builtin_int</span><span class="p">(</span><span class="n">v</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>builtin_float (A little complex case)</p></li>
+</ul>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@rule</span><span class="p">(</span><span class="n">type_</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">builtin_float</span><span class="p">(</span><span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">addon</span><span class="p">:</span> <span class="n">Addons</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="k">return</span> <span class="p">(</span><span class="s1">&#39;+&#39;</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">addon</span><span class="o">.</span><span class="n">obj</span><span class="p">(</span><span class="n">math</span><span class="p">)</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">elif</span> <span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="k">return</span> <span class="n">addon</span><span class="o">.</span><span class="n">obj</span><span class="p">(</span><span class="n">math</span><span class="p">)</span><span class="o">.</span><span class="n">nan</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>            <span class="k">return</span> <span class="n">addon</span><span class="o">.</span><span class="n">obj</span><span class="p">(</span><span class="n">math</span><span class="p">)</span><span class="o">.</span><span class="n">e</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="k">elif</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>            <span class="k">return</span> <span class="n">addon</span><span class="o">.</span><span class="n">obj</span><span class="p">(</span><span class="n">math</span><span class="p">)</span><span class="o">.</span><span class="n">pi</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="k">elif</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">tau</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>            <span class="k">return</span> <span class="n">addon</span><span class="o">.</span><span class="n">obj</span><span class="p">(</span><span class="n">math</span><span class="p">)</span><span class="o">.</span><span class="n">tau</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="k">else</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>            <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="is-rule">
+<h2>is_rule<a class="headerlink" href="#is-rule" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.fixture.common.is_rule">
+<code class="sig-prename descclassname">potc.fixture.common.</code><code class="sig-name descname">is_rule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../../_modules/potc/fixture/common.html#is_rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.common.is_rule" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Overview:</dt><dd><p>Check if a function is a potc rule.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>func (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Callable</span></code>): Function object.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>is_rule (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>): Is a rule or not.</p></li>
+</ul>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_rule</span><span class="p">(</span><span class="n">builtin_int</span><span class="p">)</span>            <span class="c1"># True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_rule</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">addon</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span>  <span class="c1"># False</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="rule-name">
+<h2>rule_name<a class="headerlink" href="#rule-name" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.fixture.common.rule_name">
+<code class="sig-prename descclassname">potc.fixture.common.</code><code class="sig-name descname">rule_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rule_</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../../_modules/potc/fixture/common.html#rule_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.common.rule_name" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Overview:</dt><dd><p>Name of the rule.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>rule_ (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Callable</span></code>): Rule object.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>name (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>): Name of the rule.</p></li>
+</ul>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rule_name</span><span class="p">(</span><span class="n">builtin_int</span><span class="p">)</span>  <span class="c1"># &#39;builtin_int&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="rule-origin">
+<h2>rule_origin<a class="headerlink" href="#rule-origin" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.fixture.common.rule_origin">
+<code class="sig-prename descclassname">potc.fixture.common.</code><code class="sig-name descname">rule_origin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rule_</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span> &#x2192; Callable<a class="reference internal" href="../../_modules/potc/fixture/common.html#rule_origin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.fixture.common.rule_origin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Original function of the rule.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>rule_ (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Callable</span></code>): Rule object.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>func (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>): Original function.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="imports.html" class="btn btn-neutral float-right" title="potc.fixture.imports" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="chain.html" class="btn btn-neutral float-left" title="potc.fixture.chain" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HansBug
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+    <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: main
+    <span class="fa fa-caret-down"></span>
+  </span>
+        <div class="rst-other-versions">
+                <dl>
+                    <dt>Tags</dt>
+                        <dd><a href="../../../v0.0.1/api_doc/fixture/common.html">v0.0.1</a></dd>
+                        <dd><a href="../../../v0.0.2/api_doc/fixture/common.html">v0.0.2</a></dd>
+                        <dd><a href="../../../v0.0.3/api_doc/fixture/common.html">v0.0.3</a></dd>
+                        <dd><a href="../../../v0.0.4/api_doc/fixture/common.html">v0.0.4</a></dd>
+                </dl>
+                <dl>
+                    <dt>Branches</dt>
+                        <dd><a href="common.html">main</a></dd>
+                </dl>
+        </div>
+    </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
