@@ -5,7 +5,8 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Quick Start &mdash; potc 0.0.3 documentation</title>
@@ -85,7 +86,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <p><span class="caption-text">Tutorials</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start</a><ul>
@@ -98,7 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../advanced_usage/index.html">Advanced Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cli_usage/index.html">CLI Usage</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API Documentation</span></p>
+<p><span class="caption-text">API Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api_doc/config/index.html">potc.config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api_doc/fixture/index.html">potc.fixture</a></li>
@@ -172,13 +173,13 @@
             
     
     
-  <div class="section" id="quick-start">
+  <section id="quick-start">
 <h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
 <p>After the installation is complete, we can run some simple examples. This page will show you this.</p>
-<div class="section" id="simple-translation">
+<section id="simple-translation">
 <h2>Simple Translation<a class="headerlink" href="#simple-translation" title="Permalink to this headline">¶</a></h2>
 <p>A simplest translation can be processed with the code below.</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<div class="highlight-python notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
@@ -186,7 +187,7 @@
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">potc</span> <span class="kn">import</span> <span class="n">transobj</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">from</span> <span class="nn">potc</span> <span class="kn">import</span> <span class="n">transobj</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;transobj(1):&quot;</span><span class="p">,</span> <span class="n">transobj</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
@@ -195,24 +196,24 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;empty set:&#39;</span><span class="p">,</span> <span class="n">transobj</span><span class="p">(</span><span class="nb">set</span><span class="p">()))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1-lengthened tuple:&#39;</span><span class="p">,</span> <span class="n">transobj</span><span class="p">((</span><span class="mi">1</span><span class="p">,)))</span>
-</pre></div>
-</td></tr></table></div>
+</pre></div></td></tr></table></div>
+</div>
 <p>The output result should be</p>
-<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<div class="highlight-text notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>transobj(1): 1
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span>transobj(1): 1
 transobj([1, 2, &#39;sdkfjģ&#39;]): [1, 2, &#39;sdkfjģ&#39;]
 empty set: set()
 1-lengthened tuple: (1, )
-</pre></div>
-</td></tr></table></div>
-<p>Most of the primitive data types supported by python can be turned back to runnable source code with <code class="docutils literal notranslate"><span class="pre">potc</span></code>.</p>
+</pre></div></td></tr></table></div>
 </div>
-<div class="section" id="scriptable-translation">
+<p>Most of the primitive data types supported by python can be turned back to runnable source code with <code class="docutils literal notranslate"><span class="pre">potc</span></code>.</p>
+</section>
+<section id="scriptable-translation">
 <h2>Scriptable Translation<a class="headerlink" href="#scriptable-translation" title="Permalink to this headline">¶</a></h2>
 <p>If we need to translate multiple values, and dump the translation result to a runnable <code class="docutils literal notranslate"><span class="pre">.py</span></code> script, we can do like this</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<div class="highlight-python notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -243,7 +244,7 @@ empty set: set()
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
-<span class="normal">32</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -275,10 +276,10 @@ empty set: set()
         <span class="s1">&#39;typing_&#39;</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]],</span>
     <span class="p">},</span> <span class="n">reformat</span><span class="o">=</span><span class="s1">&#39;pep8&#39;</span><span class="p">)</span>  <span class="c1"># auto reformat the code</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">_code</span><span class="p">)</span>
-</pre></div>
-</td></tr></table></div>
+</pre></div></td></tr></table></div>
+</div>
 <p>The output result (as well as the dumped script) should be</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<div class="highlight-python notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -329,7 +330,7 @@ empty set: set()
 <span class="normal">49</span>
 <span class="normal">50</span>
 <span class="normal">51</span>
-<span class="normal">52</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">frozenset</span><span class="p">,</span> <span class="nb">object</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
 
@@ -356,7 +357,7 @@ empty set: set()
         <span class="s1">&#39;g&#39;</span><span class="p">:</span>
         <span class="n">function</span><span class="p">(</span>
             <span class="s1">&#39;&lt;lambda&gt;&#39;</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">],</span>
-            <span class="sa">b</span><span class="s2">&quot;x</span><span class="se">\x9c</span><span class="s2">m</span><span class="se">\x8d</span><span class="s2">MO</span><span class="se">\x84</span><span class="s2">0</span><span class="se">\x14</span><span class="s2">E</span><span class="se">\x0b\xa3\x0e\xa2</span><span class="s2">&amp;&amp;</span><span class="se">\xfe\x89</span><span class="s2">aC+</span><span class="se">\x1f</span><span class="s2">#$f6,IX</span><span class="se">\x8c\x1b</span><span class="s2">vM</span><span class="se">\xfb</span><span class="s2">Z3</span><span class="se">\x8d</span><span class="s2">@</span><span class="se">\xe7</span><span class="s2">A1</span><span class="se">\x9a</span><span class="s2">h</span><span class="se">\xe2</span><span class="s2">F</span><span class="se">\x7f\xb7\x8c</span><span class="s2">k</span><span class="se">\x17\xe7\xe6\xdc\xdc\xc5\xfd</span><span class="s2">Z</span><span class="se">\x81</span><span class="s2">2]</span><span class="se">\x17\xf3</span><span class="s2">S</span><span class="se">\x86\x1c</span><span class="s2">F-</span><span class="se">\x9c\xe6\xcf\xf3\x00\xce\xd8</span><span class="s2">!D</span><span class="se">\xb2\xf9</span><span class="s2">o</span><span class="se">\x07\xab</span><span class="s2">t</span><span class="se">\x88\xde\xa6\xf6</span><span class="s2">j</span><span class="se">\xb2\xe0\xd7</span><span class="s2">U</span><span class="se">\x15</span><span class="s2">|</span><span class="se">\x10\xe5\xdd\x91</span><span class="s2">&#39;</span><span class="se">\x82</span><span class="s2">~S</span><span class="se">\xfb</span><span class="s2">?</span><span class="se">\xb8\x8a</span><span class="s2">Z</span><span class="se">\x8f\x10\xf2\x86</span><span class="s2">g</span><span class="se">\xdf</span><span class="s2">x</span><span class="se">\xde\x1e\x16\xa5\xae</span><span class="s2">?</span><span class="se">\x9e\x18</span><span class="s2">R</span><span class="se">\xa1</span><span class="s2">Y!</span><span class="se">\x81</span><span class="s2">&amp;</span><span class="se">\x0f</span><span class="s2">Y</span><span class="se">\x99\xdd</span><span class="s2">&#39;9</span><span class="se">\x14\xb2</span><span class="s2">`2</span><span class="se">\x85</span><span class="s2">-K</span><span class="se">\x0b\x99\xb3</span><span class="s2">$</span><span class="se">\x97\xac</span><span class="s2">dE</span><span class="se">\x9e</span><span class="s2">m</span><span class="se">\x97\x9a</span><span class="s2">&amp;</span><span class="se">\xba\xa4\xca\xc2</span><span class="s2">D&#39;;</span><span class="se">\x8f\xa0\xa9\x9b\x9d\x1d\x8d\xe8</span><span class="s2">&amp;</span><span class="se">\x8a\xb3\x81\x17</span><span class="s2">&gt;91:</span><span class="se">\xfa</span><span class="s2">*</span><span class="se">\xc6</span><span class="s2">)V</span><span class="se">\xba\xb7\xf1\xf1\x1d</span><span class="s2">/</span><span class="se">\xda</span><span class="s2">`</span><span class="se">\xb9</span><span class="s2">{</span><span class="se">\xec</span><span class="s2">D/</span><span class="se">\x95\xd8\xe1\xba\xbe\xad\x08\x06</span><span class="s2">Q</span><span class="se">\xe4\xf0</span><span class="s2">r</span><span class="se">\x8f</span><span class="s2">!p.g</span><span class="se">\xd3</span><span class="s2">93p</span><span class="se">\x1e</span><span class="s2">r</span><span class="se">\xde\x8b</span><span class="s2">?9</span><span class="se">\xac\x9b\xe6\x13\xaf\x1a\x87\xd7</span><span class="s2">{</span><span class="se">\xbc\x89\x7f\x01</span><span class="s2">~</span><span class="se">\xb1</span><span class="s2">S</span><span class="se">\x93</span><span class="s2">&quot;</span>
+            <span class="sa">b</span><span class="s1">&#39;x</span><span class="se">\x9c</span><span class="s1">m</span><span class="se">\x90</span><span class="s1">MO</span><span class="se">\x83</span><span class="s1">@</span><span class="se">\x18\x84\x17\xaa\x16\xf1\xa3</span><span class="s1">5</span><span class="se">\xfe\x89</span><span class="s1">ra</span><span class="se">\r\x05\x81\xc4</span><span class="s1">x</span><span class="se">\xe1</span><span class="s1">H</span><span class="se">\xc2\xa1</span><span class="s1">^</span><span class="se">\xb8\xbd</span><span class="s1">Yv</span><span class="se">\xb7</span><span class="s1">)</span><span class="se">\x11\xd8\xbe\xec</span><span class="s1">b</span><span class="se">\xd4</span><span class="s1">H</span><span class="se">\xe2\xc5\xfe</span><span class="s1">n</span><span class="se">\xc1\xb3\x87</span><span class="s1">g2</span><span class="se">\xc9</span><span class="s1">$3</span><span class="se">\xc9</span><span class="s1">|/</span><span class="se">\xb8\xa8\x9b\xc6\x87</span><span class="s1">Y]</span><span class="se">\xe0\xbd</span><span class="s1">dF</span><span class="se">\xc2</span><span class="s1">~</span><span class="se">\xe8\xb8\xa9</span><span class="s1">U</span><span class="se">\xe7</span><span class="s1">&quot;</span><span class="se">\xd9\xfc\x97</span><span class="s1">s%</span><span class="se">\xa4\x8b\xd6</span><span class="s1">&amp;</span><span class="se">\xb7</span><span class="s1">r2a</span><span class="se">\xe7</span><span class="s1">Y</span><span class="se">\xe6</span><span class="s1">|</span><span class="se">\x11</span><span class="s1">a</span><span class="se">\xdd\x93\x17\x82</span><span class="s1">v</span><span class="se">\x91\xdb\&#39;\\</span><span class="s1">x</span><span class="se">\xa5</span><span class="s1">E</span><span class="se">\x08</span><span class="s1">y</span><span class="se">\xc7\xb3\x1f</span><span class="s1">&lt;/</span><span class="se">\x0f\x93\xa5\xa6</span><span class="s1">=</span><span class="se">\xce\x0c\x9f</span><span class="s1">q</span><span class="se">\x1b\xf4\x8f\x11\xad\x92</span><span class="s1">T</span><span class="se">\x06</span><span class="s1">,</span><span class="se">\x0e\xd2</span><span class="s1">*yH</span><span class="se">\xc2\x80\x8b\x90\x8b</span><span class="s1">(</span><span class="se">\t\xd2</span><span class="s1">X$</span><span class="se">\x92\xf3</span><span class="s1">4</span><span class="se">\x0c\xb7</span><span class="s1">Q</span><span class="se">\xb0\x8f\xb6\x8c\n\xc5</span><span class="s1">5</span><span class="se">\xd5</span><span class="s1">j</span><span class="se">\xe8\xb9\xa4</span><span class="s1">f0</span><span class="se">\xaa\xaf</span><span class="s1">Y</span><span class="se">\xa3</span><span class="s1">)</span><span class="se">\x0e</span><span class="s1">5</span><span class="se">\x7f\x05</span><span class="s1">mXo</span><span class="se">\xe8\x1b\xeb\xb5</span><span class="s1">/d</span><span class="se">\xab\xfc\xe3\x07</span><span class="s1">^</span><span class="se">\x94\xce</span><span class="s1">4</span><span class="se">\xf7\xd4\xb0\xb6\x12\xec\x19\x97\xf9</span><span class="s1">:#</span><span class="se">\xe8</span><span class="s1">x</span><span class="se">\x9e\xc1\xcb\x1d\xba\x1c\xa0\x1a\xea\xc6\xd4\x1d\x80\x0b\xd0\xb2</span><span class="s1">?sX</span><span class="se">\x16\x85\xc1\xab\x1d</span><span class="s1">^</span><span class="se">\x8f</span><span class="s1">x3</span><span class="se">\xe2</span><span class="s1">m</span><span class="se">\xb9\x9a</span><span class="s1">*</span><span class="se">\x00</span><span class="s1">X</span><span class="se">\xd7</span><span class="s1">)</span><span class="se">\xc3\xe6</span><span class="s1">+4</span><span class="se">\x00\xae</span><span class="s1">F</span><span class="se">\\\xeb\x13\xde</span><span class="s1">U</span><span class="se">\xfe</span><span class="s1">/s#_r&#39;</span>
         <span class="p">),</span>
         <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="nb">print</span><span class="p">,</span>
@@ -376,16 +377,16 @@ empty set: set()
 <span class="n">np_module</span> <span class="o">=</span> <span class="n">numpy</span>
 <span class="n">np_object</span> <span class="o">=</span> <span class="n">typed_object</span><span class="p">(</span>
     <span class="n">ndarray</span><span class="p">,</span>
-    <span class="sa">b</span><span class="s1">&#39;x</span><span class="se">\x9c</span><span class="s1">UN</span><span class="se">\xbb</span><span class="s1">r</span><span class="se">\x83</span><span class="s1">0</span><span class="se">\x10\x14\xc2</span><span class="s1">y)</span><span class="se">\xce\xfb\xd5\xa4</span><span class="s1">HIE</span><span class="se">\x9d</span><span class="s1">&quot;</span><span class="se">\x9d</span><span class="s1">;k</span><span class="se">\x86\x82\x8a</span><span class="s1">N#</span><span class="se">\x0b</span><span class="s1">M</span><span class="se">\xc2\x0c\x02</span><span class="s1">V9</span><span class="se">\n\xba</span><span class="s1">4</span><span class="se">\xb6\xe3\xaf</span><span class="s1">N</span><span class="se">\x80</span><span class="s1">Q</span><span class="se">\xe3</span><span class="s1">-vgn</span><span class="se">\xf7\xf6\xee\&#39;</span><span class="s1">6eU</span><span class="se">\xd7\xa9\x9a</span><span class="s1">X(</span><span class="se">\xe3\xad</span><span class="s1">&amp;</span><span class="se">\xab\xb4\xf7</span><span class="s1">z</span><span class="se">\x10</span><span class="s1">`</span><span class="se">\xc9\x91\xf9</span><span class="s1">iIi&quot;/</span><span class="se">\x10\x1d\xcd</span><span class="s1">+</span><span class="se">\xd7\xb5\x9e\x94</span><span class="s1">k</span><span class="se">\xcb\xbe\xb6\x02\xbc</span><span class="s1">xe</span><span class="se">\x8c</span><span class="s1">5</span><span class="se">\xbd\xeb\x86\xd4\xb4\xde\xa6\xca\xf5</span><span class="s1">5Us</span><span class="se">\xa7\xea\x9d\xa6</span><span class="s1">/</span><span class="se">\xc4</span><span class="s1">[,r</span><span class="se">\x9c\x14\xcb</span><span class="s1">1</span><span class="se">\xa8\xbc</span><span class="s1">5m</span><span class="se">\xf3</span><span class="s1">M</span><span class="se">\xbe</span><span class="s1">7</span><span class="se">\x84\xd3\x1d\xce</span><span class="s1">r</span><span class="se">\x9c\x9b</span><span class="s1">y[4ex</span><span class="se">\xe4</span><span class="s1">B</span><span class="se">\xb2</span><span class="s1">-</span><span class="se">\xc4</span><span class="s1">*</span><span class="se">\xda\xe0</span><span class="s1">r</span><span class="se">\x8f</span><span class="s1">e&quot;#</span><span class="se">\xc9</span><span class="s1">%</span><span class="se">\xdf\xe1</span><span class="s1">*</span><span class="se">\xe4</span><span class="s1">J</span><span class="se">\x1a\xba\xf1\xf0</span><span class="s1">u</span><span class="se">\xc1\xc7\xbe\xea\x1d</span><span class="s1">7</span><span class="se">\x87\xdf</span><span class="s1">=ns</span><span class="se">\xdc</span><span class="s1">%2.</span><span class="se">\xa2</span><span class="s1">q</span><span class="se">\xf6\x81\xfb</span><span class="s1">,</span><span class="se">\xcb\xd6\x7f</span><span class="s1">#f</span><span class="se">\x92\x8c\xf0\xb0</span><span class="s1">9</span><span class="se">\xac\xde</span><span class="s1">&amp;s</span><span class="se">\x02\x0f\x1a\x07</span><span class="s1">]</span><span class="se">\x04\xc5</span><span class="s1">#</span><span class="se">\xe1</span><span class="s1">)#&lt;</span><span class="se">\xe7</span><span class="s1">xI</span><span class="se">\xff\x01\xb4\xca</span><span class="s1">Zm&#39;</span>
+    <span class="sa">b</span><span class="s2">&quot;x</span><span class="se">\x9c</span><span class="s2">-</span><span class="se">\x8b\xb9\x12\x82</span><span class="s2">0</span><span class="se">\x18\x84</span><span class="s2">s</span><span class="se">\xe0\x15\xcf</span><span class="s2">G</span><span class="se">\xb0\xa4</span><span class="s2">JmaGgfRP</span><span class="se">\xd1</span><span class="s2">e0</span><span class="se">\xa4</span><span class="s2">`</span><span class="se">\x86\xeb\x8f\xa1\xa0\xb3</span><span class="s2">Q</span><span class="se">\xe4\xa9\x15</span><span class="s2">$[</span><span class="se">\xec</span><span class="s2">7</span><span class="se">\xb3\xc7\x93\xea</span><span class="s2">,/</span><span class="se">\n\xae</span><span class="s2">&amp;gJ[</span><span class="se">\x93</span><span class="s2">:</span><span class="se">\xa3</span><span class="s2">Rk</span><span class="se">\xd3\x8e\x01\n</span><span class="s2">u</span><span class="se">\xd5\x96</span><span class="s2">M</span><span class="se">\xc7</span><span class="s2">um</span><span class="se">\r</span><span class="s2">/</span><span class="se">\xdb\xc2\xe5</span><span class="s2">s</span><span class="se">\xa3\xac\xd1</span><span class="s2">u</span><span class="se">\xf5</span><span class="s2">p</span><span class="se">\xb6\xd5\x8e\x01\x9e</span><span class="s2">W</span><span class="se">\xac\xca\xfc\x8f\x08\xf4\x02\x1a\xe1</span><span class="s2">;</span><span class="se">\x04</span><span class="s2">=,B</span><span class="se">\x81\x05\x11\xe4\r</span><span class="s2">K</span><span class="se">\xbf\xcb\\\xd7\x18\x06\xab\x84</span><span class="s2"> </span><span class="se">\x84\xf2\x0b\xac\x87</span><span class="s2">O</span><span class="se">\x0f\x9b\x18</span><span class="s2">X(h</span><span class="se">\x82\xc7\xec\n</span><span class="s2">[)</span><span class="se">\xe5\xed</span><span class="s2">;</span><span class="se">\xea</span><span class="s2">o</span><span class="se">\x02</span><span class="s2">9</span><span class="se">\xd8\xdd\x87\xe8</span><span class="s2">&lt;</span><span class="se">\x95\x93\x88</span><span class="s2">&#39;</span><span class="se">\xf5\x0c</span><span class="s2">&lt;a</span><span class="se">\xef\xe0</span><span class="s2"> </span><span class="se">\x1d\x1c</span><span class="s2">c8</span><span class="se">\xf1\x1f\x14\xb8</span><span class="s2">?</span><span class="se">\xa9</span><span class="s2">&quot;</span>
 <span class="p">)</span>
 <span class="n">typing_</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]</span>
 <span class="n">vbytes_</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;klsdjflkds</span><span class="se">\\\x00</span><span class="s1">&#39;</span>
 
-</pre></div>
-</td></tr></table></div>
+</pre></div></td></tr></table></div>
+</div>
 <p>It is runnable, you can take a try.</p>
-</div>
-</div>
+</section>
+</section>
 
 
 

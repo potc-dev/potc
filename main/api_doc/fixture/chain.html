@@ -5,7 +5,8 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>potc.fixture.chain &mdash; potc 0.0.3 documentation</title>
@@ -85,7 +86,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <p><span class="caption-text">Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials/installation/index.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials/quick_start/index.html">Quick Start</a></li>
@@ -94,7 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials/advanced_usage/index.html">Advanced Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials/cli_usage/index.html">CLI Usage</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API Documentation</span></p>
+<p><span class="caption-text">API Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../config/index.html">potc.config</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">potc.fixture</a><ul class="current">
@@ -180,9 +181,9 @@
             
     
     
-  <div class="section" id="module-potc.fixture.chain">
+  <section id="module-potc.fixture.chain">
 <span id="potc-fixture-chain"></span><h1>potc.fixture.chain<a class="headerlink" href="#module-potc.fixture.chain" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="build-chain">
+<section id="build-chain">
 <h2>build_chain<a class="headerlink" href="#build-chain" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="potc.fixture.chain.build_chain">
@@ -216,13 +217,13 @@ Bases on orders which depends by tuples and lists.</p>
 <li><p>list, which means the elements in it are paralleled with each other.</p></li>
 <li><p>tuple, which means the element in it should be in order one by one.</p></li>
 </ul>
-</div>
+</aside>
 <p>Here are some examples about this problem.</p>
 <p>In the simplest case, here is the difference between <code class="docutils literal notranslate"><span class="pre">(r1,</span> <span class="pre">r2)</span></code> and <code class="docutils literal notranslate"><span class="pre">[r1,</span> <span class="pre">r2]</span></code>. In the tuple’s case, it means <code class="docutils literal notranslate"><span class="pre">t1</span></code> must be processed earlier than <code class="docutils literal notranslate"><span class="pre">t2</span></code>, while in list’s case, it just means they are put together here without orders’ limit.</p>
 <img alt="../../_images/chain_simple.gv.svg" class="align-center" src="../../_images/chain_simple.gv.svg" /><p>In another case of <code class="docutils literal notranslate"><span class="pre">(r1,</span> <span class="pre">[(r2,</span> <span class="pre">r3),</span> <span class="pre">(r4,</span> <span class="pre">r5)],</span> <span class="pre">r6)</span></code>, its order graph should be like below.</p>
 <img alt="../../_images/chain_another.gv.svg" class="align-center" src="../../_images/chain_another.gv.svg" /><p>Actually, <code class="docutils literal notranslate"><span class="pre">r1</span></code> should be ahead of <code class="docutils literal notranslate"><span class="pre">[(r2,</span> <span class="pre">r3),</span> <span class="pre">(r4,</span> <span class="pre">r5)]</span></code>, <code class="docutils literal notranslate"><span class="pre">r2</span></code> should be ahead of <code class="docutils literal notranslate"><span class="pre">r3</span></code>, <code class="docutils literal notranslate"><span class="pre">r4</span></code> should be ahead of <code class="docutils literal notranslate"><span class="pre">r5</span></code>, <code class="docutils literal notranslate"><span class="pre">[(r2,</span> <span class="pre">r3),</span> <span class="pre">(r4,</span> <span class="pre">r5)]</span></code> should be ahead of <code class="docutils literal notranslate"><span class="pre">r6</span></code>. So one of the final order should be <code class="docutils literal notranslate"><span class="pre">[r1,</span> <span class="pre">r2,</span> <span class="pre">r4,</span> <span class="pre">r5,</span> <span class="pre">r3,</span> <span class="pre">r6]</span></code> (the valid orders are not unique in this case).</p>
-</div>
-<div class="section" id="rules-combine">
+</section>
+<section id="rules-combine">
 <h2>rules_combine<a class="headerlink" href="#rules-combine" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="potc.fixture.chain.rules_combine">
@@ -241,8 +242,8 @@ Bases on orders which depends by tuples and lists.</p>
 </dl>
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
 

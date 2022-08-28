@@ -5,7 +5,8 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Basic Usage &mdash; potc 0.0.3 documentation</title>
@@ -85,7 +86,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <p><span class="caption-text">Tutorials</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quick_start/index.html">Quick Start</a></li>
@@ -97,7 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../advanced_usage/index.html">Advanced Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cli_usage/index.html">CLI Usage</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API Documentation</span></p>
+<p><span class="caption-text">API Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api_doc/config/index.html">potc.config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api_doc/fixture/index.html">potc.fixture</a></li>
@@ -171,13 +172,13 @@
             
     
     
-  <div class="section" id="basic-usage">
+  <section id="basic-usage">
 <h1>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="define-my-rules">
+<section id="define-my-rules">
 <h2>Define My Rules<a class="headerlink" href="#define-my-rules" title="Permalink to this headline">¶</a></h2>
 <p>In the example above, <code class="docutils literal notranslate"><span class="pre">numpy</span></code> objects are translated as the serialized bytes, it is not as visible as we expected. Besides, you may think that the dictionary which is expressed with <code class="docutils literal notranslate"><span class="pre">{}</span></code> format is so ugly that you want to optimize the expression.</p>
 <p>You can define your own rule like the example below.</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<div class="highlight-python notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -229,7 +230,7 @@
 <span class="normal">50</span>
 <span class="normal">51</span>
 <span class="normal">52</span>
-<span class="normal">53</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="normal">53</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -282,10 +283,10 @@
         <span class="p">(</span><span class="n">my_dict</span><span class="p">,</span> <span class="n">builtin_dict</span><span class="p">,),</span>  <span class="c1"># rule for dict, before `builtin_dict`</span>
     <span class="p">],</span> <span class="n">reformat</span><span class="o">=</span><span class="s1">&#39;pep8&#39;</span><span class="p">)</span>  <span class="c1"># auto reformat the code</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">_code</span><span class="p">)</span>
-</pre></div>
-</td></tr></table></div>
+</pre></div></td></tr></table></div>
+</div>
 <p>The output result (as well as the dumped script) should be</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<div class="highlight-python notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -303,7 +304,7 @@
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;np_module&#39;</span><span class="p">,</span> <span class="s1">&#39;np_objects&#39;</span><span class="p">]</span>
@@ -322,11 +323,11 @@
                       <span class="s1">&#39;g&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;dict here.&#39;</span><span class="p">)</span>
                   <span class="p">})</span>
 
-</pre></div>
-</td></tr></table></div>
+</pre></div></td></tr></table></div>
+</div>
 <p>Now you can see the dictionaries will be expressed with <code class="docutils literal notranslate"><span class="pre">dict</span></code> form when the keys is allowed to do so, the <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> objects will be expressed with the visible format as well.</p>
-</div>
-</div>
+</section>
+</section>
 
 
 

@@ -5,7 +5,8 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>CLI Usage &mdash; potc 0.0.3 documentation</title>
@@ -85,7 +86,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Tutorials</span></p>
+              <p><span class="caption-text">Tutorials</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quick_start/index.html">Quick Start</a></li>
@@ -98,7 +99,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">API Documentation</span></p>
+<p><span class="caption-text">API Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api_doc/config/index.html">potc.config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api_doc/fixture/index.html">potc.fixture</a></li>
@@ -172,17 +173,17 @@
             
     
     
-  <div class="section" id="cli-usage">
+  <section id="cli-usage">
 <h1>CLI Usage<a class="headerlink" href="#cli-usage" title="Permalink to this headline">¶</a></h1>
 <p>In <code class="docutils literal notranslate"><span class="pre">potc</span></code>, cli is provided to quickly generate python code. For example, you can translate an object with <code class="docutils literal notranslate"><span class="pre">potc</span> <span class="pre">trans</span></code> command. Firstly, here is the content of python source file <code class="docutils literal notranslate"><span class="pre">data.py</span></code></p>
-<div class="highlight-shell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<div class="highlight-shell notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>import math
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span>import math
 
 <span class="nv">v_a</span> <span class="o">=</span> <span class="o">[</span><span class="m">1</span>, <span class="s1">&#39;kdfgjs&#39;</span>, None, math.pi<span class="o">]</span>
 <span class="nv">v_b</span> <span class="o">=</span> <span class="o">{</span>
@@ -190,24 +191,24 @@
     <span class="s1">&#39;b&#39;</span>: <span class="o">(</span><span class="m">3</span>, <span class="m">4</span>, <span class="s1">&#39;dfg&#39;</span><span class="o">)</span>,
     <span class="m">0</span>: <span class="o">{</span><span class="s1">&#39;a&#39;</span>: <span class="m">3</span>, <span class="s1">&#39;b&#39;</span>: None, <span class="s1">&#39;c&#39;</span>: math.e<span class="o">}</span>
 <span class="o">}</span>
-</pre></div>
-</td></tr></table></div>
-<div class="section" id="translation-of-single-object">
+</pre></div></td></tr></table></div>
+</div>
+<section id="translation-of-single-object">
 <h2>Translation of Single Object<a class="headerlink" href="#translation-of-single-object" title="Permalink to this headline">¶</a></h2>
 <p>Based on <code class="docutils literal notranslate"><span class="pre">data.py</span></code>, we can translate <code class="docutils literal notranslate"><span class="pre">v_a</span></code> from <code class="docutils literal notranslate"><span class="pre">data.py</span></code> by this command</p>
-<div class="highlight-shell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>potc trans data.v_a
-</pre></div>
-</td></tr></table></div>
+<div class="highlight-shell notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span>potc trans data.v_a
+</pre></div></td></tr></table></div>
+</div>
 <p>The output should be</p>
-<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>[1, &#39;kdfgjs&#39;, None, math.pi]
-</pre></div>
-</td></tr></table></div>
+<div class="highlight-text notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span>[1, &#39;kdfgjs&#39;, None, math.pi]
+</pre></div></td></tr></table></div>
+</div>
 <p>Also, if you need to take a look at the full information of this translation, you can use <code class="docutils literal notranslate"><span class="pre">-I</span></code> option to display them, like this</p>
-<div class="highlight-shell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>potc trans data.v_b -I
-</pre></div>
-</td></tr></table></div>
+<div class="highlight-shell notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span>potc trans data.v_b -I
+</pre></div></td></tr></table></div>
+</div>
 <p>The output (including information) should be</p>
-<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<div class="highlight-text notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -216,7 +217,7 @@
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>Object Information:
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span>Object Information:
 Module : data
 Name : v_b
 Type : dict
@@ -226,17 +227,17 @@ import math
 
 Expression:
 {&#39;a&#39;: [1, &#39;kdfgjs&#39;, None, math.pi], &#39;b&#39;: (3, 4, &#39;dfg&#39;), 0: {&#39;a&#39;: 3, &#39;b&#39;: None, &#39;c&#39;: math.e}}
-</pre></div>
-</td></tr></table></div>
+</pre></div></td></tr></table></div>
 </div>
-<div class="section" id="export-multiple-objects">
+</section>
+<section id="export-multiple-objects">
 <h2>Export Multiple Objects<a class="headerlink" href="#export-multiple-objects" title="Permalink to this headline">¶</a></h2>
 <p>In further cases, we may need to directly dump a runnable python source code and then maybe execute it. You can dump the variables from <code class="docutils literal notranslate"><span class="pre">data.py</span></code> by this command</p>
-<div class="highlight-shell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>potc <span class="nb">export</span> -v <span class="s1">&#39;data.v_*&#39;</span>
-</pre></div>
-</td></tr></table></div>
+<div class="highlight-shell notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span>potc <span class="nb">export</span> -v <span class="s1">&#39;data.v_*&#39;</span>
+</pre></div></td></tr></table></div>
+</div>
 <p>The dumped code should be</p>
-<div class="highlight-shell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<div class="highlight-shell notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -248,7 +249,7 @@ Expression:
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>import math
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span>import math
 
 <span class="nv">__all__</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;v_a&#39;</span>, <span class="s1">&#39;v_b&#39;</span><span class="o">]</span>
 <span class="nv">v_a</span> <span class="o">=</span> <span class="o">[</span><span class="m">1</span>, <span class="s1">&#39;kdfgjs&#39;</span>, None, math.pi<span class="o">]</span>
@@ -261,14 +262,14 @@ Expression:
         <span class="s1">&#39;c&#39;</span>: math.e
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></div>
-</td></tr></table></div>
+</pre></div></td></tr></table></div>
+</div>
 <p>Besides, you can use your self-defined rules to change the dumping result, like this</p>
-<div class="highlight-shell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>potc <span class="nb">export</span> -v <span class="s1">&#39;data.v_*&#39;</span> -r plugins.potc_dict.potc_dict.plugin.__rules__
-</pre></div>
-</td></tr></table></div>
+<div class="highlight-shell notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span>potc <span class="nb">export</span> -v <span class="s1">&#39;data.v_*&#39;</span> -r plugins.potc_dict.potc_dict.plugin.__rules__
+</pre></div></td></tr></table></div>
+</div>
 <p>The new dumped code should be</p>
-<div class="highlight-shell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<div class="highlight-shell notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -277,7 +278,7 @@ Expression:
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>import math
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span>import math
 from builtins import dict
 
 <span class="nv">__all__</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;v_a&#39;</span>, <span class="s1">&#39;v_b&#39;</span><span class="o">]</span>
@@ -287,10 +288,10 @@ from builtins import dict
     <span class="s1">&#39;b&#39;</span>: <span class="o">(</span><span class="m">3</span>, <span class="m">4</span>, <span class="s1">&#39;dfg&#39;</span><span class="o">)</span>,
     <span class="m">0</span>: dict<span class="o">(</span><span class="nv">a</span><span class="o">=</span><span class="m">3</span>, <span class="nv">b</span><span class="o">=</span>None, <span class="nv">c</span><span class="o">=</span>math.e<span class="o">)</span>
 <span class="o">}</span>
-</pre></div>
-</td></tr></table></div>
+</pre></div></td></tr></table></div>
 </div>
-</div>
+</section>
+</section>
 
 
 
