@@ -1,1 +1,1 @@
-potc export -v 'data.v_*' -r plugins.potc_dict.potc_dict.plugin.__rules__
+potc export -v 'data.v_*' -r plugins.dict.potc_dict.plugin.__rules__
