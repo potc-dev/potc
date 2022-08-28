@@ -3,11 +3,11 @@ import io
 import os
 import subprocess
 import sys
-import tempfile
 from functools import partial
 
 import pytest
 from click.testing import CliRunner
+from hbutils.testing import isolated_directory
 
 from potc.entry.cli import potc_cli
 
@@ -41,20 +41,19 @@ class TestEntryCliExport:
         assert "F_INT = 2345" in result.stdout
         assert "F_TUPLE = (1, '94', [4, 5, -6, 9, math.e])" in result.stdout
 
-        with tempfile.NamedTemporaryFile('w') as tf:
-            _print = partial(builtins.print, file=tf)
+        with isolated_directory():
+            with open('temp.py', 'w') as tf:
+                _print = partial(builtins.print, file=tf)
 
-            _print(result.stdout)
-            _print()
+                _print(result.stdout)
+                _print()
 
-            _print('print("F_INT:", F_INT)')
-            _print('print("F_TUPLE:", F_TUPLE)')
-            _print()
-
-            tf.flush()
+                _print('print("F_INT:", F_INT)')
+                _print('print("F_TUPLE:", F_TUPLE)')
+                _print()
 
             srun = subprocess.run(
-                [sys.executable, tf.name],
+                [sys.executable, 'temp.py'],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 universal_newlines=True
@@ -74,20 +73,19 @@ class TestEntryCliExport:
         assert "F_INT = 2345" in result.stdout
         assert "F_TUPLE = (1, '94', [4, 5, -6, 9, math.e])" in result.stdout
 
-        with tempfile.NamedTemporaryFile('w') as tf:
-            _print = partial(builtins.print, file=tf)
+        with isolated_directory():
+            with open('temp.py', 'w') as tf:
+                _print = partial(builtins.print, file=tf)
 
-            _print(result.stdout)
-            _print()
+                _print(result.stdout)
+                _print()
 
-            _print('print("F_INT:", F_INT)')
-            _print('print("F_TUPLE:", F_TUPLE)')
-            _print()
-
-            tf.flush()
+                _print('print("F_INT:", F_INT)')
+                _print('print("F_TUPLE:", F_TUPLE)')
+                _print()
 
             srun = subprocess.run(
-                [sys.executable, tf.name],
+                [sys.executable, 'temp.py'],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 universal_newlines=True
@@ -107,20 +105,19 @@ class TestEntryCliExport:
         assert "P_F_INT = 2345" in result.stdout
         assert "P_F_TUPLE = (1, '94', [4, 5, -6, 9, math.e])" in result.stdout
 
-        with tempfile.NamedTemporaryFile('w') as tf:
-            _print = partial(builtins.print, file=tf)
+        with isolated_directory():
+            with open('temp.py', 'w') as tf:
+                _print = partial(builtins.print, file=tf)
 
-            _print(result.stdout)
-            _print()
+                _print(result.stdout)
+                _print()
 
-            _print('print("F_INT:", P_F_INT)')
-            _print('print("F_TUPLE:", P_F_TUPLE)')
-            _print()
-
-            tf.flush()
+                _print('print("F_INT:", P_F_INT)')
+                _print('print("F_TUPLE:", P_F_TUPLE)')
+                _print()
 
             srun = subprocess.run(
-                [sys.executable, tf.name],
+                [sys.executable, 'temp.py'],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 universal_newlines=True
@@ -141,20 +138,19 @@ class TestEntryCliExport:
         assert "F_INT = 5 * 7 * 67" in result.stdout
         assert "F_TUPLE = (1, '94', [2 * 2, 5, -1 * 2 * 3, 3 * 3, math.e])" in result.stdout
 
-        with tempfile.NamedTemporaryFile('w') as tf:
-            _print = partial(builtins.print, file=tf)
+        with isolated_directory():
+            with open('temp.py', 'w') as tf:
+                _print = partial(builtins.print, file=tf)
 
-            _print(result.stdout)
-            _print()
+                _print(result.stdout)
+                _print()
 
-            _print('print("F_INT:", F_INT)')
-            _print('print("F_TUPLE:", F_TUPLE)')
-            _print()
-
-            tf.flush()
+                _print('print("F_INT:", F_INT)')
+                _print('print("F_TUPLE:", F_TUPLE)')
+                _print()
 
             srun = subprocess.run(
-                [sys.executable, tf.name],
+                [sys.executable, 'temp.py'],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 universal_newlines=True
@@ -176,20 +172,19 @@ class TestEntryCliExport:
         assert "F_TUPLE = (1, '94', [4, 5, -6, 9, math.e])" in result.stdout
         assert '# This is a mark of reformatter here.' in result.stdout
 
-        with tempfile.NamedTemporaryFile('w') as tf:
-            _print = partial(builtins.print, file=tf)
+        with isolated_directory():
+            with open('temp.py', 'w') as tf:
+                _print = partial(builtins.print, file=tf)
 
-            _print(result.stdout)
-            _print()
+                _print(result.stdout)
+                _print()
 
-            _print('print("F_INT:", F_INT)')
-            _print('print("F_TUPLE:", F_TUPLE)')
-            _print()
-
-            tf.flush()
+                _print('print("F_INT:", F_INT)')
+                _print('print("F_TUPLE:", F_TUPLE)')
+                _print()
 
             srun = subprocess.run(
-                [sys.executable, tf.name],
+                [sys.executable, 'temp.py'],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 universal_newlines=True
