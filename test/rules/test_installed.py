@@ -1,34 +1,28 @@
-from unittest import skipUnless
-from unittest.mock import patch, MagicMock
-
 import pytest
-from hbutils.testing import vpip
-from pkg_resources import iter_entry_points
 
+import test
 from potc.testing import transobj_assert
-
-
-class _Wrapper:
-    def __init__(self, x):
-        self.__x = x
-
-    def load(self):
-        return self.__x
+from ..conftest import with_potc_plugins
 
 
 @pytest.fixture()
 def potc_dict_installed(potc_dict_plugin):
-    def _my_func(group):
-        if group == 'potc_plugin':
-            yield from map(_Wrapper, [potc_dict_plugin])
-        else:
-            yield from iter_entry_points(group=group)
-
-    with patch('pkg_resources.iter_entry_points', MagicMock(side_effect=_my_func)):
+    with with_potc_plugins(potc_dict_plugin):
         yield
 
 
-@skipUnless(not vpip('potc-dict'), 'no potc-dict installed required')
+@pytest.fixture()
+def potc_invalid_plugin_1_installed():
+    with with_potc_plugins(test):  # module without __rules__
+        yield
+
+
+@pytest.fixture()
+def potc_invalid_plugin_2_installed():
+    with with_potc_plugins(233):  # invalid type
+        yield
+
+
 @pytest.mark.unittest
 class TestRulesInstalled:
     @classmethod
@@ -49,3 +43,13 @@ class TestRulesInstalled:
         with transobj_assert({'a': 1, 'b': 2}) as (obj, name):
             assert obj == {'a': 1, 'b': 2}
             assert name == 'pretty_dict'
+
+    def test_potc_invalid_plugin_1(self, potc_invalid_plugin_1_installed):
+        with pytest.raises(ImportError):
+            with transobj_assert({'a': 1, 'b': 2}) as (obj, name):
+                pytest.fail('Should not reach here.')
+
+    def test_potc_invalid_plugin_2(self, potc_invalid_plugin_2_installed):
+        with pytest.raises(TypeError):
+            with transobj_assert({'a': 1, 'b': 2}) as (obj, name):
+                pytest.fail('Should not reach here.')
