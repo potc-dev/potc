@@ -1,16 +1,15 @@
 import builtins
 import io
+import os
 import subprocess
+import sys
 import tempfile
 from functools import partial
 
 import pytest
-import where
 from click.testing import CliRunner
 
 from potc.entry.cli import potc_cli
-
-python = where.first('python')
 
 
 def reformatter(code: str) -> str:
@@ -54,9 +53,13 @@ class TestEntryCliExport:
 
             tf.flush()
 
-            srun = subprocess.run([python, tf.name], stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                  universal_newlines=True)
-            assert srun.returncode == 0
+            srun = subprocess.run(
+                [sys.executable, tf.name],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                universal_newlines=True
+            )
+            assert srun.returncode == 0, f'This is stderr:{os.linesep}{srun.stderr}'
             assert "F_INT: 2345" in srun.stdout
             assert "F_TUPLE: (1, '94', [4, 5, -6, 9, 2.7182818" in srun.stdout
 
@@ -83,9 +86,13 @@ class TestEntryCliExport:
 
             tf.flush()
 
-            srun = subprocess.run([python, tf.name], stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                  universal_newlines=True)
-            assert srun.returncode == 0
+            srun = subprocess.run(
+                [sys.executable, tf.name],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                universal_newlines=True
+            )
+            assert srun.returncode == 0, f'This is stderr:{os.linesep}{srun.stderr}'
             assert "F_INT: 2345" in srun.stdout
             assert "F_TUPLE: (1, '94', [4, 5, -6, 9, 2.7182818" in srun.stdout
 
@@ -112,9 +119,13 @@ class TestEntryCliExport:
 
             tf.flush()
 
-            srun = subprocess.run([python, tf.name], stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                  universal_newlines=True)
-            assert srun.returncode == 0
+            srun = subprocess.run(
+                [sys.executable, tf.name],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                universal_newlines=True
+            )
+            assert srun.returncode == 0, f'This is stderr:{os.linesep}{srun.stderr}'
             assert "F_INT: 2345" in srun.stdout
             assert "F_TUPLE: (1, '94', [4, 5, -6, 9, 2.7182818" in srun.stdout
 
@@ -142,9 +153,13 @@ class TestEntryCliExport:
 
             tf.flush()
 
-            srun = subprocess.run([python, tf.name], stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                  universal_newlines=True)
-            assert srun.returncode == 0
+            srun = subprocess.run(
+                [sys.executable, tf.name],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                universal_newlines=True
+            )
+            assert srun.returncode == 0, f'This is stderr:{os.linesep}{srun.stderr}'
             assert "F_INT: 2345" in srun.stdout
             assert "F_TUPLE: (1, '94', [4, 5, -6, 9, 2.7182818" in srun.stdout
 
@@ -173,8 +188,12 @@ class TestEntryCliExport:
 
             tf.flush()
 
-            srun = subprocess.run([python, tf.name], stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                  universal_newlines=True)
-            assert srun.returncode == 0
+            srun = subprocess.run(
+                [sys.executable, tf.name],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                universal_newlines=True
+            )
+            assert srun.returncode == 0, f'This is stderr:{os.linesep}{srun.stderr}'
             assert "F_INT: 2345" in srun.stdout
             assert "F_TUPLE: (1, '94', [4, 5, -6, 9, 2.7182818" in srun.stdout
