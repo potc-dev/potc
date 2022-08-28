@@ -1,0 +1,565 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>potc.translate.trans &mdash; potc 0.0.4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> potc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/quick_start/index.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/main_idea/index.html">Main Idea</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/basic_usage/index.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/advanced_usage/index.html">Advanced Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/cli_usage/index.html">CLI Usage</a></li>
+</ul>
+<p><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/config/index.html">potc.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/fixture/index.html">potc.fixture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/rules/index.html">potc.rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/supports/index.html">potc.supports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/testing/index.html">potc.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/translate/index.html">potc.translate</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">potc</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>potc.translate.trans</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+    
+    
+  <h1>Source code for potc.translate.trans</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">isort</span> <span class="kn">import</span> <span class="n">code</span> <span class="k">as</span> <span class="n">sort_code_imports</span>
+<span class="kn">from</span> <span class="nn">yapf.yapflib.yapf_api</span> <span class="kn">import</span> <span class="n">FormatCode</span>
+
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">make_both_rules</span>
+<span class="kn">from</span> <span class="nn">..fixture</span> <span class="kn">import</span> <span class="n">Addons</span><span class="p">,</span> <span class="n">UnprocessableError</span>
+<span class="kn">from</span> <span class="nn">..fixture.imports</span> <span class="kn">import</span> <span class="n">ImportStatement</span>
+<span class="kn">from</span> <span class="nn">..rules</span> <span class="kn">import</span> <span class="n">installed_loader</span><span class="p">,</span> <span class="n">system_all</span><span class="p">,</span> <span class="n">default_all</span><span class="p">,</span> <span class="n">native_all</span>
+
+
+<div class="viewcode-block" id="TranslationFailed"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.TranslationFailed">[docs]</a><span class="k">class</span> <span class="nc">TranslationFailed</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Exception when translation is failed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TranslationFailed.__init__"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.TranslationFailed.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Constructor of :class:`TranslationFailed`.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - obj: Object which is failed to be translated.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="ne">Exception</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Translating failed for </span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__obj</span> <span class="o">=</span> <span class="n">obj</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">obj</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            The object which is failed to be translated.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__obj</span></div>
+
+
+<div class="viewcode-block" id="ObjectTranslation"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.ObjectTranslation">[docs]</a><span class="k">class</span> <span class="nc">ObjectTranslation</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Result of object translation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ObjectTranslation.__init__"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.ObjectTranslation.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">addon</span><span class="p">:</span> <span class="n">Addons</span><span class="p">,</span> <span class="n">trace</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Constructor of :class:`ObjectTranslation`.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - code (:obj:`str`): String translated code.</span>
+<span class="sd">            - addon (:obj:`Addons`): Addon object for this translation.</span>
+<span class="sd">            - trace (:obj:`str`): Rule name for the translated object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__code</span> <span class="o">=</span> <span class="n">code</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__addon</span> <span class="o">=</span> <span class="n">addon</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__trace</span> <span class="o">=</span> <span class="n">trace</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            String translated code.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__code</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">addon</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Addons</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Addon object for this translation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__addon</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">trace</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Rule name for the translated object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__trace</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">imports</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">ImportStatement</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Import statements of this translation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">addon</span><span class="o">.</span><span class="n">import_items</span>
+
+<div class="viewcode-block" id="ObjectTranslation.__str__"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.ObjectTranslation.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Just get the string code, such as for the :func:`print` function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__code</span></div>
+
+<div class="viewcode-block" id="ObjectTranslation.__iter__"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.ObjectTranslation.__iter__">[docs]</a>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Iterate this object.</span>
+
+<span class="sd">        Examples::</span>
+<span class="sd">            &gt;&gt;&gt; ot = ObjectTranslation(cc, aa, tt)</span>
+<span class="sd">            &gt;&gt;&gt; c, a, t = ot</span>
+<span class="sd">            &gt;&gt;&gt; assert c is cc</span>
+<span class="sd">            &gt;&gt;&gt; assert a is aa</span>
+<span class="sd">            &gt;&gt;&gt; assert t is tt</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">__code</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">__addon</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">__trace</span></div></div>
+
+
+<div class="viewcode-block" id="VarsTranslation"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.VarsTranslation">[docs]</a><span class="k">class</span> <span class="nc">VarsTranslation</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Result of vars translation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="VarsTranslation.__init__"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.VarsTranslation.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">addons</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Addons</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Constructor of :class:`VarsTranslation`.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - code (:obj:`str`): String translated code.</span>
+<span class="sd">            - addons (:obj:`Mapping[str, Addons]`): Addon objects for the sub translations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__code</span> <span class="o">=</span> <span class="n">code</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__addons</span> <span class="o">=</span> <span class="n">addons</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            String translated code.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__code</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">addons</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Addons</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Addon objects for the sub translations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__addons</span>
+
+<div class="viewcode-block" id="VarsTranslation.__str__"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.VarsTranslation.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Just get the string code, such as for the :func:`print` function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__code</span></div>
+
+<div class="viewcode-block" id="VarsTranslation.__iter__"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.VarsTranslation.__iter__">[docs]</a>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Iterate this object.</span>
+
+<span class="sd">        Examples::</span>
+<span class="sd">            &gt;&gt;&gt; ot = VarsTranslation(cc, aa)</span>
+<span class="sd">            &gt;&gt;&gt; c, a = ot</span>
+<span class="sd">            &gt;&gt;&gt; assert c is cc</span>
+<span class="sd">            &gt;&gt;&gt; assert a is aa</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">__code</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">__addons</span></div></div>
+
+
+<span class="n">_VARS_KEY_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[_a-zA-Z][_0-9a-zA-Z]*$&#39;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">_AbstractTranslator</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rules</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Constructor of :class:`_AbstractTranslator`.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - rules: Rules for translator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__rule</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__plain_rule</span> <span class="o">=</span> <span class="n">make_both_rules</span><span class="p">(</span><span class="n">rules</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">transobj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObjectTranslation</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Do translation to the given object ``obj``.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - obj: Object to be translated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - result (:obj:`ObjectTranslation`): Result of object translation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">addon</span> <span class="o">=</span> <span class="n">Addons</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__plain_rule</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">_code</span><span class="p">,</span> <span class="n">_trace_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__rule</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">addon</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ObjectTranslation</span><span class="p">(</span><span class="n">_code</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">addon</span><span class="p">,</span> <span class="n">_trace_name</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">UnprocessableError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">TranslationFailed</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__transvars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vars_</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
+        <span class="n">codes</span><span class="p">,</span> <span class="n">addons</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">vars_</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="n">_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transobj</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">_code</span><span class="p">,</span> <span class="n">_addon</span> <span class="o">=</span> <span class="n">_result</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">_result</span><span class="o">.</span><span class="n">addon</span>
+            <span class="n">codes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="n">_code</span><span class="p">))</span>
+            <span class="n">addons</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="n">_addon</span><span class="p">))</span>
+
+        <span class="n">_imports</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">import_items</span><span class="p">,</span> <span class="n">addons</span><span class="p">))),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_imports</span><span class="p">,</span> <span class="n">codes</span><span class="p">,</span> <span class="n">addons</span>
+
+    <span class="k">def</span> <span class="nf">transvars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vars_</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">reformat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">isort</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VarsTranslation</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Do translation to the given variables ``vars_``, and create a runnable code.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - vars\_ (:obj:`Mapping[str, Any]`): Variables to be translated.</span>
+<span class="sd">            - reformat: Reformatter for the final source code, default is ``None`` which means \</span>
+<span class="sd">                do not reformat the code.</span>
+<span class="sd">            - isort (:obj:`bool`): Sort the import statements, default is ``True``.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - result (:obj:`VarsTranslation`): Result of vars translation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">actual_vars</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">vars_</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">actual_vars</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_VARS_KEY_PATTERN</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invalid variable name - </span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+
+        <span class="n">actual_vars</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">__all__</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">vars_</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+        <span class="n">_import_lines</span><span class="p">,</span> <span class="n">_assignments</span><span class="p">,</span> <span class="n">_addons</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__transvars</span><span class="p">(</span><span class="n">actual_vars</span><span class="p">)</span>
+
+        <span class="n">_assignment_lines</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">_assignments</span><span class="p">]</span>
+        <span class="n">_code</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">chain</span><span class="p">(</span><span class="n">_import_lines</span><span class="p">,</span> <span class="n">_assignment_lines</span><span class="p">))))</span>
+
+        <span class="k">if</span> <span class="n">isort</span><span class="p">:</span>
+            <span class="n">_code</span> <span class="o">=</span> <span class="n">sort_code_imports</span><span class="p">(</span><span class="n">_code</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">reformat</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">reformat</span><span class="p">):</span>
+                <span class="n">_code</span> <span class="o">=</span> <span class="n">reformat</span><span class="p">(</span><span class="n">_code</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">_code</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">FormatCode</span><span class="p">(</span><span class="n">_code</span><span class="p">,</span> <span class="n">style_config</span><span class="o">=</span><span class="n">reformat</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">VarsTranslation</span><span class="p">(</span><span class="n">_code</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">_addons</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="BaseTranslator"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.BaseTranslator">[docs]</a><span class="k">class</span> <span class="nc">BaseTranslator</span><span class="p">(</span><span class="n">_AbstractTranslator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Base translator for the common translation cases.</span>
+
+<span class="sd">        This class is based on :class:`_AbstractTranslator`, contains only \</span>
+<span class="sd">        system-leveled and default object-leveled translation rules.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="BaseTranslator.__init__"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.BaseTranslator.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extend_rules</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Constructor of :class:`BaseTranslator`.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - extend_rules: Rules for base translator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_AbstractTranslator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">(</span><span class="n">system_all</span><span class="p">,</span> <span class="n">extend_rules</span> <span class="ow">or</span> <span class="p">[],</span> <span class="n">default_all</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="BlankTranslator"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.BlankTranslator">[docs]</a><span class="k">class</span> <span class="nc">BlankTranslator</span><span class="p">(</span><span class="n">BaseTranslator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Blank translator for the common translation cases.</span>
+
+<span class="sd">        This class is based on :class:`BaseTranslator`, contains all the native rules \</span>
+<span class="sd">        in this project. May be the best choice for DIY and testings.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        The rules from the plugins will be not be here, \</span>
+<span class="sd">        and will certainly not be applied when translation is processed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="BlankTranslator.__init__"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.BlankTranslator.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extend_rules</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Constructor of :class:`BlankTranslator`.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - extend_rules: Rules for base translator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">BaseTranslator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">[(</span><span class="n">extend_rules</span> <span class="ow">or</span> <span class="p">[]),</span> <span class="n">native_all</span><span class="p">])</span></div></div>
+
+
+<div class="viewcode-block" id="Translator"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.Translator">[docs]</a><span class="k">class</span> <span class="nc">Translator</span><span class="p">(</span><span class="n">BlankTranslator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Common translator for the common translation cases.</span>
+
+<span class="sd">        This class is based on :class:`BlankTranslator`, contains all the \</span>
+<span class="sd">        rules from the installed plugins. It is the best choice for being used directly.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Translator.__init__"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.Translator.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extend_rules</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Constructor of :class:`Translator`.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - extend_rules: Rules for base translator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">BlankTranslator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">[(</span><span class="n">extend_rules</span> <span class="ow">or</span> <span class="p">[]),</span> <span class="n">installed_loader</span><span class="p">()])</span></div></div>
+
+
+<div class="viewcode-block" id="autotrans"><a class="viewcode-back" href="../../../api_doc/translate/trans.html#potc.translate.trans.autotrans">[docs]</a><span class="k">def</span> <span class="nf">autotrans</span><span class="p">(</span><span class="n">trans</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">BaseTranslator</span><span class="p">,</span> <span class="n">Type</span><span class="p">[</span><span class="n">BaseTranslator</span><span class="p">],</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">BaseTranslator</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Turn the given object ``trans`` to a :class:`BaseTranslator` instance.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        - trans (:obj:`Union[BaseTranslator, Type[BaseTranslator], list, tuple]`): \</span>
+<span class="sd">            Any object to be transformed to :class:`BaseTranslator` instance.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - translator (:obj:`BaseTranslator`): Translator instance which can be directly used.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">BaseTranslator</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">trans</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">BaseTranslator</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">trans</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Translator</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span></div>
+</pre></div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HansBug
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+    <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: dev/submodule
+    <span class="fa fa-caret-down"></span>
+  </span>
+        <div class="rst-other-versions">
+                <dl>
+                    <dt>Tags</dt>
+                        <dd><a href="../../../../../v0.0.2/index.html">v0.0.2</a></dd>
+                        <dd><a href="../../../../../v0.0.3/index.html">v0.0.3</a></dd>
+                        <dd><a href="../../../../../v0.0.4/index.html">v0.0.4</a></dd>
+                </dl>
+                <dl>
+                    <dt>Branches</dt>
+                        <dd><a href="trans.html">dev/submodule</a></dd>
+                        <dd><a href="../../../../../main/index.html">main</a></dd>
+                </dl>
+        </div>
+    </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

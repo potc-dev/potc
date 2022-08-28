@@ -1,0 +1,495 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>potc.rules.native.builtin &mdash; potc 0.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="potc.rules.native.typing" href="typing.html" />
+    <link rel="prev" title="potc.rules.native" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> potc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/quick_start/index.html">Quick Start</a></li>
+</ul>
+<p><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../config/index.html">potc.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fixture/index.html">potc.fixture</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">potc.rules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">potc.rules.native</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">potc.rules.native.builtin</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-all">builtin_all</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-reflect">builtin_reflect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-collection">builtin_collection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-basic">builtin_basic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-ellipsis">builtin_ellipsis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-slice">builtin_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-range">builtin_range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-bytes">builtin_bytes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-float">builtin_float</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-module">builtin_module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-tuple">builtin_tuple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-func">builtin_func</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-type">builtin_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-dict">builtin_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-int">builtin_int</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-list">builtin_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-none">builtin_none</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-set">builtin_set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-str">builtin_str</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-items">builtin_items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-complex">builtin_complex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#builtin-object">builtin_object</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="typing.html">potc.rules.native.typing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../default.html">potc.rules.default</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installed.html">potc.rules.installed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system.html">potc.rules.system</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../supports/index.html">potc.supports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/index.html">potc.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translate/index.html">potc.translate</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">potc</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">potc.rules</a> &raquo;</li>
+        
+          <li><a href="index.html">potc.rules.native</a> &raquo;</li>
+        
+      <li>potc.rules.native.builtin</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/api_doc/rules/native/builtin.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+    
+    
+  <section id="module-potc.rules.native.builtin">
+<span id="potc-rules-native-builtin"></span><h1>potc.rules.native.builtin<a class="headerlink" href="#module-potc.rules.native.builtin" title="Permalink to this headline">¶</a></h1>
+<section id="builtin-all">
+<h2>builtin_all<a class="headerlink" href="#builtin-all" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="potc.rules.native.builtin.builtin_all">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_all</code><em class="property"> = [((&lt;function builtin_int&gt;, &lt;function builtin_complex&gt;, &lt;function builtin_float&gt;, &lt;function builtin_str&gt;, &lt;function builtin_none&gt;, &lt;function builtin_range&gt;, &lt;function builtin_slice&gt;, &lt;function builtin_ellipsis&gt;, &lt;function builtin_bytes&gt;), (&lt;function builtin_list&gt;, &lt;function builtin_tuple&gt;, &lt;function builtin_set&gt;, &lt;function builtin_dict&gt;), (&lt;function builtin_items&gt;, &lt;function builtin_func&gt;, &lt;function builtin_type&gt;, &lt;function builtin_raw_type&gt;, &lt;function builtin_module&gt;), &lt;function builtin_object&gt;)]</em><a class="headerlink" href="#potc.rules.native.builtin.builtin_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overview:
+All Builtin types.</p>
+</dd></dl>
+
+</section>
+<section id="builtin-reflect">
+<h2>builtin_reflect<a class="headerlink" href="#builtin-reflect" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="potc.rules.native.builtin.builtin_reflect">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_reflect</code><em class="property"> = (&lt;function builtin_items&gt;, &lt;function builtin_func&gt;, &lt;function builtin_type&gt;, &lt;function builtin_raw_type&gt;, &lt;function builtin_module&gt;)</em><a class="headerlink" href="#potc.rules.native.builtin.builtin_reflect" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Builtin reflectance types</p>
+</dd>
+<dt>Items:</dt><dd><ul class="simple">
+<li><p>Builtin items (items in module <code class="docutils literal notranslate"><span class="pre">builtins</span></code>)</p></li>
+<li><p>Functions</p></li>
+<li><p>Types (including importable ones and unimportable ones)</p></li>
+<li><p>Modules</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="builtin-collection">
+<h2>builtin_collection<a class="headerlink" href="#builtin-collection" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="potc.rules.native.builtin.builtin_collection">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_collection</code><em class="property"> = (&lt;function builtin_list&gt;, &lt;function builtin_tuple&gt;, &lt;function builtin_set&gt;, &lt;function builtin_dict&gt;)</em><a class="headerlink" href="#potc.rules.native.builtin.builtin_collection" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Builtin collection types</p>
+</dd>
+<dt>Items:</dt><dd><ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="builtin-basic">
+<h2>builtin_basic<a class="headerlink" href="#builtin-basic" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="potc.rules.native.builtin.builtin_basic">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_basic</code><em class="property"> = (&lt;function builtin_int&gt;, &lt;function builtin_complex&gt;, &lt;function builtin_float&gt;, &lt;function builtin_str&gt;, &lt;function builtin_none&gt;, &lt;function builtin_range&gt;, &lt;function builtin_slice&gt;, &lt;function builtin_ellipsis&gt;, &lt;function builtin_bytes&gt;)</em><a class="headerlink" href="#potc.rules.native.builtin.builtin_basic" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Basic builtin types.</p>
+</dd>
+<dt>Items:</dt><dd><ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">complex</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">none</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">slice</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ellipsis</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="builtin-ellipsis">
+<h2>builtin_ellipsis<a class="headerlink" href="#builtin-ellipsis" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_ellipsis">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_ellipsis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_ellipsis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_ellipsis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-slice">
+<h2>builtin_slice<a class="headerlink" href="#builtin-slice" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_slice">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_slice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">slice</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_slice" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-range">
+<h2>builtin_range<a class="headerlink" href="#builtin-range" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_range">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_range</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">range</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_range" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-bytes">
+<h2>builtin_bytes<a class="headerlink" href="#builtin-bytes" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_bytes">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_bytes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">bytes</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_bytes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_bytes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-float">
+<h2>builtin_float<a class="headerlink" href="#builtin-float" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_float">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_float</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_float"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_float" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-module">
+<h2>builtin_module<a class="headerlink" href="#builtin-module" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_module">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_module</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_module"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_module" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-tuple">
+<h2>builtin_tuple<a class="headerlink" href="#builtin-tuple" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_tuple">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_tuple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">tuple</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_tuple"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_tuple" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-func">
+<h2>builtin_func<a class="headerlink" href="#builtin-func" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_func">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_func</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_func"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_func" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-type">
+<h2>builtin_type<a class="headerlink" href="#builtin-type" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_type">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">type</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-dict">
+<h2>builtin_dict<a class="headerlink" href="#builtin-dict" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_dict">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">dict</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-int">
+<h2>builtin_int<a class="headerlink" href="#builtin-int" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_int">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_int</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_int" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-list">
+<h2>builtin_list<a class="headerlink" href="#builtin-list" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_list">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-none">
+<h2>builtin_none<a class="headerlink" href="#builtin-none" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_none">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_none</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_none"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_none" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-set">
+<h2>builtin_set<a class="headerlink" href="#builtin-set" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_set">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">set</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-str">
+<h2>builtin_str<a class="headerlink" href="#builtin-str" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_str">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_str</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-items">
+<h2>builtin_items<a class="headerlink" href="#builtin-items" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_items">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_items</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-complex">
+<h2>builtin_complex<a class="headerlink" href="#builtin-complex" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_complex">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_complex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span><span class="p">:</span> <span class="n">complex</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_complex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_complex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="builtin-object">
+<h2>builtin_object<a class="headerlink" href="#builtin-object" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.rules.native.builtin.builtin_object">
+<code class="sig-prename descclassname">potc.rules.native.builtin.</code><code class="sig-name descname">builtin_object</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em>, <em class="sig-param"><span class="n">addon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../fixture/addons.html#potc.fixture.addons.Addons" title="potc.fixture.addons.Addons">potc.fixture.addons.Addons</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/potc/rules/native/builtin.html#builtin_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.rules.native.builtin.builtin_object" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="typing.html" class="btn btn-neutral float-right" title="potc.rules.native.typing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="potc.rules.native" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HansBug
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+    <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: v0.0.2
+    <span class="fa fa-caret-down"></span>
+  </span>
+        <div class="rst-other-versions">
+                <dl>
+                    <dt>Tags</dt>
+                        <dd><a href="builtin.html">v0.0.2</a></dd>
+                        <dd><a href="../../../../v0.0.3/api_doc/rules/native/builtin.html">v0.0.3</a></dd>
+                        <dd><a href="../../../../v0.0.4/api_doc/rules/native/builtin.html">v0.0.4</a></dd>
+                </dl>
+                <dl>
+                    <dt>Branches</dt>
+                        <dd><a href="../../../../dev/submodule/api_doc/rules/native/builtin.html">dev/submodule</a></dd>
+                        <dd><a href="../../../../main/api_doc/rules/native/builtin.html">main</a></dd>
+                </dl>
+        </div>
+    </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
