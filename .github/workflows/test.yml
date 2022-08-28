@@ -112,7 +112,7 @@ jobs:
           fail_ci_if_error: false
 
   plugin_test:
-    name: Plugin ${{ matrix.plugin }} test, python ${{ matrix.python-version }}
+    name: Plugin test
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
