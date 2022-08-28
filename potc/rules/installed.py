@@ -1,7 +1,7 @@
 import types
 from functools import lru_cache
 
-from pkg_resources import iter_entry_points
+import pkg_resources
 
 from ..fixture import is_rule
 
@@ -24,7 +24,7 @@ _GROUP_NAME = 'potc_plugin'
 
 
 def _iter_plugins():
-    for ep in iter_entry_points(group=_GROUP_NAME):
+    for ep in pkg_resources.iter_entry_points(group=_GROUP_NAME):
         yield ep.load()
 
 
