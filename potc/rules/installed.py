@@ -1,5 +1,4 @@
 import types
-from functools import lru_cache
 
 import pkg_resources
 
@@ -32,7 +31,6 @@ def _load_plugins():
     return [_autoload_plugin(item) for item in _iter_plugins()]
 
 
-@lru_cache()
 def installed_loader():
     """
     Overview:
