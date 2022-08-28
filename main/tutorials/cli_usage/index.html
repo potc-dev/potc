@@ -265,29 +265,11 @@ Expression:
 </pre></div></td></tr></table></div>
 </div>
 <p>Besides, you can use your self-defined rules to change the dumping result, like this</p>
-<div class="highlight-shell notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span>potc <span class="nb">export</span> -v <span class="s1">&#39;data.v_*&#39;</span> -r plugins.potc_dict.potc_dict.plugin.__rules__
+<div class="highlight-shell notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span>potc <span class="nb">export</span> -v <span class="s1">&#39;data.v_*&#39;</span> -r plugins.dict.potc_dict.plugin.__rules__
 </pre></div></td></tr></table></div>
 </div>
 <p>The new dumped code should be</p>
-<div class="highlight-shell notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span>import math
-from builtins import dict
-
-<span class="nv">__all__</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;v_a&#39;</span>, <span class="s1">&#39;v_b&#39;</span><span class="o">]</span>
-<span class="nv">v_a</span> <span class="o">=</span> <span class="o">[</span><span class="m">1</span>, <span class="s1">&#39;kdfgjs&#39;</span>, None, math.pi<span class="o">]</span>
-<span class="nv">v_b</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="s1">&#39;a&#39;</span>: <span class="o">[</span><span class="m">1</span>, <span class="s1">&#39;kdfgjs&#39;</span>, None, math.pi<span class="o">]</span>,
-    <span class="s1">&#39;b&#39;</span>: <span class="o">(</span><span class="m">3</span>, <span class="m">4</span>, <span class="s1">&#39;dfg&#39;</span><span class="o">)</span>,
-    <span class="m">0</span>: dict<span class="o">(</span><span class="nv">a</span><span class="o">=</span><span class="m">3</span>, <span class="nv">b</span><span class="o">=</span>None, <span class="nv">c</span><span class="o">=</span>math.e<span class="o">)</span>
-<span class="o">}</span>
+<div class="highlight-shell notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span>
 </pre></div></td></tr></table></div>
 </div>
 </section>
