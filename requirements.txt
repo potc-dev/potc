@@ -1,5 +1,5 @@
 enum_tools
-dill~=0.3.4
+dill==0.3.4
 yapf>=0.29.0,<1
 isort>=5.6
 click>=8,<9
