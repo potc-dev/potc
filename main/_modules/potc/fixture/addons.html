@@ -1,0 +1,497 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>potc.fixture.addons &mdash; potc 0.0.4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> potc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/quick_start/index.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/main_idea/index.html">Main Idea</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/basic_usage/index.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/advanced_usage/index.html">Advanced Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/cli_usage/index.html">CLI Usage</a></li>
+</ul>
+<p><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/config/index.html">potc.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/fixture/index.html">potc.fixture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/rules/index.html">potc.rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/supports/index.html">potc.supports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/testing/index.html">potc.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_doc/translate/index.html">potc.translate</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">potc</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>potc.fixture.addons</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+    
+    
+  <h1>Source code for potc.fixture.addons</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">.imports</span> <span class="kn">import</span> <span class="n">ImportPool</span><span class="p">,</span> <span class="n">ImportStatement</span><span class="p">,</span> <span class="n">FromImport</span><span class="p">,</span> <span class="n">DirectImport</span><span class="p">,</span> <span class="n">try_import_info</span>
+
+
+<span class="nd">@lru_cache</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">_get_unprocessable</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">unprocessable</span>
+    <span class="k">return</span> <span class="n">unprocessable</span>
+
+
+<span class="k">def</span> <span class="nf">unprocessable</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">_get_unprocessable</span><span class="p">()()</span>
+
+
+<div class="viewcode-block" id="AddonProxy"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.AddonProxy">[docs]</a><span class="k">class</span> <span class="nc">AddonProxy</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Proxy of addon expression.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AddonProxy.__init__"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.AddonProxy.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">rule</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Constructor of ``AddonProxy``</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - base: Base unit of the proxy.</span>
+<span class="sd">            - rule: Translation rule.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__base</span> <span class="o">=</span> <span class="n">base</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__rule</span> <span class="o">=</span> <span class="n">rule</span></div>
+
+<div class="viewcode-block" id="AddonProxy.__getattr__"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.AddonProxy.__getattr__">[docs]</a>    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Generate attribute-getting expression, \</span>
+<span class="sd">            like ``base.xxx``.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - item (:obj:`str`): Attribute name.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - proxy: New generated proxy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">AddonProxy</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__base</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__rule</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AddonProxy.__getitem__"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.AddonProxy.__getitem__">[docs]</a>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Generate item-getting expression, \</span>
+<span class="sd">            like ``base[233]``, ``base[::-1]`` or ``base[1, 2, 3]``.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - item (:obj:`str`): Item value, can be simple value, slice or tuple.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - proxy: New generated proxy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+            <span class="n">_items</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span> <span class="o">*</span><span class="p">((</span><span class="n">item</span><span class="o">.</span><span class="n">step</span><span class="p">,)</span> <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">step</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">())]</span>
+            <span class="n">_item_str</span> <span class="o">=</span> <span class="s1">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">__rule</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">_items</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">_item_str</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__rule</span><span class="p">,</span> <span class="n">item</span><span class="p">))</span>
+            <span class="n">_item_str</span> <span class="o">=</span> <span class="n">_item_str</span> <span class="o">+</span> <span class="p">(</span><span class="s1">&#39;, &#39;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_item_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__rule</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">AddonProxy</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__base</span><span class="si">}</span><span class="s1">[</span><span class="si">{</span><span class="n">_item_str</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__rule</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AddonProxy.__call__"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.AddonProxy.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Generate item call expression, \</span>
+<span class="sd">            like ``base(1, 2, x=1, y=2)``.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - args: Positional arguments.</span>
+<span class="sd">            - kwargs: Key-word arguments.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - proxy: New generated proxy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_items</span> <span class="o">=</span> <span class="n">chain</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__rule</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">args</span><span class="p">),</span>
+            <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__rule</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">AddonProxy</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__base</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_items</span><span class="p">)</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__rule</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AddonProxy.__str__"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.AddonProxy.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            String format of expression.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - return (:obj:`str`): String formatted expression.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__base</span></div></div>
+
+
+<div class="viewcode-block" id="Addons"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.Addons">[docs]</a><span class="k">class</span> <span class="nc">Addons</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Addon object used in rules.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Addons.__init__"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.Addons.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Constructor of ``Addons``.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - rule: Translation rule, default is ``None`` which means no translation rule, \</span>
+<span class="sd">                auto translation will also be disabled when ``None`` is used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__imports</span> <span class="o">=</span> <span class="n">ImportPool</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__rule</span> <span class="o">=</span> <span class="n">rule</span></div>
+
+    <span class="k">def</span> <span class="nf">import_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_import</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DirectImport</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__imports</span><span class="o">.</span><span class="n">import_</span><span class="p">(</span><span class="n">_import</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">from_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_from</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FromImport</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__imports</span><span class="o">.</span><span class="n">from_</span><span class="p">(</span><span class="n">_from</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Addons.obj"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.Addons.obj">[docs]</a>    <span class="k">def</span> <span class="nf">obj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">alias</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AddonProxy</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Generate an object proxy.</span>
+<span class="sd">            Object proxy means a object which need to be automatically imported, \</span>
+<span class="sd">            such as ``json``, an import statement ``import json`` will be generated.</span>
+<span class="sd">            If the object cannot be imported, it will raise exception.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - obj: Target object.</span>
+<span class="sd">            - alias (:obj:`Optional[str]`): Alias name of the imported object, \</span>
+<span class="sd">                default is ``None`` which means do not alias.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - proxy (:obj:`AddonProxy`): Expression proxy object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">segments</span> <span class="o">=</span> <span class="n">try_import_info</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">alias</span><span class="o">=</span><span class="n">alias</span><span class="p">)</span>
+            <span class="n">_import</span> <span class="o">=</span> <span class="bp">self</span>
+            <span class="k">for</span> <span class="n">sign</span><span class="p">,</span> <span class="n">content</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">segments</span><span class="p">[::</span><span class="mi">2</span><span class="p">],</span> <span class="n">segments</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">sign</span> <span class="o">==</span> <span class="s1">&#39;from&#39;</span><span class="p">:</span>
+                    <span class="n">_import</span> <span class="o">=</span> <span class="n">_import</span><span class="o">.</span><span class="n">from_</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">sign</span> <span class="o">==</span> <span class="s1">&#39;import&#39;</span><span class="p">:</span>
+                    <span class="n">_import</span> <span class="o">=</span> <span class="n">_import</span><span class="o">.</span><span class="n">import_</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">_import</span> <span class="o">=</span> <span class="n">_import</span><span class="o">.</span><span class="n">as_</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">alias</span><span class="p">:</span>
+                <span class="n">_import</span> <span class="o">=</span> <span class="n">_import</span><span class="o">.</span><span class="n">as_</span><span class="p">(</span><span class="n">alias</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">AddonProxy</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_import</span><span class="o">.</span><span class="n">target</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">rule</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Addons.val"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.Addons.val">[docs]</a>    <span class="k">def</span> <span class="nf">val</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AddonProxy</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Generate a value proxy.</span>
+<span class="sd">            Differs from ``obj`` method, this method will not do automatic import, \</span>
+<span class="sd">            it will just generate the string expression with the rule translator.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - obj: Value object.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - proxy (:obj:`AddonProxy`): Expression proxy object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">AddonProxy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rule</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">rule</span><span class="p">)</span></div>
+
+    <span class="c1"># noinspection PyMethodMayBeStatic</span>
+<div class="viewcode-block" id="Addons.raw"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.Addons.raw">[docs]</a>    <span class="k">def</span> <span class="nf">raw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AddonProxy</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Generate raw proxy.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - val: Raw object.</span>
+<span class="sd">            - func: Translation function, default is ``None`` which means just \</span>
+<span class="sd">                turn it to string by builtin function ``str``.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - proxy (:obj:`AddonProxy`): Raw proxy object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">AddonProxy</span><span class="p">((</span><span class="n">func</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">)(</span><span class="n">val</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">rule</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Addons.rule"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.Addons.rule">[docs]</a>    <span class="k">def</span> <span class="nf">rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Express the value with the rule translator.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - v: Value object.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - str (:obj:`str`): String formatted expression.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__rule</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">import_items</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">ImportStatement</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Import statements.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - statements (:obj:`Tuple[ImportStatement, ...]`): Tuple of import statements.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__imports</span><span class="o">.</span><span class="n">imports</span>
+
+    <span class="c1"># noinspection PyMethodMayBeStatic</span>
+<div class="viewcode-block" id="Addons.unprocessable"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.Addons.unprocessable">[docs]</a>    <span class="k">def</span> <span class="nf">unprocessable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Raise an exception ``UnprocessableError``.</span>
+<span class="sd">            Announce that the current rule cannot express this value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">unprocessable</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Addons.transaction"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.Addons.transaction">[docs]</a>    <span class="nd">@contextmanager</span>
+    <span class="k">def</span> <span class="nf">transaction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Open up an atomic transaction context.</span>
+<span class="sd">            If exception is thrown in this context, all the update in this \</span>
+<span class="sd">            addon object will be undone.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; with addon.transaction():</span>
+<span class="sd">            &gt;&gt;&gt;     addon.rule(1)</span>
+<span class="sd">            &gt;&gt;&gt;     addon.val([1, 2])</span>
+<span class="sd">            &gt;&gt;&gt;     addon.obj(json)</span>
+<span class="sd">            &gt;&gt;&gt;     raise RuntimeError  # the changes above will be undone</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_state</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">())</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="bp">self</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__setstate__</span><span class="p">(</span><span class="n">_state</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">err</span></div>
+
+<div class="viewcode-block" id="Addons.__getstate__"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.Addons.__getstate__">[docs]</a>    <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Get state value of this object.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - state: State value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__imports</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__rule</span></div>
+
+<div class="viewcode-block" id="Addons.__setstate__"><a class="viewcode-back" href="../../../api_doc/fixture/addons.html#potc.fixture.addons.Addons.__setstate__">[docs]</a>    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Set state value of this object.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            - state: State value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__imports</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__rule</span> <span class="o">=</span> <span class="n">state</span></div></div>
+</pre></div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HansBug
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+    <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: main
+    <span class="fa fa-caret-down"></span>
+  </span>
+        <div class="rst-other-versions">
+                <dl>
+                    <dt>Tags</dt>
+                        <dd><a href="../../../../v0.0.1/index.html">v0.0.1</a></dd>
+                        <dd><a href="../../../../v0.0.2/index.html">v0.0.2</a></dd>
+                        <dd><a href="../../../../v0.0.3/index.html">v0.0.3</a></dd>
+                        <dd><a href="../../../../v0.0.4/index.html">v0.0.4</a></dd>
+                </dl>
+                <dl>
+                    <dt>Branches</dt>
+                        <dd><a href="addons.html">main</a></dd>
+                </dl>
+        </div>
+    </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
