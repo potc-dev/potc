@@ -37,6 +37,14 @@ class _MyPair:
         self.__x = x
         self.__y = y
 
+    @property
+    def x(self):
+        return self.__x
+
+    @property
+    def y(self):
+        return self.__y
+
     def __getstate__(self):
         return self.__x, self.__y
 
@@ -145,7 +153,9 @@ class TestRulesNativeBuiltins:
             assert name == 'builtin_type'
 
         with transobj_assert(self._MyInnerPair) as (obj, name):
-            assert obj == self._MyInnerPair
+            assert isinstance(obj, type)
+            assert issubclass(obj, _MyPair)
+            assert obj.__name__ == self._MyInnerPair.__name__
             assert name == 'builtin_raw_type'
 
         with transobj_assert(types.ModuleType) as (obj, name):
@@ -264,7 +274,12 @@ class TestRulesNativeBuiltins:
             assert name == 'builtin_object'
 
         with transobj_assert(self._MyInnerPair(1, 2)) as (obj, name):
-            assert obj == self._MyInnerPair(1, 2)
+            assert isinstance(obj, _MyPair)
+            expected = self._MyInnerPair(1, 2)
+
+            assert type(obj).__name__ == type(expected).__name__
+            assert obj.x == expected.x
+            assert obj.y == expected.y
             assert name == 'builtin_object'
 
     def test_with_rules(self):
