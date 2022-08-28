@@ -38,6 +38,14 @@ class _MyPair:
         self.__x = x
         self.__y = y
 
+    @property
+    def x(self):
+        return self.__x
+
+    @property
+    def y(self):
+        return self.__y
+
     def __getstate__(self):
         return self.__x, self.__y
 
@@ -46,6 +54,9 @@ class _MyPair:
 
     def __eq__(self, other):
         return (other is self) or (type(other) == type(self) and self.__getstate__() == other.__getstate__())
+
+    def __repr__(self):
+        return f'<{type(self).__name__} x: {self.__x!r}, y: {self.__y!r}>'
 
 
 class _WrapperClass:
@@ -161,7 +172,9 @@ def provement(trans=None):
                 assert obj == _LocalType
 
             with self.transobj_assert(_WrapperClass._MyInnerPair) as (obj, name):
-                assert obj == _WrapperClass._MyInnerPair
+                assert isinstance(obj, type)
+                assert issubclass(obj, _MyPair)
+                assert obj.__name__ == _WrapperClass._MyInnerPair.__name__
 
             with self.transobj_assert(types.ModuleType) as (obj, name):
                 assert obj is types.ModuleType
@@ -253,7 +266,13 @@ def provement(trans=None):
                 assert obj == _MyPair(1, 2)
 
             with self.transobj_assert(_WrapperClass._MyInnerPair(1, 2)) as (obj, name):
-                assert obj == _WrapperClass._MyInnerPair(1, 2)
+                assert isinstance(obj, _MyPair)
+                expected = _WrapperClass._MyInnerPair(1, 2)
+
+                assert type(obj).__name__ == type(expected).__name__
+                assert obj.x == expected.x
+                assert obj.y == expected.y
+                assert repr(obj) == repr(expected)
 
         def test_module(self):
             with self.transobj_assert(source) as (obj, name):
