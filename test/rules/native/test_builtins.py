@@ -54,6 +54,9 @@ class _MyPair:
     def __hash__(self):
         return hash(self.__getstate__())
 
+    def __repr__(self):
+        return f'<{type(self).__name__} x: {self.__x!r}, y: {self.__y!r}>'
+
 
 @pytest.mark.unittest
 class TestRulesNativeBuiltins:
