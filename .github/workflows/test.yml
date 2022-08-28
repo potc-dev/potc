@@ -25,6 +25,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 20
+          submodules: 'recursive'
       - name: Set up system dependences on linux
         if: ${{ runner.os == 'Linux' }}
         run: |
@@ -79,13 +80,14 @@ jobs:
           - '3.9'
           - '3.10'
         plugin:
-          - 'potc_dict'
+          - 'dict'
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 20
+          submodules: 'recursive'
       - name: Set up system dependences on linux
         if: ${{ runner.os == 'Linux' }}
         run: |
@@ -101,18 +103,16 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install --upgrade flake8 setuptools wheel twine
-          pip install -r requirements.txt
-          pip install -r requirements-test.txt
           pip install .
-          pip install "plugins/${{ matrix.plugin }}"
+          pip install -r "plugins/${{ matrix.plugin }}/requirements.txt"
+          pip install -r "plugins/${{ matrix.plugin }}/requirements-test.txt"
       - name: Test the basic environment
         run: |
           python -V
           pip --version
           pip list
           tree .
-          cloc potc_dict
-          cloc test
+          cloc plugins/${{ matrix.plugin }}
       - name: Run unittest
         env:
           CI: 'true'

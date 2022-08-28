@@ -1,0 +1,3 @@
+[submodule "plugins/dict"]
+	path = plugins/dict
+	url = git@github.com:potc-dev/potc-dict.git
