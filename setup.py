@@ -1,21 +1,23 @@
 import os
+import pathlib
 import re
 from codecs import open
 from distutils.core import setup
 
+import pkg_resources
 from setuptools import find_packages
 
 _package_name = "potc"
 
 here = os.path.abspath(os.path.dirname(__file__))
 meta = {}
-with open(os.path.join(here, _package_name, 'config', 'meta.py'), 'r', 'utf-8') as f:
+with open(os.path.join(here, _package_name, 'config', 'meta.py'), 'r', encoding='utf-8') as f:
     exec(f.read(), meta)
 
 
 def _load_req(file: str):
-    with open(file, 'r', 'utf-8') as f:
-        return [line.strip() for line in f.readlines() if line.strip()]
+    with pathlib.Path(file).open() as reqfile:
+        return list(map(str, pkg_resources.parse_requirements(reqfile)))
 
 
 requirements = _load_req('requirements.txt')
@@ -26,7 +28,7 @@ group_requirements = {
     for item in [_REQ_PATTERN.fullmatch(reqpath) for reqpath in os.listdir()] if item
 }
 
-with open('README.md', 'r', 'utf-8') as f:
+with open('README.md', 'r', encoding='utf-8') as f:
     readme = f.read()
 
 setup(
