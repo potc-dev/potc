@@ -1,7 +1,6 @@
 import types
-from functools import lru_cache
 
-from pkg_resources import iter_entry_points
+import pkg_resources
 
 from ..fixture import is_rule
 
@@ -20,11 +19,11 @@ def _autoload_plugin(plg):
         raise TypeError(f'Not a valid rule object, link or group - {repr(plg)}.')
 
 
-_GROUP_NAME = 'potc_plugin'
+POTC_PLUGIN_GROUP = 'potc_plugin'
 
 
 def _iter_plugins():
-    for ep in iter_entry_points(group=_GROUP_NAME):
+    for ep in pkg_resources.iter_entry_points(group=POTC_PLUGIN_GROUP):
         yield ep.load()
 
 
@@ -32,7 +31,6 @@ def _load_plugins():
     return [_autoload_plugin(item) for item in _iter_plugins()]
 
 
-@lru_cache()
 def installed_loader():
     """
     Overview:

@@ -1,3 +1,6 @@
 [submodule "plugins/dict"]
 	path = plugins/dict
 	url = git@github.com:potc-dev/potc-dict.git
+[submodule "plugins/typing"]
+	path = plugins/typing
+	url = git@github.com:potc-dev/potc-typing.git

@@ -127,6 +127,7 @@ jobs:
           - '3.10'
         plugin:
           - 'dict'
+          - 'typing'
 
     steps:
       - name: Get system version for Linux
@@ -205,7 +206,7 @@ jobs:
       - name: Run unittest
         env:
           CI: 'true'
-          MIN_COVERAGE: '90'
+          MIN_COVERAGE: '80'
         shell: bash
         run: |
           make -C plugins/${{ matrix.plugin }} unittest

@@ -10,4 +10,3 @@ potc.rules.native
     :maxdepth: 3
 
     builtin
-    typing
