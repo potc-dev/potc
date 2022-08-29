@@ -30,11 +30,11 @@ class TestTranslateTrans:
         assert _trace == 'builtin_list'
 
     def test_base_translator(self):
-        with transobj_assert(1, trans=BaseTranslator) as(obj, name):
+        with transobj_assert(1, trans=BaseTranslator) as (obj, name):
             assert obj == 1
             assert name == 'default_object'
 
-        with transobj_assert(1, trans=BaseTranslator()) as(obj, name):
+        with transobj_assert(1, trans=BaseTranslator()) as (obj, name):
             assert obj == 1
             assert name == 'default_object'
 
