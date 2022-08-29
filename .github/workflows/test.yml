@@ -206,7 +206,7 @@ jobs:
       - name: Run unittest
         env:
           CI: 'true'
-          MIN_COVERAGE: '90'
+          MIN_COVERAGE: '80'
         shell: bash
         run: |
           make -C plugins/${{ matrix.plugin }} unittest
