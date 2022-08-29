@@ -19,11 +19,11 @@ def _autoload_plugin(plg):
         raise TypeError(f'Not a valid rule object, link or group - {repr(plg)}.')
 
 
-_GROUP_NAME = 'potc_plugin'
+POTC_PLUGIN_GROUP = 'potc_plugin'
 
 
 def _iter_plugins():
-    for ep in pkg_resources.iter_entry_points(group=_GROUP_NAME):
+    for ep in pkg_resources.iter_entry_points(group=POTC_PLUGIN_GROUP):
         yield ep.load()
 
 
