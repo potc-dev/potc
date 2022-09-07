@@ -18,5 +18,5 @@ def with_pythonpath(*path: str):
 
 @pytest.fixture(autouse=True)
 def no_plugin():
-    with mock_potc_plugins():
+    with mock_potc_plugins(clear=True):
         yield

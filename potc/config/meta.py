@@ -7,7 +7,7 @@ Overview:
 __TITLE__ = "potc"
 
 #: Version of this project.
-__VERSION__ = "0.1.0"
+__VERSION__ = "0.1.1"
 
 #: Short description of the project, will be included in ``setup.py``.
 __DESCRIPTION__ = 'Python object to code module.'

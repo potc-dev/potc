@@ -1,5 +1,6 @@
 from contextlib import contextmanager
 from functools import wraps
+from itertools import chain
 from unittest.mock import patch, MagicMock
 
 import pkg_resources
@@ -44,12 +45,13 @@ def _to_plugin(v) -> FakeEntryPoint:
 
 
 @contextmanager
-def mock_potc_plugins(*plugins):
+def mock_potc_plugins(*plugins, clear=False):
     """
     Overview:
         Mock potc plugins for unittest.
 
     :param plugins: String of plugin module, such as ``potc_dict.plugin``, which can be auto-imported.
+    :param clear: Only use the mocked plugins. Default is ``False``, which means the installed plugins will be kept.
 
     Examples::
         >>> from potc import transobj
@@ -66,13 +68,26 @@ def mock_potc_plugins(*plugins):
         >>> print(transobj({'a': 1, 'b': [3, 'dfgk']}))  # again
         dict(a=1, b=[3, 'dfgk'])
     """
+    from pkg_resources import iter_entry_points as _origin_iep
 
     @wraps(pkg_resources.iter_entry_points)
     def _new_iter_func(group, name=None):
+        _exist_names = set()
+
+        def _check_name(x) -> bool:
+            if (name is None or x.name == name) and name not in _exist_names:
+                _exist_names.add(name)
+                return True
+            else:
+                return False
+
         if group == POTC_PLUGIN_GROUP:
-            yield from filter(lambda x: (name is None or x.name == name), map(_to_plugin, plugins))
+            mocked = map(_to_plugin, plugins)
+            if not clear:
+                mocked = chain(mocked, _origin_iep(group, name))
+            yield from filter(_check_name, mocked)
         else:
-            yield from pkg_resources.iter_entry_points(group, name)  # pragma: no cover
+            yield from _origin_iep(group, name)  # pragma: no cover
 
     with patch('pkg_resources.iter_entry_points', MagicMock(side_effect=_new_iter_func)):
         yield
