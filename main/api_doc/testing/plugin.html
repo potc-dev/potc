@@ -9,7 +9,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>potc.testing.plugin &mdash; potc 0.1.0 documentation</title>
+  <title>potc.testing.plugin &mdash; potc 0.1.1 documentation</title>
   
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.1.1
               </div>
             
           
@@ -185,14 +185,17 @@
 <h2>mock_potc_plugins<a class="headerlink" href="#mock-potc-plugins" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="potc.testing.plugin.mock_potc_plugins">
-<code class="sig-prename descclassname">potc.testing.plugin.</code><code class="sig-name descname">mock_potc_plugins</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">plugins</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/testing/plugin.html#mock_potc_plugins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.testing.plugin.mock_potc_plugins" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">potc.testing.plugin.</code><code class="sig-name descname">mock_potc_plugins</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">plugins</span></em>, <em class="sig-param"><span class="n">clear</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/potc/testing/plugin.html#mock_potc_plugins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.testing.plugin.mock_potc_plugins" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Overview:</dt><dd><p>Mock potc plugins for unittest.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>plugins</strong> – String of plugin module, such as <code class="docutils literal notranslate"><span class="pre">potc_dict.plugin</span></code>, which can be auto-imported.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plugins</strong> – String of plugin module, such as <code class="docutils literal notranslate"><span class="pre">potc_dict.plugin</span></code>, which can be auto-imported.</p></li>
+<li><p><strong>clear</strong> – Only use the mocked plugins. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>, which means the installed plugins will be kept.</p></li>
+</ul>
 </dd>
 </dl>
 <dl>
@@ -263,7 +266,6 @@
         <div class="rst-other-versions">
                 <dl>
                     <dt>Tags</dt>
-                        <dd><a href="../../../v0.0.1/index.html">v0.0.1</a></dd>
                         <dd><a href="../../../v0.0.2/index.html">v0.0.2</a></dd>
                         <dd><a href="../../../v0.0.3/index.html">v0.0.3</a></dd>
                         <dd><a href="../../../v0.0.4/index.html">v0.0.4</a></dd>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>potc.testing.plugin &mdash; potc 0.1.0 documentation</title>
+  <title>potc.testing.plugin &mdash; potc 0.1.1 documentation</title>
   
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.1.1
               </div>
             
           
@@ -167,6 +167,7 @@
   <h1>Source code for potc.testing.plugin</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
 <span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">patch</span><span class="p">,</span> <span class="n">MagicMock</span>
 
 <span class="kn">import</span> <span class="nn">pkg_resources</span>
@@ -211,12 +212,13 @@
 
 
 <div class="viewcode-block" id="mock_potc_plugins"><a class="viewcode-back" href="../../../api_doc/testing/plugin.html#potc.testing.plugin.mock_potc_plugins">[docs]</a><span class="nd">@contextmanager</span>
-<span class="k">def</span> <span class="nf">mock_potc_plugins</span><span class="p">(</span><span class="o">*</span><span class="n">plugins</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">mock_potc_plugins</span><span class="p">(</span><span class="o">*</span><span class="n">plugins</span><span class="p">,</span> <span class="n">clear</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Overview:</span>
 <span class="sd">        Mock potc plugins for unittest.</span>
 
 <span class="sd">    :param plugins: String of plugin module, such as ``potc_dict.plugin``, which can be auto-imported.</span>
+<span class="sd">    :param clear: Only use the mocked plugins. Default is ``False``, which means the installed plugins will be kept.</span>
 
 <span class="sd">    Examples::</span>
 <span class="sd">        &gt;&gt;&gt; from potc import transobj</span>
@@ -233,13 +235,26 @@
 <span class="sd">        &gt;&gt;&gt; print(transobj({&#39;a&#39;: 1, &#39;b&#39;: [3, &#39;dfgk&#39;]}))  # again</span>
 <span class="sd">        dict(a=1, b=[3, &#39;dfgk&#39;])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">iter_entry_points</span> <span class="k">as</span> <span class="n">_origin_iep</span>
 
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">pkg_resources</span><span class="o">.</span><span class="n">iter_entry_points</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">_new_iter_func</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">_exist_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">_check_name</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">name</span><span class="p">)</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_exist_names</span><span class="p">:</span>
+                <span class="n">_exist_names</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
         <span class="k">if</span> <span class="n">group</span> <span class="o">==</span> <span class="n">POTC_PLUGIN_GROUP</span><span class="p">:</span>
-            <span class="k">yield from</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">name</span><span class="p">),</span> <span class="nb">map</span><span class="p">(</span><span class="n">_to_plugin</span><span class="p">,</span> <span class="n">plugins</span><span class="p">))</span>
+            <span class="n">mocked</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">_to_plugin</span><span class="p">,</span> <span class="n">plugins</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">clear</span><span class="p">:</span>
+                <span class="n">mocked</span> <span class="o">=</span> <span class="n">chain</span><span class="p">(</span><span class="n">mocked</span><span class="p">,</span> <span class="n">_origin_iep</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+            <span class="k">yield from</span> <span class="nb">filter</span><span class="p">(</span><span class="n">_check_name</span><span class="p">,</span> <span class="n">mocked</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">yield from</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">iter_entry_points</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>
+            <span class="k">yield from</span> <span class="n">_origin_iep</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>
 
     <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;pkg_resources.iter_entry_points&#39;</span><span class="p">,</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">side_effect</span><span class="o">=</span><span class="n">_new_iter_func</span><span class="p">)):</span>
         <span class="k">yield</span></div>
@@ -280,7 +295,6 @@
         <div class="rst-other-versions">
                 <dl>
                     <dt>Tags</dt>
-                        <dd><a href="../../../../v0.0.1/index.html">v0.0.1</a></dd>
                         <dd><a href="../../../../v0.0.2/index.html">v0.0.2</a></dd>
                         <dd><a href="../../../../v0.0.3/index.html">v0.0.3</a></dd>
                         <dd><a href="../../../../v0.0.4/index.html">v0.0.4</a></dd>
