@@ -1,0 +1,400 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Basic Usage &mdash; potc 0.1.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Advanced Usage" href="../advanced_usage/index.html" />
+    <link rel="prev" title="Main Idea" href="../main_idea/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> potc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start/index.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../main_idea/index.html">Main Idea</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Basic Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#define-my-rules">Define My Rules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced_usage/index.html">Advanced Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli_usage/index.html">CLI Usage</a></li>
+</ul>
+<p><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api_doc/config/index.html">potc.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_doc/fixture/index.html">potc.fixture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_doc/rules/index.html">potc.rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_doc/supports/index.html">potc.supports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_doc/testing/index.html">potc.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_doc/translate/index.html">potc.translate</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">potc</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Basic Usage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/tutorials/basic_usage/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+    
+    
+  <section id="basic-usage">
+<h1>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h1>
+<section id="define-my-rules">
+<h2>Define My Rules<a class="headerlink" href="#define-my-rules" title="Permalink to this headline">¶</a></h2>
+<p>In the example above, <code class="docutils literal notranslate"><span class="pre">numpy</span></code> objects are translated as the serialized bytes, it is not as visible as we expected. Besides, you may think that the dictionary which is expressed with <code class="docutils literal notranslate"><span class="pre">{}</span></code> format is so ugly that you want to optimize the expression.</p>
+<p>You can define your own rule like the example below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">potc</span> <span class="kn">import</span> <span class="n">transvars</span>
+<span class="kn">from</span> <span class="nn">potc.fixture</span> <span class="kn">import</span> <span class="n">rule</span><span class="p">,</span> <span class="n">Addons</span>
+<span class="kn">from</span> <span class="nn">potc.rules</span> <span class="kn">import</span> <span class="n">builtin_dict</span>
+
+
+<span class="nd">@rule</span><span class="p">(</span><span class="n">type_</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">ndarray_</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">addon</span><span class="p">:</span> <span class="n">Addons</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">addon</span><span class="o">.</span><span class="n">transaction</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">addon</span><span class="o">.</span><span class="n">obj</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s1">&#39;np&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+
+<span class="n">_VAR_NAME</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[a-zA-Z_][a-zA-Z0-9_]*$&#39;</span><span class="p">)</span>
+
+
+<span class="nd">@rule</span><span class="p">(</span><span class="n">type_</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">my_dict</span><span class="p">(</span><span class="n">v</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">addon</span><span class="p">:</span> <span class="n">Addons</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">all</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">_VAR_NAME</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">keys</span><span class="p">()]):</span>
+        <span class="k">return</span> <span class="n">addon</span><span class="o">.</span><span class="n">val</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">))(</span><span class="o">**</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">addon</span><span class="o">.</span><span class="n">unprocessable</span><span class="p">()</span>  <span class="c1"># give up rule replacing</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">_code</span> <span class="o">=</span> <span class="n">transvars</span><span class="p">({</span>
+        <span class="s1">&#39;np_objects&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]),</span>
+            <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]),</span>
+                <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+                <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="mi">233</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>
+                <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="n">j</span><span class="p">,</span>
+                <span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="mi">123</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+                    <span class="kc">None</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)),</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;g&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="s1">&#39;dict here.&#39;</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;np_module&#39;</span><span class="p">:</span> <span class="n">np</span><span class="p">,</span>
+    <span class="p">},</span> <span class="p">[</span>
+        <span class="n">ndarray_</span><span class="p">,</span>  <span class="c1"># rule for np.ndarray</span>
+        <span class="p">(</span><span class="n">my_dict</span><span class="p">,</span> <span class="n">builtin_dict</span><span class="p">,),</span>  <span class="c1"># rule for dict, before `builtin_dict`</span>
+    <span class="p">],</span> <span class="n">reformat</span><span class="o">=</span><span class="s1">&#39;pep8&#39;</span><span class="p">)</span>  <span class="c1"># auto reformat the code</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">_code</span><span class="p">)</span>
+</pre></div></td></tr></table></div>
+</div>
+<p>The output result (as well as the dumped script) should be</p>
+<div class="highlight-python notranslate"><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;np_module&#39;</span><span class="p">,</span> <span class="s1">&#39;np_objects&#39;</span><span class="p">]</span>
+<span class="n">np_module</span> <span class="o">=</span> <span class="n">numpy</span>
+<span class="n">np_objects</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]),</span>
+                  <span class="n">b</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]),</span>
+                         <span class="n">d</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]]),</span>
+                         <span class="n">t</span><span class="o">=</span><span class="mi">233</span><span class="p">),</span>
+                  <span class="n">e</span><span class="o">=</span><span class="p">{</span>
+                      <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>
+                      <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="n">j</span><span class="p">,</span>
+                      <span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="p">{</span>
+                          <span class="mi">123</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]),</span>
+                          <span class="kc">None</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>
+                      <span class="p">},</span>
+                      <span class="s1">&#39;g&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;dict here.&#39;</span><span class="p">)</span>
+                  <span class="p">})</span>
+
+</pre></div></td></tr></table></div>
+</div>
+<p>Now you can see the dictionaries will be expressed with <code class="docutils literal notranslate"><span class="pre">dict</span></code> form when the keys is allowed to do so, the <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> objects will be expressed with the visible format as well.</p>
+</section>
+</section>
+
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../advanced_usage/index.html" class="btn btn-neutral float-right" title="Advanced Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../main_idea/index.html" class="btn btn-neutral float-left" title="Main Idea" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HansBug
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+    <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: dev/req
+    <span class="fa fa-caret-down"></span>
+  </span>
+        <div class="rst-other-versions">
+                <dl>
+                    <dt>Tags</dt>
+                        <dd><a href="../../../../v0.0.3/index.html">v0.0.3</a></dd>
+                        <dd><a href="../../../../v0.0.4/tutorials/basic_usage/index.html">v0.0.4</a></dd>
+                </dl>
+                <dl>
+                    <dt>Branches</dt>
+                        <dd><a href="index.html">dev/req</a></dd>
+                        <dd><a href="../../../../main/tutorials/basic_usage/index.html">main</a></dd>
+                </dl>
+        </div>
+    </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
