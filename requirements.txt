@@ -2,5 +2,5 @@ enum_tools
 dill>=0.3.5
 yapf>=0.29.0,<1
 isort>=5.6
-click>=8
+click>=7
 hbutils>=0.7.4
