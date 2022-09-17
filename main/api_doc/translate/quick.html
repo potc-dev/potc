@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>potc.translate.quick &mdash; potc 0.1.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="potc.translate.trans" href="trans.html" />
+    <link rel="prev" title="potc.translate" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> potc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/quick_start/index.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/main_idea/index.html">Main Idea</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basic_usage/index.html">Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/advanced_usage/index.html">Advanced Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/cli_usage/index.html">CLI Usage</a></li>
+</ul>
+<p><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../config/index.html">potc.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fixture/index.html">potc.fixture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rules/index.html">potc.rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supports/index.html">potc.supports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/index.html">potc.testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">potc.translate</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">potc.translate.quick</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#transobj">transobj</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transvars">transvars</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trans.html">potc.translate.trans</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">potc</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">potc.translate</a> &raquo;</li>
+        
+      <li>potc.translate.quick</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api_doc/translate/quick.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+    
+    
+  <section id="module-potc.translate.quick">
+<span id="potc-translate-quick"></span><h1>potc.translate.quick<a class="headerlink" href="#module-potc.translate.quick" title="Permalink to this headline">¶</a></h1>
+<section id="transobj">
+<h2>transobj<a class="headerlink" href="#transobj" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.translate.quick.transobj">
+<code class="sig-prename descclassname">potc.translate.quick.</code><code class="sig-name descname">transobj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em>, <em class="sig-param"><span class="n">trans</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="trans.html#potc.translate.trans.ObjectTranslation" title="potc.translate.trans.ObjectTranslation">potc.translate.trans.ObjectTranslation</a><a class="reference internal" href="../../_modules/potc/translate/quick.html#transobj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.quick.transobj" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Overview:</dt><dd><p>Process-oriented version of <a class="reference internal" href="trans.html#potc.translate.trans.BaseTranslator.transobj" title="potc.translate.trans.BaseTranslator.transobj"><code class="xref py py-meth docutils literal notranslate"><span class="pre">potc.translate.trans.BaseTranslator.transobj()</span></code></a>.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>obj: Object to be translated.</p></li>
+<li><p>trans: Translator to be used, default is <code class="docutils literal notranslate"><span class="pre">None</span></code> which means use             an instance of :class:’potc.translate.trans.Translator’.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>result (<code class="xref py py-obj docutils literal notranslate"><span class="pre">ObjectTranslation</span></code>): Result of object translation.</p></li>
+</ul>
+</dd>
+<dt>Examples::</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">transobj</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">&lt;potc.translate.trans.ObjectTranslation object at 0x7f08a9520f10&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">code</span>
+<span class="go">&quot;[1, &#39;2&#39;, 3.4, ..., None, math.e]&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">imports</span>
+<span class="go">(&lt;_SelfDirectImport &#39;import math&#39;&gt;,)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="transvars">
+<h2>transvars<a class="headerlink" href="#transvars" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="potc.translate.quick.transvars">
+<code class="sig-prename descclassname">potc.translate.quick.</code><code class="sig-name descname">transvars</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vars_</span></em>, <em class="sig-param"><span class="n">trans</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reformat</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">isort</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="trans.html#potc.translate.trans.VarsTranslation" title="potc.translate.trans.VarsTranslation">potc.translate.trans.VarsTranslation</a><a class="reference internal" href="../../_modules/potc/translate/quick.html#transvars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#potc.translate.quick.transvars" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Overview:</dt><dd><p>Process-oriented version of <a class="reference internal" href="trans.html#potc.translate.trans.BaseTranslator.transvars" title="potc.translate.trans.BaseTranslator.transvars"><code class="xref py py-meth docutils literal notranslate"><span class="pre">potc.translate.trans.BaseTranslator.transvars()</span></code></a>.</p>
+</dd>
+<dt>Arguments:</dt><dd><ul class="simple">
+<li><p>vars_ (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Mapping[str,</span> <span class="pre">Any]</span></code>): Variables to be translated.</p></li>
+<li><p>trans: Translator to be used, default is <code class="docutils literal notranslate"><span class="pre">None</span></code> which means use             an instance of :class:’potc.translate.trans.Translator’.</p></li>
+<li><p>reformat: Reformatter for the final source code, default is <code class="docutils literal notranslate"><span class="pre">None</span></code> which means             do not reformat the code.</p></li>
+<li><p>isort (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>): Sort the import statements, default is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>result (<code class="xref py py-obj docutils literal notranslate"><span class="pre">VarsTranslation</span></code>): Result of vars translation.</p></li>
+</ul>
+</dd>
+<dt>Examples::</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">transvars</span><span class="p">({</span>
+<span class="gp">... </span>    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;ds&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">(),</span> <span class="n">c</span><span class="o">=</span><span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}),</span>
+<span class="gp">... </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">&lt;potc.translate.trans.VarsTranslation object at 0x7f08a95cd5b0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">code</span><span class="p">)</span>
+<span class="go">import math</span>
+<span class="go">__all__ = [&#39;a&#39;, &#39;b&#39;]</span>
+<span class="go">a = [1, &#39;2&#39;, 3.4, ..., None, math.e]</span>
+<span class="go">b = {&#39;a&#39;: &#39;ds&#39;, &#39;b&#39;: (), &#39;c&#39;: {3, 4, 5}}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="trans.html" class="btn btn-neutral float-right" title="potc.translate.trans" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="potc.translate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HansBug
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+    <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: main
+    <span class="fa fa-caret-down"></span>
+  </span>
+        <div class="rst-other-versions">
+                <dl>
+                    <dt>Tags</dt>
+                        <dd><a href="../../../v0.0.3/api_doc/translate/quick.html">v0.0.3</a></dd>
+                        <dd><a href="../../../v0.0.4/api_doc/translate/quick.html">v0.0.4</a></dd>
+                </dl>
+                <dl>
+                    <dt>Branches</dt>
+                        <dd><a href="quick.html">main</a></dd>
+                </dl>
+        </div>
+    </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
